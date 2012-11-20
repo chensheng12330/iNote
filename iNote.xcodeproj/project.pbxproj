@@ -26,7 +26,6 @@
 		D4A1B7431640C1BC0021CFDF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A1B7421640C1BC0021CFDF /* libicucore.dylib */; };
 		D4A1B7451640C1E70021CFDF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A1B7441640C1E70021CFDF /* MessageUI.framework */; };
 		D4A1B7471640C1F20021CFDF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A1B7461640C1F20021CFDF /* Security.framework */; };
-		D4B828FB163E77E500AE63F0 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B828D2163E77E500AE63F0 /* libOAuth.a */; };
 		D4B828FC163E77E500AE63F0 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = D4B828D4163E77E500AE63F0 /* Base64Transcoder.c */; };
 		D4B828FD163E77E500AE63F0 /* NSMutableURLRequest_Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828D7163E77E500AE63F0 /* NSMutableURLRequest_Parameters.m */; };
 		D4B828FE163E77E500AE63F0 /* NSString_URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828D9163E77E500AE63F0 /* NSString_URLEncoding.m */; };
@@ -148,7 +147,6 @@
 		D4A1B7421640C1BC0021CFDF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D4A1B7441640C1E70021CFDF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D4A1B7461640C1F20021CFDF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		D4B828D2163E77E500AE63F0 /* libOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOAuth.a; sourceTree = "<group>"; };
 		D4B828D4163E77E500AE63F0 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		D4B828D5163E77E500AE63F0 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		D4B828D6163E77E500AE63F0 /* NSMutableURLRequest_Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableURLRequest_Parameters.h; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 				D43BD2FA160C55850091A219 /* UIKit.framework in Frameworks */,
 				D43BD2FC160C55850091A219 /* Foundation.framework in Frameworks */,
 				D43BD2FE160C55850091A219 /* CoreGraphics.framework in Frameworks */,
-				D4B828FB163E77E500AE63F0 /* libOAuth.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +447,6 @@
 			isa = PBXGroup;
 			children = (
 				D4B82910163E7FF400AE63F0 /* Utils */,
-				D4B828D2163E77E500AE63F0 /* libOAuth.a */,
 				D4B828D3163E77E500AE63F0 /* OAuthConsumer */,
 				D4B828F0163E77E500AE63F0 /* OAuthController.h */,
 				D4B828F1163E77E500AE63F0 /* OAuthController.m */,
