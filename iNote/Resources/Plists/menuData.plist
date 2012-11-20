@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>menuTitle</key>
+	<array>
+		<string>新建笔记</string>
+		<string>全部笔记</string>
+		<string>笔记本</string>
+		<string>设置</string>
+		<string>登陆账户</string>
+	</array>
+	<key>menuBgs</key>
+	<array>
+		<string>Hot01.png</string>
+		<string>Brand01.png</string>
+		<string>New01.png</string>
+		<string>Product01.png</string>
+		<string>Member01.png</string>
+	</array>
+	<key>menuClass</key>
+	<array>
+		<string></string>
+	</array>
+</dict>
+</plist>

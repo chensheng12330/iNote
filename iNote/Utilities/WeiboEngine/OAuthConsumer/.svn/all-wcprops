@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer
+END
+OAServiceTicket.m
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAServiceTicket.m
+END
+OADataFetcher.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OADataFetcher.h
+END
+OAPlaintextSignatureProvider.m
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAPlaintextSignatureProvider.m
+END
+OAuthConsumer.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAuthConsumer.h
+END
+NSURL_Base.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/NSURL_Base.h
+END
+OADataFetcher.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OADataFetcher.m
+END
+OAToken.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAToken.h
+END
+NSString_URLEncoding.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/NSString_URLEncoding.h
+END
+OAHMAC_SHA1SignatureProvider.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAHMAC_SHA1SignatureProvider.h
+END
+NSURL_Base.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/NSURL_Base.m
+END
+OASignatureProviding.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OASignatureProviding.h
+END
+Base64Transcoder.c
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/Base64Transcoder.c
+END
+NSString_URLEncoding.m
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/NSString_URLEncoding.m
+END
+OAMutableURLRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAMutableURLRequest.h
+END
+OAToken.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAToken.m
+END
+OAHMAC_SHA1SignatureProvider.m
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAHMAC_SHA1SignatureProvider.m
+END
+OAAsynchronousDataFetcher.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAAsynchronousDataFetcher.h
+END
+NSMutableURLRequest_Parameters.h
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/NSMutableURLRequest_Parameters.h
+END
+Base64Transcoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/Base64Transcoder.h
+END
+OARequestParameter.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OARequestParameter.h
+END
+OAMutableURLRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAMutableURLRequest.m
+END
+OAAsynchronousDataFetcher.m
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAAsynchronousDataFetcher.m
+END
+OAConsumer.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAConsumer.h
+END
+OARequestParameter.m
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OARequestParameter.m
+END
+NSMutableURLRequest_Parameters.m
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/NSMutableURLRequest_Parameters.m
+END
+OAConsumer.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAConsumer.m
+END
+OAServiceTicket.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAServiceTicket.h
+END
+OAPlaintextSignatureProvider.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/xcode/!svn/ver/1228/MM_SM/iPhone/MM_SM/MM/Libraries/weibo/WeiboEngine/OAuthConsumer/OAPlaintextSignatureProvider.h
+END
