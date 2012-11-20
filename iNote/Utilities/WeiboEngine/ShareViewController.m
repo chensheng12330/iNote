@@ -55,12 +55,19 @@
         
         OAToken *ot = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
         _engine->_requestToken = ot;
-        _engine->_accessToken = [ot retain];
+        
+        
+        OAToken *ot1 = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
+        _engine->_accessToken = ot1;
+        
+        _engine->_pin = @"pin";
+        _engine->_username = @"sherwin";
         
         NSData * data = [OAuthEngine archivedDataWithOAuthEngine:_engine];
         
         [_engine release];
         _engine = [OAuthEngine unarchivedOAuthEngineWithData:data];
+        
         // usename
         // pin_key
 	}

@@ -283,25 +283,25 @@ static OAuthEngine * _currentOAuthEngine;
 
 #pragma mark -  To Data
 -(void) encodeWithCoder:(NSCoder *) coder{
-    [coder encodeObject:self->_consumerSecret   forKey:CONSUMER_SECRET];
-    [coder encodeObject:self->_consumerKey      forKey:CONSUMER_KEY];
-    [coder encodeObject:self->_username         forKey:USER_NAME];
-    [coder encodeObject:self->_pin              forKey:PIN];
-    [coder encodeObject:self->_consumer         forKey:CONSUMER];
-    [coder encodeObject:self->_requestToken     forKey:REQ_TOKEN];
-    [coder encodeObject:self->_accessToken      forKey:ACC_TOKEN];
+    [coder encodeObject:_consumerSecret   forKey:CONSUMER_SECRET];
+    [coder encodeObject:_consumerKey      forKey:CONSUMER_KEY];
+    [coder encodeObject:_username         forKey:USER_NAME];
+    [coder encodeObject:_pin              forKey:PIN];
+    [coder encodeObject:_consumer         forKey:CONSUMER];
+    [coder encodeObject:_requestToken     forKey:REQ_TOKEN];
+    [coder encodeObject:_accessToken      forKey:ACC_TOKEN];
     return;
 }
 
 -(id) initWithCoder:(NSCoder *)  decoder{
     if(self =[super init]){
-        _consumerSecret = [decoder decodeObjectForKey:CONSUMER_SECRET];
-        _consumerKey    = [decoder decodeObjectForKey:CONSUMER_KEY];
-        _username       = [decoder decodeObjectForKey:USER_NAME];
-        _pin            = [decoder decodeObjectForKey:PIN];
-        _consumer       = [decoder decodeObjectForKey:CONSUMER];
-        _requestToken   = [decoder decodeObjectForKey:REQ_TOKEN];
-        _accessToken    = [decoder decodeObjectForKey:ACC_TOKEN];
+        self.consumerSecret = [decoder decodeObjectForKey:CONSUMER_SECRET];
+        self.consumerKey    = [decoder decodeObjectForKey:CONSUMER_KEY];
+        self.username       = [decoder decodeObjectForKey:USER_NAME];
+        self.pin            = [decoder decodeObjectForKey:PIN];
+        _consumer       = [[decoder decodeObjectForKey:CONSUMER] retain];
+        _requestToken   = [[decoder decodeObjectForKey:REQ_TOKEN] retain];
+        _accessToken    = [[decoder decodeObjectForKey:ACC_TOKEN] retain];
     }
     return self;
 }

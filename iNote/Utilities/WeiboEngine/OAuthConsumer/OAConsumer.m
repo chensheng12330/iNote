@@ -50,8 +50,8 @@
 
 //对象序列化
 -(void) encodeWithCoder:(NSCoder *) coder{
-    [coder encodeObject:self.key forKey:@"key"];
-    [coder encodeObject:self.secret forKey:@"secret"];
+    [coder encodeObject:self.key    ==nil?@"":self.key    forKey:@"key"];
+    [coder encodeObject:self.secret ==nil?@"":self.secret forKey:@"secret"];
     return;
 }
 

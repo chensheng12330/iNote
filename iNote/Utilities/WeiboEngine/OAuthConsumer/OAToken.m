@@ -49,16 +49,18 @@
 {
 	if (self = [super init])
 	{
-		self.key = aKey;
+        self.pin    = nil;
+		self.key    = aKey;
 		self.secret = aSecret;
+        
 	}
 	return self;
 }
 
 -(void) encodeWithCoder:(NSCoder *) coder{
-    [coder encodeObject:self.key    forKey:@"key"];
-    [coder encodeObject:self.secret forKey:@"secret"];
-    [coder encodeObject:self.pin    forKey:@"pin"];
+    [coder encodeObject:self.pin   ==nil?@"":self.pin       forKey:@"pin"];
+    [coder encodeObject:self.key   ==nil?@"":self.key       forKey:@"key"];
+    [coder encodeObject:self.secret==nil?@"":self.secret    forKey:@"secret"];
     return;
 }
 
