@@ -44,7 +44,7 @@
 		D4B8290B163E77E500AE63F0 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828F5163E77E500AE63F0 /* ShareViewController.m */; };
 		D4B8290C163E77E500AE63F0 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B828F6163E77E500AE63F0 /* ShareViewController.xib */; };
 		D4B8290D163E77E500AE63F0 /* URLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828F8163E77E500AE63F0 /* URLConnection.m */; };
-		D4B8290E163E77E500AE63F0 /* WeiboClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828FA163E77E500AE63F0 /* WeiboClient.m */; };
+		D4B8290E163E77E500AE63F0 /* SHNoteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828FA163E77E500AE63F0 /* SHNoteClient.m */; };
 		D4B8291E163E7FF400AE63F0 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B82912163E7FF400AE63F0 /* ColorUtils.m */; };
 		D4B8291F163E7FF400AE63F0 /* ImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B82915163E7FF400AE63F0 /* ImageUtils.m */; };
 		D4B82920163E7FF400AE63F0 /* QuartzUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = D4B82916163E7FF400AE63F0 /* QuartzUtils.c */; };
@@ -184,8 +184,8 @@
 		D4B828F6163E77E500AE63F0 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		D4B828F7163E77E500AE63F0 /* URLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnection.h; sourceTree = "<group>"; };
 		D4B828F8163E77E500AE63F0 /* URLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnection.m; sourceTree = "<group>"; };
-		D4B828F9163E77E500AE63F0 /* WeiboClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboClient.h; sourceTree = "<group>"; };
-		D4B828FA163E77E500AE63F0 /* WeiboClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboClient.m; sourceTree = "<group>"; };
+		D4B828F9163E77E500AE63F0 /* SHNoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteClient.h; sourceTree = "<group>"; };
+		D4B828FA163E77E500AE63F0 /* SHNoteClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteClient.m; sourceTree = "<group>"; };
 		D4B82911163E7FF400AE63F0 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
 		D4B82912163E7FF400AE63F0 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorUtils.m; sourceTree = "<group>"; };
 		D4B82913163E7FF400AE63F0 /* DebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugUtils.h; sourceTree = "<group>"; };
@@ -454,8 +454,8 @@
 				D4B828F3163E77E500AE63F0 /* OAuthEngine.m */,
 				D4B828F7163E77E500AE63F0 /* URLConnection.h */,
 				D4B828F8163E77E500AE63F0 /* URLConnection.m */,
-				D4B828F9163E77E500AE63F0 /* WeiboClient.h */,
-				D4B828FA163E77E500AE63F0 /* WeiboClient.m */,
+				D4B828F9163E77E500AE63F0 /* SHNoteClient.h */,
+				D4B828FA163E77E500AE63F0 /* SHNoteClient.m */,
 				D4B828F4163E77E500AE63F0 /* ShareViewController.h */,
 				D4B828F5163E77E500AE63F0 /* ShareViewController.m */,
 				D4B828F6163E77E500AE63F0 /* ShareViewController.xib */,
@@ -885,7 +885,7 @@
 				D4B8290A163E77E500AE63F0 /* OAuthEngine.m in Sources */,
 				D4B8290B163E77E500AE63F0 /* ShareViewController.m in Sources */,
 				D4B8290D163E77E500AE63F0 /* URLConnection.m in Sources */,
-				D4B8290E163E77E500AE63F0 /* WeiboClient.m in Sources */,
+				D4B8290E163E77E500AE63F0 /* SHNoteClient.m in Sources */,
 				D4B8291E163E7FF400AE63F0 /* ColorUtils.m in Sources */,
 				D4B8291F163E7FF400AE63F0 /* ImageUtils.m in Sources */,
 				D4B82920163E7FF400AE63F0 /* QuartzUtils.c in Sources */,

@@ -8,6 +8,7 @@
 
 #import "ShareViewController.h"
 
+
 @interface ShareViewController (Private)
 - (void)postNewStatus;
 @end
@@ -31,7 +32,7 @@
 
 - (void)dealloc {
     [_engine     release];
-    [weiboClient release];
+    [ydNoteClient release];
     [super dealloc];
     return;
 }
@@ -50,23 +51,23 @@
 		_engine.consumerKey    = kOAuthConsumerKey;
 		_engine.consumerSecret = kOAuthConsumerSecret;
         
-        OAConsumer *oc = [[OAConsumer alloc] initWithKey:@"1234" secret:@"321"];
-        _engine->_consumer = oc;
-        
-        OAToken *ot = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
-        _engine->_requestToken = ot;
-        
-        
-        OAToken *ot1 = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
-        _engine->_accessToken = ot1;
-        
-        _engine->_pin = @"pin";
-        _engine->_username = @"sherwin";
-        
-        NSData * data = [OAuthEngine archivedDataWithOAuthEngine:_engine];
-        
-        [_engine release];
-        _engine = [OAuthEngine unarchivedOAuthEngineWithData:data];
+//        OAConsumer *oc = [[OAConsumer alloc] initWithKey:@"1234" secret:@"321"];
+//        _engine->_consumer = oc;
+//        
+//        OAToken *ot = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
+//        _engine->_requestToken = ot;
+//        
+//        
+//        OAToken *ot1 = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
+//        _engine->_accessToken = ot1;
+//        
+//        _engine->_pin = @"pin";
+//        _engine->_username = @"sherwin";
+//        
+//        NSData * data = [OAuthEngine archivedDataWithOAuthEngine:_engine];
+//        
+//        [_engine release];
+//        _engine = [OAuthEngine unarchivedOAuthEngineWithData:data];
         
         // usename
         // pin_key
@@ -86,20 +87,15 @@
 }
 
 - (void)loadData {
-	if (weiboClient) { 
+    //成功返回授权相关信息
+	if (ydNoteClient) { 
 		return;
 	}
     
-    NSString *str =@"sa";
-    //[str dat]
-    //储入engine数据
-    NSData* saveDate = [_engine zone];
-    //
-    
-	weiboClient = [[WeiboClient alloc] initWithTarget:self 
+    //初使化管理
+	ydNoteClient = [[SHNoteClient alloc] initWithTarget:self 
 											   engine:_engine
 											   action:@selector(timelineDidReceive:obj:)];
-    
 }
 
 
@@ -112,7 +108,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"viewDidAppear 被调用");
+    //NSLog(@"viewDidAppear 被调用");
 }
 
 
@@ -130,7 +126,7 @@
 }
 
 #pragma mark WeiBoOpreate
-- (void)timelineDidReceive:(WeiboClient*)sender obj:(NSObject*)obj
+- (void)timelineDidReceive:(SHNoteClient*)sender obj:(NSObject*)obj
 {
 	NSLog(@"begin timelineDidReceive");
     if (sender.hasError) {

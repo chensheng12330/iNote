@@ -14,7 +14,7 @@ typedef enum {
     WEIBO_REQUEST_FRIENDSHIP_EXISTS,
 } RequestType;
 
-@interface WeiboClient : URLConnection
+@interface SHNoteClient : URLConnection
 {
     RequestType request;
     id          context;

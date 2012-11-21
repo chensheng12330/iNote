@@ -6,11 +6,11 @@
 //  Copyright naan studio 2008. All rights reserved.
 //
 
-#import "WeiboClient.h"
+#import "SHNoteClient.h"
 #import "SBJSON.h"
 #import "StringUtil.h"
 
-@implementation WeiboClient
+@implementation SHNoteClient
 
 @synthesize request;
 @synthesize context;
