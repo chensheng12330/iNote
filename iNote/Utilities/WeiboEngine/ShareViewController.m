@@ -46,31 +46,13 @@
     // Do any additional setup after loading the view from its nib.
     
     //授权管理初使化
+    NSData *getData = [[NSUserDefaults standardUserDefaults] objectForKey: @"YDauthData"];
+    _engine = [[OAuthEngine unarchivedOAuthEngineWithData:getData] retain];
+    
     if (!_engine){
 		_engine = [[OAuthEngine alloc] initOAuthWithDelegate: self];
 		_engine.consumerKey    = kOAuthConsumerKey;
 		_engine.consumerSecret = kOAuthConsumerSecret;
-        
-//        OAConsumer *oc = [[OAConsumer alloc] initWithKey:@"1234" secret:@"321"];
-//        _engine->_consumer = oc;
-//        
-//        OAToken *ot = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
-//        _engine->_requestToken = ot;
-//        
-//        
-//        OAToken *ot1 = [[OAToken alloc] initWithKey:@"123" secret:@"321"];
-//        _engine->_accessToken = ot1;
-//        
-//        _engine->_pin = @"pin";
-//        _engine->_username = @"sherwin";
-//        
-//        NSData * data = [OAuthEngine archivedDataWithOAuthEngine:_engine];
-//        
-//        [_engine release];
-//        _engine = [OAuthEngine unarchivedOAuthEngineWithData:data];
-        
-        // usename
-        // pin_key
 	}
     
     
@@ -91,6 +73,13 @@
 	if (ydNoteClient) { 
 		return;
 	}
+    
+    //将获取的授权信息存储
+    NSData *saveEngine = [OAuthEngine archivedDataWithOAuthEngine:_engine];
+    
+    NSUserDefaults			*defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject: saveEngine forKey: @"YDauthData"];
+	[defaults synchronize];
     
     //初使化管理
 	ydNoteClient = [[SHNoteClient alloc] initWithTarget:self 

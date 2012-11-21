@@ -91,6 +91,12 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 -(void)willRotateToMenu:(NSInteger)index rotateview:(BaseRotateView *)rotateview{
     //NSLog(@"index = %d",index);
     
