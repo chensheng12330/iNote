@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		84166CBA1610A51900183621 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84166CB91610A51900183621 /* icon.png */; };
 		84DA02B61610897300DAF3A2 /* menuData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DA02B51610897300DAF3A2 /* menuData.plist */; };
+		84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84EDABA7165E603C0039F314 /* MarkInfo.rtf */; };
 		D43BD2FA160C55850091A219 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD2F9160C55850091A219 /* UIKit.framework */; };
 		D43BD2FC160C55850091A219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD2FB160C55850091A219 /* Foundation.framework */; };
 		D43BD2FE160C55850091A219 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD2FD160C55850091A219 /* CoreGraphics.framework */; };
@@ -125,6 +126,7 @@
 		84166CB91610A51900183621 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
 		84B4318A164AA0D000ED79D7 /* MacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroDefine.h; path = iNote/Utilities/WeiboEngine/Utils/MacroDefine.h; sourceTree = SOURCE_ROOT; };
 		84DA02B51610897300DAF3A2 /* menuData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = menuData.plist; path = Plists/menuData.plist; sourceTree = "<group>"; };
+		84EDABA7165E603C0039F314 /* MarkInfo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = MarkInfo.rtf; sourceTree = "<group>"; };
 		D43BD2F5160C55850091A219 /* iNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43BD2F9160C55850091A219 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D43BD2FB160C55850091A219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -691,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				D4BA1412165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard */,
+				84EDABA7165E603C0039F314 /* MarkInfo.rtf */,
 				D45B33F71611386F00D24033 /* Icon */,
 				D45B33F61611386400D24033 /* PNG */,
 				D45B33F41611384B00D24033 /* Plists */,
@@ -798,6 +801,7 @@
 				84166CBA1610A51900183621 /* icon.png in Resources */,
 				D4B8290C163E77E500AE63F0 /* ShareViewController.xib in Resources */,
 				D4BA1413165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard in Resources */,
+				84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
