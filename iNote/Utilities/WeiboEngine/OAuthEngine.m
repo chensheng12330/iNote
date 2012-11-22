@@ -347,8 +347,7 @@ static OAuthEngine * _currentOAuthEngine;
     [toDataOfMDic setValue:[_requestToken OAToken2Data] forKey:REQ_TOKEN];
     [toDataOfMDic setValue:[_accessToken  OAToken2Data] forKey:ACC_TOKEN];
     
-    //toDataOfMDic 
-    //[NSData alloc] ini
+    return nil;
 }
 
 -(void) Data2OAuthEngineAttribute:(NSData*) _data

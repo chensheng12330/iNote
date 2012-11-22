@@ -52,6 +52,7 @@
 		D4B82922163E7FF400AE63F0 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B8291B163E7FF400AE63F0 /* StringUtil.m */; };
 		D4B82923163E7FF400AE63F0 /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B8291D163E7FF400AE63F0 /* TimeUtils.m */; };
 		D4B82926163E82E200AE63F0 /* GlobalCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B82925163E82E200AE63F0 /* GlobalCore.m */; };
+		D4BA1413165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BA1412165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard */; };
 		D4C1471616105CD80072FF17 /* BaseRotateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C1470216105CD80072FF17 /* BaseRotateView.m */; };
 		D4C1471716105CD80072FF17 /* BottomRotateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C1470416105CD80072FF17 /* BottomRotateView.m */; };
 		D4C1471816105CD80072FF17 /* MemberCenterRotateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C1470616105CD80072FF17 /* MemberCenterRotateView.m */; };
@@ -201,6 +202,7 @@
 		D4B8291D163E7FF400AE63F0 /* TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtils.m; sourceTree = "<group>"; };
 		D4B82924163E82E200AE63F0 /* GlobalCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalCore.h; sourceTree = "<group>"; };
 		D4B82925163E82E200AE63F0 /* GlobalCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalCore.m; sourceTree = "<group>"; };
+		D4BA1412165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FlowChartStoryboard.storyboard; path = iNote/Resources/FlowChartStoryboard.storyboard; sourceTree = SOURCE_ROOT; };
 		D4C1470116105CD80072FF17 /* BaseRotateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRotateView.h; sourceTree = "<group>"; };
 		D4C1470216105CD80072FF17 /* BaseRotateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRotateView.m; sourceTree = "<group>"; };
 		D4C1470316105CD80072FF17 /* BottomRotateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomRotateView.h; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 		D4D91FED161017B300A634CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4BA1412165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard */,
 				D45B33F71611386F00D24033 /* Icon */,
 				D45B33F61611386400D24033 /* PNG */,
 				D45B33F41611384B00D24033 /* Plists */,
@@ -794,6 +797,7 @@
 				84DA02B61610897300DAF3A2 /* menuData.plist in Resources */,
 				84166CBA1610A51900183621 /* icon.png in Resources */,
 				D4B8290C163E77E500AE63F0 /* ShareViewController.xib in Resources */,
+				D4BA1413165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
