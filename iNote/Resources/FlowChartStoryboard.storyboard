@@ -17,7 +17,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOk-sk-PCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1271" y="-121"/>
+            <point key="canvasLocation" x="-1521" y="-213"/>
         </scene>
         <!--View Controller - RouteView-->
         <scene sceneID="ac5-42-Xd5">
@@ -117,9 +117,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ERN-t0-iwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-873" y="-231"/>
+            <point key="canvasLocation" x="-1077" y="-213"/>
         </scene>
-        <!--View Controller - 全部笔记-->
+        <!--View Controller - 全部笔记/笔记本内笔记-->
         <scene sceneID="lvG-QY-frE">
             <objects>
                 <viewController id="RI5-sJ-1xB" sceneMemberID="viewController">
@@ -136,11 +136,11 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="22" id="Ecf-I7-AfP">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="22" id="Ecf-I7-AfP">
                                         <rect key="frame" x="0.0" y="22" width="320" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012年11月" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q3z-gX-ZCp">
@@ -153,6 +153,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="KrL-rB-ib3" kind="push" id="n8b-1Q-Zga"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="96" id="8FD-Jo-i5Z">
                                         <rect key="frame" x="0.0" y="44" width="320" height="96"/>
@@ -216,12 +219,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="全部笔记" id="hTb-ji-kR8"/>
+                    <navigationItem key="navigationItem" title="全部笔记/笔记本内笔记" id="hTb-ji-kR8"/>
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vru-eQ-bqk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-448" y="-365"/>
+            <point key="canvasLocation" x="-367" y="-487"/>
         </scene>
         <!--View Controller - 用户设置-->
         <scene sceneID="jBf-cp-QxK">
@@ -508,35 +511,6 @@
             </objects>
             <point key="canvasLocation" x="-418" y="-188"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="i9C-5P-ZOq">
-            <objects>
-                <tableViewController id="gCa-pi-Ag0" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6KF-ax-63w">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4Es-9r-KcS">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="gCa-pi-Ag0" id="XaO-DV-1xZ"/>
-                            <outlet property="delegate" destination="gCa-pi-Ag0" id="zss-Dk-6LI"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sYM-ZG-D09" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-380" y="-71"/>
-        </scene>
         <!--View Controller - 同步设置-->
         <scene sceneID="jDy-vu-KWm">
             <objects>
@@ -670,7 +644,74 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ch-Dn-T3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9" y="-200"/>
+            <point key="canvasLocation" x="221" y="-194"/>
+        </scene>
+        <!--View Controller - 查看笔记-->
+        <scene sceneID="oO5-XY-kFk">
+            <objects>
+                <viewController id="KrL-rB-ib3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pSv-N7-9ML">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ysi-lr-AMg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="zMQ-6z-V3V">
+                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="done" systemItem="reply" id="lA2-SM-CYU"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qfJ-hp-kG0"/>
+                                    <barButtonItem systemItem="action" id="hoP-hk-tSI"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HjB-fy-nfV"/>
+                                    <barButtonItem systemItem="trash" id="Ob2-3V-nLx"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="VFW-ls-XMh"/>
+                                    <barButtonItem systemItem="action" id="cFG-iU-ZrG"/>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="向上滑动，自动隐藏 工具条，显示更多空间，单击显示" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vQG-Wz-act">
+                                <rect key="frame" x="41" y="294" width="230" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="查看笔记" id="8Xv-aI-gUj">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="hzm-NT-y2K">
+                            <connections>
+                                <segue destination="MVy-Gw-TgP" kind="push" id="fBV-Fh-hA5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p0A-L1-FYX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="17" y="-497"/>
+        </scene>
+        <!--View Controller - 笔记编辑-->
+        <scene sceneID="qh0-l1-aUP">
+            <objects>
+                <viewController id="MVy-Gw-TgP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P29-PP-JIe">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="笔记编辑" id="MGB-Ih-3d4"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iZO-wl-p1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="436" y="-497"/>
         </scene>
     </scenes>
     <resources>
