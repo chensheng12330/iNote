@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840808851663A51E00028F77 /* SHSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840808831663A51E00028F77 /* SHSettingViewController.m */; };
+		840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840808841663A51E00028F77 /* SHSettingViewController.xib */; };
 		84166CBA1610A51900183621 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84166CB91610A51900183621 /* icon.png */; };
 		84DA02B61610897300DAF3A2 /* menuData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DA02B51610897300DAF3A2 /* menuData.plist */; };
 		84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84EDABA7165E603C0039F314 /* MarkInfo.rtf */; };
@@ -44,8 +46,6 @@
 		D4B82908163E77E500AE63F0 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828EE163E77E500AE63F0 /* OAToken.m */; };
 		D4B82909163E77E500AE63F0 /* OAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828F1163E77E500AE63F0 /* OAuthController.m */; };
 		D4B8290A163E77E500AE63F0 /* OAuthEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828F3163E77E500AE63F0 /* OAuthEngine.m */; };
-		D4B8290B163E77E500AE63F0 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828F5163E77E500AE63F0 /* ShareViewController.m */; };
-		D4B8290C163E77E500AE63F0 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B828F6163E77E500AE63F0 /* ShareViewController.xib */; };
 		D4B8290D163E77E500AE63F0 /* URLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828F8163E77E500AE63F0 /* URLConnection.m */; };
 		D4B8290E163E77E500AE63F0 /* SHNoteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B828FA163E77E500AE63F0 /* SHNoteClient.m */; };
 		D4B8291E163E7FF400AE63F0 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B82912163E7FF400AE63F0 /* ColorUtils.m */; };
@@ -125,6 +125,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		840808821663A51E00028F77 /* SHSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSettingViewController.h; sourceTree = "<group>"; };
+		840808831663A51E00028F77 /* SHSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSettingViewController.m; sourceTree = "<group>"; };
+		840808841663A51E00028F77 /* SHSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSettingViewController.xib; sourceTree = "<group>"; };
 		84166CB91610A51900183621 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
 		84B4318A164AA0D000ED79D7 /* MacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroDefine.h; path = iNote/Utilities/WeiboEngine/Utils/MacroDefine.h; sourceTree = SOURCE_ROOT; };
 		84DA02B51610897300DAF3A2 /* menuData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = menuData.plist; path = Plists/menuData.plist; sourceTree = "<group>"; };
@@ -186,9 +189,6 @@
 		D4B828F1163E77E500AE63F0 /* OAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthController.m; sourceTree = "<group>"; };
 		D4B828F2163E77E500AE63F0 /* OAuthEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthEngine.h; sourceTree = "<group>"; };
 		D4B828F3163E77E500AE63F0 /* OAuthEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthEngine.m; sourceTree = "<group>"; };
-		D4B828F4163E77E500AE63F0 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		D4B828F5163E77E500AE63F0 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		D4B828F6163E77E500AE63F0 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		D4B828F7163E77E500AE63F0 /* URLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnection.h; sourceTree = "<group>"; };
 		D4B828F8163E77E500AE63F0 /* URLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnection.m; sourceTree = "<group>"; };
 		D4B828F9163E77E500AE63F0 /* SHNoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteClient.h; sourceTree = "<group>"; };
@@ -343,6 +343,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		840808801663A43A00028F77 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				840808821663A51E00028F77 /* SHSettingViewController.h */,
+				840808831663A51E00028F77 /* SHSettingViewController.m */,
+				840808841663A51E00028F77 /* SHSettingViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		D43BD2EA160C55850091A219 = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +395,7 @@
 		D43BD2FF160C55850091A219 /* iNote */ = {
 			isa = PBXGroup;
 			children = (
+				840808801663A43A00028F77 /* ViewController */,
 				D43BD308160C55850091A219 /* SHAppDelegate.h */,
 				D43BD309160C55850091A219 /* SHAppDelegate.m */,
 				D43BD30B160C55850091A219 /* SHViewController.h */,
@@ -464,9 +475,6 @@
 				D4B828F8163E77E500AE63F0 /* URLConnection.m */,
 				D4B828F9163E77E500AE63F0 /* SHNoteClient.h */,
 				D4B828FA163E77E500AE63F0 /* SHNoteClient.m */,
-				D4B828F4163E77E500AE63F0 /* ShareViewController.h */,
-				D4B828F5163E77E500AE63F0 /* ShareViewController.m */,
-				D4B828F6163E77E500AE63F0 /* ShareViewController.xib */,
 			);
 			path = WeiboEngine;
 			sourceTree = "<group>";
@@ -805,11 +813,11 @@
 				D4C1472616105CD80072FF17 /* Product01.png in Resources */,
 				84DA02B61610897300DAF3A2 /* menuData.plist in Resources */,
 				84166CBA1610A51900183621 /* icon.png in Resources */,
-				D4B8290C163E77E500AE63F0 /* ShareViewController.xib in Resources */,
 				D4BA1413165E1BAF00ED5A50 /* FlowChartStoryboard.storyboard in Resources */,
 				84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */,
 				D42D87FA165F4706004D3E72 /* Default.png in Resources */,
 				D42D8818165F77CB004D3E72 /* half rount.png in Resources */,
+				840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -899,7 +907,6 @@
 				D4B82908163E77E500AE63F0 /* OAToken.m in Sources */,
 				D4B82909163E77E500AE63F0 /* OAuthController.m in Sources */,
 				D4B8290A163E77E500AE63F0 /* OAuthEngine.m in Sources */,
-				D4B8290B163E77E500AE63F0 /* ShareViewController.m in Sources */,
 				D4B8290D163E77E500AE63F0 /* URLConnection.m in Sources */,
 				D4B8290E163E77E500AE63F0 /* SHNoteClient.m in Sources */,
 				D4B8291E163E7FF400AE63F0 /* ColorUtils.m in Sources */,
@@ -908,6 +915,7 @@
 				D4B82921163E7FF400AE63F0 /* REString.m in Sources */,
 				D4B82922163E7FF400AE63F0 /* StringUtil.m in Sources */,
 				D4B82923163E7FF400AE63F0 /* TimeUtils.m in Sources */,
+				840808851663A51E00028F77 /* SHSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

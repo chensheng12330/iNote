@@ -1,9 +1,9 @@
 //
-//  ShareViewController.h
-//  WeiBo
+//  SHSettingViewController.h
+//  iNote
 //
-//  Created by sherwin.chen on 12-4-12.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 1322 on 12-11-26.
+//
 //
 
 #import <UIKit/UIKit.h>
@@ -12,7 +12,7 @@
 #import "SHNoteClient.h"
 
 //页面登陆事件处理
-@interface ShareViewController : UIViewController<OAuthControllerDelegate,OAuthEngineDelegate>
+@interface SHSettingViewController : UIViewController<OAuthControllerDelegate,OAuthEngineDelegate>
 {
     OAuthEngine				 *_engine;       //授权管理
 	SHNoteClient             *ydNoteClient;   //有道api管理

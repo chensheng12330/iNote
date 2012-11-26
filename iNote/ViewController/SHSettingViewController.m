@@ -1,15 +1,14 @@
 //
-//  ShareViewController.m
-//  WeiBo
+//  SHSettingViewController.m
+//  iNote
 //
-//  Created by clochase on 12-4-12.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 1322 on 12-11-26.
+//
 //
 
-#import "ShareViewController.h"
+#import "SHSettingViewController.h"
 
-
-@interface ShareViewController (Private)
+@interface SHSettingViewController (Private)
 - (void)postNewStatus;
 @end
 
@@ -19,7 +18,7 @@
 #define kOAuthConsumerSecret			@"10c6d13eec190b97248591e51b2abe0d"		//REPLACE ME
 //end
 
-@implementation ShareViewController
+@implementation SHSettingViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +40,7 @@
 {
     [super viewDidLoad];
     
-
+    
     //NSKeyedArchiver
     // Do any additional setup after loading the view from its nib.
     
@@ -64,13 +63,13 @@
 	OAuthController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self];
     [controller setStTitle:@"登陆授权"];
     
-	if (controller) 
+	if (controller)
         [self.navigationController pushViewController: controller animated: YES];
 }
 
 - (void)loadData {
     //成功返回授权相关信息
-	if (ydNoteClient) { 
+	if (ydNoteClient) {
 		return;
 	}
     
@@ -82,9 +81,9 @@
 	[defaults synchronize];
     
     //初使化管理
-	ydNoteClient = [[SHNoteClient alloc] initWithTarget:self 
-											   engine:_engine
-											   action:@selector(timelineDidReceive:obj:)];
+	ydNoteClient = [[SHNoteClient alloc] initWithTarget:self
+                                                 engine:_engine
+                                                 action:@selector(timelineDidReceive:obj:)];
 }
 
 
@@ -155,7 +154,7 @@
     //[OAuthEngine setCurrentOAuthEngine:_engine];
     
     //NSArray * ar = controller.navigationController.viewControllers;
-
+    
     [controller.navigationController popViewControllerAnimated:YES];
     
     [OAuthEngine setCurrentOAuthEngine:_engine];
@@ -168,7 +167,7 @@
 	NSLog(@"Authentication Failed!");
 	//UIViewController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self];
 	
-	if (controller) 
+	if (controller)
     {
         NSArray *ar = self.navigationController.viewControllers;
         int ncount = self.navigationController.viewControllers.count;
@@ -181,7 +180,7 @@
 - (void) OAuthControllerCanceled: (OAuthController *) controller {
 	NSLog(@"Authentication Canceled.");
 	//UIViewController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self]
-    if (controller) 
+    if (controller)
     {
         NSArray *ar = self.navigationController.viewControllers;
         int ncount = self.navigationController.viewControllers.count;

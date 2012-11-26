@@ -9,7 +9,7 @@
 #import "SHViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "ShareViewController.h"
+#import "SHSettingViewController.h"
 
 @interface SHViewController ()
 
@@ -123,7 +123,7 @@
 //    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"you click" message:[NSString stringWithFormat:@"%d",btn.tag] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] autorelease];
 //    [alert show];
     
-    UIViewController *subViewController = [[ShareViewController alloc] init];
+    UIViewController *subViewController = [[SHSettingViewController alloc] init];
 
     //id subClass = 
     switch (btn.tag) {

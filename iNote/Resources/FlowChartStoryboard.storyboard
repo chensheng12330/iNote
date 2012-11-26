@@ -17,7 +17,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOk-sk-PCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1561" y="-251"/>
+            <point key="canvasLocation" x="-1881" y="-659"/>
         </scene>
         <!--View Controller - RouteView-->
         <scene sceneID="ac5-42-Xd5">
@@ -123,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ERN-t0-iwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1031" y="-251"/>
+            <point key="canvasLocation" x="-1351" y="-659"/>
         </scene>
         <!--View Controller - 全部笔记-->
         <scene sceneID="lvG-QY-frE">
@@ -230,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vru-eQ-bqk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-504" y="-739"/>
+            <point key="canvasLocation" x="-824" y="-1147"/>
         </scene>
         <!--View Controller - 新建笔记-->
         <scene sceneID="ixH-FY-sOH">
@@ -287,9 +287,12 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="MVy-Gw-TgP" kind="push" id="dch-aW-jou"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Covel Flow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KVo-Wt-dcC">
-                                <rect key="frame" x="46" y="394" width="226" height="21"/>
+                                <rect key="frame" x="106" y="395" width="108" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -302,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuP-Sd-D5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-928" y="492"/>
+            <point key="canvasLocation" x="-818" y="662"/>
         </scene>
         <!--Table View Controller - 笔记本-->
         <scene sceneID="QNs-fd-C2n">
@@ -450,7 +453,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5St-E1-BZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-518" y="472"/>
+            <point key="canvasLocation" x="-818" y="64"/>
         </scene>
         <!--View Controller - 用户设置-->
         <scene sceneID="jBf-cp-QxK">
@@ -735,7 +738,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZ7-c1-gfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-504" y="-150"/>
+            <point key="canvasLocation" x="-824" y="-558"/>
         </scene>
         <!--View Controller - 同步设置-->
         <scene sceneID="jDy-vu-KWm">
@@ -870,7 +873,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ch-Dn-T3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="-150"/>
+            <point key="canvasLocation" x="-223" y="-558"/>
         </scene>
         <!--View Controller - 查看笔记-->
         <scene sceneID="oO5-XY-kFk">
@@ -921,7 +924,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0A-L1-FYX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="97" y="-757"/>
+            <point key="canvasLocation" x="-223" y="-1165"/>
         </scene>
         <!--View Controller - 笔记编辑-->
         <scene sceneID="qh0-l1-aUP">
@@ -947,7 +950,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZO-wl-p1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="524" y="407"/>
+            <point key="canvasLocation" x="306" y="-251"/>
         </scene>
     </scenes>
     <resources>
@@ -960,4 +963,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="fBV-Fh-hA5"/>
+    </inferredMetricsTieBreakers>
 </document>
