@@ -10,13 +10,14 @@
 
 @interface SHSettingViewController (Private)
 - (void)postNewStatus;
+- (void)initTableViewData;
 @end
 
 
 // 有道云词典
 #define kOAuthConsumerKey				@"448412811a0a2fcac811ca08b8b2c258"		//REPLACE ME
 #define kOAuthConsumerSecret			@"10c6d13eec190b97248591e51b2abe0d"		//REPLACE ME
-//end
+// end
 
 @implementation SHSettingViewController
 
@@ -32,6 +33,17 @@
 - (void)dealloc {
     [_engine     release];
     [ydNoteClient release];
+    [_myTableView release];
+    [_myCell1 release];
+    [_myCell2 release];
+    [_myCell3 release];
+    [_myCell4 release];
+    [_myCell5 release];
+    [_myCell6 release];
+    [_myCell7 release];
+    [_myCell8 release];
+    [_myCell9 release];
+    [_myCell10 release];
     [super dealloc];
     return;
 }
@@ -40,9 +52,10 @@
 {
     [super viewDidLoad];
     
-    
-    //NSKeyedArchiver
     // Do any additional setup after loading the view from its nib.
+    
+    // Add view element
+    [self initTableViewData];
     
     //授权管理初使化
     NSData *getData = [[NSUserDefaults standardUserDefaults] objectForKey: @"YDauthData"];
@@ -63,8 +76,10 @@
 	OAuthController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self];
     [controller setStTitle:@"登陆授权"];
     
-	if (controller)
-        [self.navigationController pushViewController: controller animated: YES];
+    
+    //presentModalViewController
+	if (controller) [self presentModalViewController:controller animated:YES];
+        //[self.navigationController pushViewController: controller animated: YES];
 }
 
 - (void)loadData {
@@ -86,10 +101,11 @@
                                                  action:@selector(timelineDidReceive:obj:)];
 }
 
-
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationItem setTitle:@"用户设置"];
+    
     return;
 }
 
@@ -99,10 +115,19 @@
     //NSLog(@"viewDidAppear 被调用");
 }
 
-
-
 - (void)viewDidUnload
 {
+    [self setMyTableView:nil];
+    [self setMyCell1:nil];
+    [self setMyCell2:nil];
+    [self setMyCell3:nil];
+    [self setMyCell4:nil];
+    [self setMyCell5:nil];
+    [self setMyCell6:nil];
+    [self setMyCell7:nil];
+    [self setMyCell8:nil];
+    [self setMyCell9:nil];
+    [self setMyCell10:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -112,6 +137,39 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark - TableView Deleget
+
+-(void)initTableViewData
+{
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"";
+}
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    return @"";
+}
+
+
 
 #pragma mark WeiBoOpreate
 - (void)timelineDidReceive:(SHNoteClient*)sender obj:(NSObject*)obj
@@ -179,7 +237,10 @@
 
 - (void) OAuthControllerCanceled: (OAuthController *) controller {
 	NSLog(@"Authentication Canceled.");
-	//UIViewController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self]
+
+    [controller dismissModalViewControllerAnimated:YES];
+    
+    return;
     if (controller)
     {
         NSArray *ar = self.navigationController.viewControllers;

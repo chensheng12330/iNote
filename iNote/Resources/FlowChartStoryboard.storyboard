@@ -230,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vru-eQ-bqk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-824" y="-1147"/>
+            <point key="canvasLocation" x="-824" y="-1165"/>
         </scene>
         <!--View Controller - 新建笔记-->
         <scene sceneID="ixH-FY-sOH">
@@ -738,7 +738,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZ7-c1-gfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-824" y="-558"/>
+            <point key="canvasLocation" x="-790" y="-558"/>
         </scene>
         <!--View Controller - 同步设置-->
         <scene sceneID="jDy-vu-KWm">
@@ -873,7 +873,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ch-Dn-T3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223" y="-558"/>
+            <point key="canvasLocation" x="-343" y="-558"/>
         </scene>
         <!--View Controller - 查看笔记-->
         <scene sceneID="oO5-XY-kFk">
@@ -964,6 +964,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fBV-Fh-hA5"/>
+        <segue reference="dch-aW-jou"/>
     </inferredMetricsTieBreakers>
 </document>

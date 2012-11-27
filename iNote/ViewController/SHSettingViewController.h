@@ -12,11 +12,33 @@
 #import "SHNoteClient.h"
 
 //页面登陆事件处理
-@interface SHSettingViewController : UIViewController<OAuthControllerDelegate,OAuthEngineDelegate>
+@interface SHSettingViewController : UIViewController
+<OAuthControllerDelegate,
+     OAuthEngineDelegate,
+   UITableViewDataSource,
+        UITabBarDelegate>
 {
     OAuthEngine				 *_engine;       //授权管理
 	SHNoteClient             *ydNoteClient;   //有道api管理
+    
+    //nib init table cell
+    NSArray *myTableCell;
 }
+
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell1;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell2;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell3;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell4;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell5;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell6;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell7;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell8;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell9;
+@property (retain, nonatomic) IBOutlet UITableViewCell *myCell10;
+
+@property (retain, nonatomic) IBOutlet UITableView *myTableView;
+
+
 
 //登陆管理
 - (void)openAuthenticateView;

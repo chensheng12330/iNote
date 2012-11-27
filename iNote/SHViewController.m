@@ -46,7 +46,6 @@
 {
     [super viewDidLoad];
     
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
 	// Do any additional setup after loading the view, typically from a nib.
     backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Firstbg0.png"]];
     backImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);    
@@ -91,10 +90,17 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    return;
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 -(void)willRotateToMenu:(NSInteger)index rotateview:(BaseRotateView *)rotateview{
