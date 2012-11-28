@@ -75,7 +75,7 @@
     [self.view addSubview:mainView];
     [mainView release];
     
-    //return;
+
     UIImageView *iconbg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icobg.png"]]; 
     iconbg.frame = CGRectMake(110, 114, 199.0/2.0, 281.0/2.0);
     [self.view addSubview:iconbg];
@@ -87,7 +87,7 @@
     btn.frame = CGRectMake(133, 177, 110.0/2.0, 110.0/2.0);
     centerButton = btn;
     [self.view addSubview:self.centerButton];
-    
+    return;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -99,8 +99,9 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillDisappear:animated];
+    
 }
 
 -(void)willRotateToMenu:(NSInteger)index rotateview:(BaseRotateView *)rotateview{

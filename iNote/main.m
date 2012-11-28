@@ -12,7 +12,16 @@
 
 int main(int argc, char *argv[])
 {
+    int retVal;
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SHAppDelegate class]));
+        @try {
+           retVal= UIApplicationMain(argc, argv, nil, NSStringFromClass([SHAppDelegate class]));
+        }
+        @catch (NSException *exception) {
+            NSLog(@"CRASH: %@", exception);
+            NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+            NSLog(@"App Over");
+        }
     }
+    return retVal;
 }

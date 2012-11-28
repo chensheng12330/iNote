@@ -21,11 +21,11 @@
 
 @implementation SHSettingViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -44,6 +44,9 @@
     [_myCell8 release];
     [_myCell9 release];
     [_myCell10 release];
+    
+    [myAllCellKey   release];
+    [myTableCellDit release];
     [super dealloc];
     return;
 }
@@ -104,6 +107,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationItem setTitle:@"用户设置"];
     
     return;
@@ -142,34 +146,74 @@
 
 -(void)initTableViewData
 {
+    myTableCellDit = [[NSMutableDictionary alloc] init];
+    myAllCellKey   = [[NSArray alloc] initWithObjects:@"",@"账户信息",@"更多功能设置",@"关于", nil];
     
+    NSArray *ar1 = [NSArray arrayWithObjects:_myCell1, nil];
+    [myTableCellDit setObject:ar1 forKey:[myAllCellKey objectAtIndex:0]];
+    
+    NSArray *ar2 = [NSArray arrayWithObjects:_myCell3,_myCell5,_myCell6,_myCell7,_myCell8,_myCell9, nil];
+    [myTableCellDit setObject:ar2 forKey:[myAllCellKey objectAtIndex:1]];
+    
+    NSArray *ar3 = [NSArray arrayWithObjects:_myCell2,_myCell4,nil];
+    [myTableCellDit setObject:ar3 forKey:[myAllCellKey objectAtIndex:2]];
+    
+    NSArray *ar4 = [NSArray arrayWithObjects:_myCell10, nil];
+    [myTableCellDit setObject:ar4 forKey:[myAllCellKey objectAtIndex:3]];
+    return;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    @try {
+        NSString *strKey = [myAllCellKey   objectAtIndex:section];
+        NSArray  *arCells= [myTableCellDit objectForKey:strKey];
+        return [arCells count];
+    }
+    @catch (NSException *exception) {
+        //process
+        NSLog(@"CRASH: %@", exception);
+    }
+    @finally {
+        
+    }
+    
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    int row     = indexPath.row;
+    int section = indexPath.section;
+    
+    @try {
+        NSString *strKey = [myAllCellKey   objectAtIndex:section];
+        NSArray  *arCells= [myTableCellDit objectForKey:strKey];
+        
+        UITableViewCell *cell = [arCells objectAtIndex:row];
+        NSAssert(cell!=nil, @"Sherwin: SettingMVC:cellForFowAtIndexPath,cell is null");
+        return cell;
+    }
+    @catch (NSException *exception) {
+        //process
+        NSLog(@"CRASH: %@", exception);
+    }
     return nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    return [myTableCellDit count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"";
+    return [myAllCellKey objectAtIndex:section];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     return @"";
 }
-
-
 
 #pragma mark WeiBoOpreate
 - (void)timelineDidReceive:(SHNoteClient*)sender obj:(NSObject*)obj

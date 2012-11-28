@@ -22,21 +22,22 @@
 	SHNoteClient             *ydNoteClient;   //有道api管理
     
     //nib init table cell
-    NSArray *myTableCell;
+    NSMutableDictionary *myTableCellDit;
+    NSArray *myAllCellKey;
 }
 
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell1;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell2;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell3;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell4;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell5;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell6;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell7;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell8;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell9;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell10;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell1;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell2;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell3;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell4;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell5;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell6;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell7;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell8;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell9;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell10;
 
-@property (retain, nonatomic) IBOutlet UITableView *myTableView;
+@property (nonatomic,retain) IBOutlet UITableView *myTableView;
 
 
 

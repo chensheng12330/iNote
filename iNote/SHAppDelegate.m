@@ -16,6 +16,9 @@
 @synthesize viewController = _viewController;
 @synthesize navigationController = _navigationController;
 
+void uncaughtExceptionHandler(NSException*exception){    NSLog(@"CRASH: %@", exception);    NSLog(@"Stack Trace: %@",[exception callStackSymbols]);    // Internal error reporting
+}
+    
 - (void)dealloc
 {
     [_window release];
@@ -26,6 +29,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.viewController = [[[SHViewController alloc] initWithNibName:@"SHViewController" bundle:nil] autorelease];
