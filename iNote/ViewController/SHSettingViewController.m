@@ -47,6 +47,7 @@
     
     [myAllCellKey   release];
     [myTableCellDit release];
+    
     [super dealloc];
     return;
 }
@@ -257,43 +258,30 @@
     
     //NSArray * ar = controller.navigationController.viewControllers;
     
-    [controller.navigationController popViewControllerAnimated:YES];
+    [controller dismissModalViewControllerAnimated:YES];
     
+    //数据载入
     [OAuthEngine setCurrentOAuthEngine:_engine];
     [self loadData];
-    //NSLog(self);
-    //[controller.navigationController popToViewController:self animated:YES];
 }
 
 - (void) OAuthControllerFailed: (OAuthController *) controller {
 	NSLog(@"Authentication Failed!");
 	//UIViewController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self];
-	
-	if (controller)
-    {
-        NSArray *ar = self.navigationController.viewControllers;
-        int ncount = self.navigationController.viewControllers.count;
-        UIViewController *viewControl = [ar objectAtIndex:ncount-3];
-        [self.navigationController popToViewController:viewControl animated:YES];
-    }
+	NSAssert(controller!=nil, @"Sherwin: OAuthControllerFailed.");
+    
+    [controller dismissModalViewControllerAnimated:YES];
+    
 	
 }
 
 - (void) OAuthControllerCanceled: (OAuthController *) controller {
 	NSLog(@"Authentication Canceled.");
-
+    //data process
+    //etc:
     [controller dismissModalViewControllerAnimated:YES];
-    
     return;
-    if (controller)
-    {
-        NSArray *ar = self.navigationController.viewControllers;
-        int ncount = self.navigationController.viewControllers.count;
-        UIViewController *viewControl = [ar objectAtIndex:ncount-3];
-        
-        [self.navigationController popToViewController:viewControl animated:YES];
-    }
-    return;
+
 }
 
 @end

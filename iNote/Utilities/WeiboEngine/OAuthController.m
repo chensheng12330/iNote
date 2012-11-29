@@ -10,6 +10,7 @@
 #import "OAuthController.h"
 #import "OAuthEngine.h"
 #import "GlobalCore.h"
+#import "MacroDefine.h"
 
 @interface OAuthController ()
 @property (nonatomic, readonly) UIToolbar *pinCopyPromptBar;
@@ -187,7 +188,11 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation {
 	self.orientation = self.interfaceOrientation;
-	NSLog(@"orientation:%d", self.interfaceOrientation);
+    
+#if OAUTH_DEBUG_LOG
+    NSLog(@"orientation:%d", self.interfaceOrientation);
+#endif
+	
 	CGRect frame = ApplicationFrame(self.orientation);
 	frame.origin.y = 44;
 	frame.size.height -= 44;
@@ -304,8 +309,11 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     NSString *pin;
 	
 	NSString			*html = [webView stringByEvaluatingJavaScriptFromString: @"document.body.innerText"];
-	NSLog(@"html:%@", [webView stringByEvaluatingJavaScriptFromString: @"document.body.innerHTML"]);
-	
+    
+    #if OAUTH_DEBUG_LOG
+    NSLog(@"html:%@", [webView stringByEvaluatingJavaScriptFromString: @"document.body.innerHTML"]);
+    #endif
+		
 	if (html.length == 0) return nil;
     
     //////////find USER_ID

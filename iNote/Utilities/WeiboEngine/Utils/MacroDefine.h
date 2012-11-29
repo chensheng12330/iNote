@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 #define OA2DATA_STRING @"##"
 
+#ifdef  OAUTH_DEBUG_LOG
+#define OAUTH_DEBUG_LOG 0 //if 0: output debug info, else not 
+#endif
 
 
