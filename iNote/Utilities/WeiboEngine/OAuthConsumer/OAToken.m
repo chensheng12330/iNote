@@ -151,6 +151,7 @@
             self.secret = [strings objectAtIndex:2];
         }
     }
+    [combString release];
     return;
 }
 @end

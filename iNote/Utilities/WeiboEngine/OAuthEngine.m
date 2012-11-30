@@ -338,7 +338,7 @@ static OAuthEngine * _currentOAuthEngine;
 
 -(NSData*) OAuthEngine2Data
 {
-    NSMutableDictionary *toDataOfMDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *toDataOfMDic = [[[NSMutableDictionary alloc] init] autorelease];
     [toDataOfMDic setValue:_consumerSecret  forKey:CONSUMER_SECRET];
     [toDataOfMDic setValue:_consumerKey     forKey:CONSUMER_KEY];
     [toDataOfMDic setValue:_username        forKey:USER_NAME];
@@ -347,7 +347,11 @@ static OAuthEngine * _currentOAuthEngine;
     [toDataOfMDic setValue:[_requestToken OAToken2Data] forKey:REQ_TOKEN];
     [toDataOfMDic setValue:[_accessToken  OAToken2Data] forKey:ACC_TOKEN];
     
-    return nil;
+    NSString *tempFile =  [NSTemporaryDirectory() stringByAppendingString:@"temp.data"];
+    [toDataOfMDic writeToFile:tempFile atomically:YES];
+    
+    NSData *data = [[NSData alloc] initWithContentsOfFile:tempFile];
+    return [data autorelease];
 }
 
 -(void) Data2OAuthEngineAttribute:(NSData*) _data

@@ -283,7 +283,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     NSRange range = [_webstring rangeOfString:@"USER_ID"];
     
     if (range.location != NSNotFound) {
-        NSRange endRange = range;
+        NSRange endRange;
         range.length =100;
         endRange = [_webstring rangeOfString:@">" options:NSRegularExpressionSearch range:range];
         

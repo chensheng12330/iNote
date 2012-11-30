@@ -88,6 +88,7 @@
             self.secret= [strings objectAtIndex:1];
         }
     }
+    [combString release];
     return;
 }
 @end

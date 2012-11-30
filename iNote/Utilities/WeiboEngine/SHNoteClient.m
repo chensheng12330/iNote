@@ -20,7 +20,7 @@
 
 - (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine action:(SEL)anAction
 {
-    [super initWithDelegate:aDelegate engine:__engine];
+    self = [super initWithDelegate:aDelegate engine:__engine];
     action = anAction;
     hasError = false;
     return self;

@@ -20,6 +20,18 @@
 // end
 
 @implementation SHSettingViewController
+@synthesize myCell1 = _myCell1;
+@synthesize myCell2 = _myCell2;
+@synthesize myCell3 = _myCell3;
+@synthesize myCell4 = _myCell4;
+@synthesize myCell5 = _myCell5;
+@synthesize myCell6 = _myCell6;
+@synthesize myCell7 = _myCell7;
+@synthesize myCell8 = _myCell8;
+@synthesize myCell9 = _myCell9;
+@synthesize myCell10= _myCell10;
+@synthesize myTableView = _myTableView;
+
 
 - (id)init
 {
