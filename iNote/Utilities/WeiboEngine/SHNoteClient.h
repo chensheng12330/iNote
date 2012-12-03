@@ -37,6 +37,6 @@ typedef enum {
 -(void)getUseInfo;
 -(void)getNoteBooks;
 
-- (void)alert;
+//- (void)alert;
 
 @end

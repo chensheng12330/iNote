@@ -7,6 +7,7 @@
 //
 
 #import "SHSettingViewController.h"
+#import "JSON.h"
 
 @interface SHSettingViewController (Private)
 - (void)postNewStatus;
@@ -100,21 +101,23 @@
 
 - (void)loadData {
     //成功返回授权相关信息
-	if (ydNoteClient) {
-		return;
+	if (ydNoteClient==nil) {
+        //将获取的授权信息存储
+        NSData *saveEngine = [OAuthEngine archivedDataWithOAuthEngine:_engine];
+        
+        NSUserDefaults			*defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject: saveEngine forKey: @"YDauthData"];
+        [defaults synchronize];
+        
+        //初使化管理
+        ydNoteClient = [[SHNoteClient alloc] initWithTarget:self
+                                                     engine:_engine
+                                                     action:@selector(timelineDidReceive:obj:)];
 	}
     
-    //将获取的授权信息存储
-    NSData *saveEngine = [OAuthEngine archivedDataWithOAuthEngine:_engine];
+    [ydNoteClient getUseInfo];
     
-    NSUserDefaults			*defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject: saveEngine forKey: @"YDauthData"];
-	[defaults synchronize];
     
-    //初使化管理
-	ydNoteClient = [[SHNoteClient alloc] initWithTarget:self
-                                                 engine:_engine
-                                                 action:@selector(timelineDidReceive:obj:)];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -235,11 +238,14 @@
     if (sender.hasError) {
 		NSLog(@"timelineDidReceive error!!!, errorMessage:%@, errordetail:%@"
 			  , sender.errorMessage, sender.errorDetail);
-		[sender alert];
+		//[sender alert];
         if (sender.statusCode == 401) {
-            [self openAuthenticateView];
+            //[self openAuthenticateView];
         }
     }
+    
+    //解释obj
+    
     return;
 }
 

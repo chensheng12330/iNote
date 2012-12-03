@@ -28,52 +28,60 @@
  */
 
 #import <Foundation/Foundation.h>
-
-#pragma mark JSON Writing
-
-/// Adds JSON generation to NSObject
-@interface NSObject (NSObject_SBJsonWriting)
+#import "SBJsonBase.h"
 
 /**
- @brief Encodes the receiver into a JSON string
+  @brief Options for the parser class.
  
- Although defined as a category on NSObject it is only defined for NSArray and NSDictionary.
- 
- @return the receiver encoded in JSON, or nil on error.
- 
- @see @ref objc2json
+ This exists so the SBJSON facade can implement the options in the parser without having to re-declare them.
  */
-- (NSString *)JSONRepresentation;
+@protocol SBJsonParser
+
+/**
+ @brief Return the object represented by the given string.
+ 
+ Returns the object represented by the passed-in string or nil on error. The returned object can be
+ a string, number, boolean, null, array or dictionary.
+ 
+ @param repr the json string to parse
+ */
+- (id)objectWithString:(NSString *)repr;
 
 @end
 
 
-#pragma mark JSON Parsing
-
-/// Adds JSON parsing methods to NSString
-@interface NSString (NSString_SBJsonParsing)
-
 /**
- @brief Decodes the receiver's JSON text
+ @brief The JSON parser class.
  
- @return the NSDictionary or NSArray represented by the receiver, or nil on error.
+ JSON is mapped to Objective-C types in the following way:
  
- @see @ref json2objc
+ @li Null -> NSNull
+ @li String -> NSMutableString
+ @li Array -> NSMutableArray
+ @li Object -> NSMutableDictionary
+ @li Boolean -> NSNumber (initialised with -initWithBool:)
+ @li Number -> NSDecimalNumber
+ 
+ Since Objective-C doesn't have a dedicated class for boolean values, these turns into NSNumber
+ instances. These are initialised with the -initWithBool: method, and 
+ round-trip back to JSON properly. (They won't silently suddenly become 0 or 1; they'll be
+ represented as 'true' and 'false' again.)
+ 
+ JSON numbers turn into NSDecimalNumber instances,
+ as we can thus avoid any loss of precision. (JSON allows ridiculously large numbers.)
+ 
  */
-- (id)JSONValue;
+@interface SBJsonParser : SBJsonBase <SBJsonParser> {
+    
+@private
+    const char *c;
+}
 
 @end
 
-/// Adds JSON parsing methods to NSData
-@interface NSData (NSData_SBJsonParsing)
-
-/**
- @brief Decodes the receiver's JSON data
- 
- @return the NSDictionary or NSArray represented by the receiver, or nil on error.
- 
- @see @ref json2objc
- */
-- (id)JSONValue;
-
+// don't use - exists for backwards compatibility with 2.1.x only. Will be removed in 2.3.
+@interface SBJsonParser (Private)
+- (id)fragmentWithString:(id)repr;
 @end
+
+

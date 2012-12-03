@@ -42,7 +42,7 @@
 
 
 //登陆管理
-- (void)openAuthenticateView;
+//- (void)openAuthenticateView;
 - (void)timelineDidReceive:(SHNoteClient*)sender obj:(NSObject*)obj;
 
 - (void)loadTimeline;
