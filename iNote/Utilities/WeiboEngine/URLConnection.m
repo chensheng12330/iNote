@@ -118,7 +118,7 @@ NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
     int contentLength = [body lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     
     [req setValue:[NSString stringWithFormat:@"%d", contentLength] forHTTPHeaderField:@"Content-Length"];
-	NSString *finalBody = @"";
+	NSString *finalBody = nil;
 	if (body) {
 		finalBody = [finalBody stringByAppendingString:body];
 	}

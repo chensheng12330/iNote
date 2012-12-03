@@ -34,3 +34,30 @@ extern NSString *TWITTERFON_FORM_BOUNDARY;
 - (void)URLConnectionDidFinishLoading:(NSString*)content;
 
 @end
+
+/*
+ NSURL *url=[[NSURL alloc]initWithString:urlString];
+ NSMutableURLRequest  *request=[[NSMutableURLRequest alloc]init];
+ 
+ 
+ NSError *err=nil;
+ 
+ NSData *data=[NSURLConnection sendSynchronousRequest:request
+ 
+ returningResponse:nil
+ 
+ error:&err];
+ 
+ if(data==nil)
+ 
+ {
+ 
+ //if([err code])
+ 
+ 
+ NSLog(@"Code:%d,domain:%@,localizedDesc:%@",[err code],
+ 
+ [err domain],[err localizedDescription]);
+ 
+ }
+*/
