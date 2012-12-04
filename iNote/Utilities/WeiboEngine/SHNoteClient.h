@@ -33,10 +33,35 @@ typedef enum {
 @property(nonatomic, copy) NSString* errorDetail;
 
 - (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine action:(SEL)anAction;
-
+//获取用户信息
 -(NSData*)getUseInfoWithRequesMode:(Reques_Mode)_requesMode;
+
+//查看用户全部笔记本 :post
 -(void)getNoteBooks;
 
+//列出笔记本下的笔记 :post
+-(void)getNoteDetail;
+
+//创建笔记本
+-(void) createNoteBook;
+
+//删除笔记本
+-(void) deleteNoteBook;
+
+//创建笔记
+//-(void)
+
+//查看笔记
+
+//修改笔记
+
+//移动笔记
+
+//删除笔记 http://[baseURL]/yws/open/note/delete.json
+
+//上传附件或图片 http://[baseURL]/yws/open/resource/upload.json
+
+//下载附件/图片/图标 http://[baseURL]/yws/open/resource/download/...  :GET
 //- (void)alert;
 
 @end

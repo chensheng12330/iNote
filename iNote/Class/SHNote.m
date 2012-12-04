@@ -41,4 +41,9 @@
     [self initAllNil];
     [super dealloc];
 }
+
+-(NSString *) description{
+    NSString *descripton=[NSString stringWithFormat:@"strTitle:%@  strAuthor:%@  strSource:%@ /nstrContent:%@ strCreate_time:%@  strNoteSize:%@",self.strTitle,self.strAuthor,self.strSource,self.strContent,self.strCreate_time,self.strNoteSize];
+    return (descripton);
+}
 @end

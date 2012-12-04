@@ -40,4 +40,9 @@
     [self initAllNil];
     [super dealloc];
 }
+
+-(NSString *) description{
+    NSString *descripton=[NSString stringWithFormat:@"strPath:%@  strNotes_num:%@  strNotebookName:%@ /nstrCreate_time:%@  strModify_time:%@  ",self.strPath,self.strNotes_num,self.strNotebookName,self.strCreate_time,self.strModify_time];
+    return (descripton);
+}
 @end

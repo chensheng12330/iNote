@@ -44,7 +44,7 @@
 -(NSString*)ToStringWithNSDecimalNumber:(NSDecimalNumber*)_num
 {
     double _dnum = [_num doubleValue];
-    return [NSString stringWithFormat:@"%lf",_dnum];
+    return [NSString stringWithFormat:@"%.2lf",_dnum];
 }
 
 -(id) initWithJSON:(NSDictionary*) _dict
@@ -58,8 +58,8 @@
         
         // all values
         self.strUser = [_dict objectForKey:@"user"];
-        self.strUsed_size = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"total_size"]];
-        self.strTotal_size= [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"used_size"]];
+        self.strTotal_size = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"total_size"]];
+        self.strUsed_size  = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"used_size"]];
         self.strRegister_time    = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"register_time"]];
         self.strLast_modify_time = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"last_login_time"]];
         self.strLast_login_time  = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"last_modify_time"]];
@@ -76,20 +76,21 @@
     }
     
     double ltotal_size=0.0, lused_size =0.0, dRate =0.0;
+    ltotal_size = [_strTotal_size doubleValue];
+    lused_size  = [_strUsed_size  doubleValue];
     
     switch (_index) {
         case 0:  //账户
             return self.strUser;
         case 1:
-            ltotal_size = [_strTotal_size longLongValue];
-            lused_size  = [_strUsed_size  longLongValue];
-            dRate       = 1-lused_size/ltotal_size;
-            strUsableRate = [NSString stringWithFormat:@"%.2f",dRate];
+            
+            dRate       = lused_size/ltotal_size;
+            strUsableRate = [NSString stringWithFormat:@"%f",dRate];
             return strUsableRate;
         case 2: //已使用空间
-            return self.strUsed_size;
+            return [NSString stringWithFormat:@"%.2lfMB",(lused_size/1024.0/1024.0)];
         case 3: //总空间
-            return self.strTotal_size;
+            return [NSString stringWithFormat:@"%.2lfMB",(ltotal_size/1024.0/1024.0)];;
         case 4: //最后登录时间
             return self.strLast_login_time;
         case 5: //最近修改时间
