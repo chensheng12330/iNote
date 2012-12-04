@@ -107,18 +107,19 @@
 
 #pragma mark Status methods
 
--(void)getUseInfo
+-(NSData*)getUseInfoWithRequesMode:(Reques_Mode)_requesMode;
 {
     needAuth = YES;
     NSString *path = [NSString stringWithFormat:@"yws/open/user/get.%@", API_FORMAT];
-	[super get:[self getURL:path queryParameters:nil]];
+	return [super get:[self getURL:path queryParameters:nil] requesMode:_requesMode];
 }
+
 -(void) getNoteBooks
 {
     //yws/open/notebook/all.json
     needAuth = YES;
     NSString *path = [NSString stringWithFormat:@"yws/open/notebook/all.%@", API_FORMAT];
-	[super post:[self getURL:path queryParameters:nil] body:nil];
+	[super post:[self getURL:path queryParameters:nil] body:nil requesMode:Reques_Asyn];
 }
 
 #pragma mark -

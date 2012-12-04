@@ -32,7 +32,7 @@
 #import "NSMutableURLRequest_Parameters.h"
 #import "NSURL_Base.h"
 
-#define DEBUG_LONG_OA_MR 1
+#define DEBUG_LONG_OA_MR 0
 
 @interface OAMutableURLRequest : NSMutableURLRequest {
 @protected

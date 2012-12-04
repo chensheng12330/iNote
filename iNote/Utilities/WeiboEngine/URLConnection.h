@@ -7,6 +7,13 @@
 #define API_FORMAT @"json"
 #define API_DOMAIN	@"note.youdao.com" //@"api.t.sina.com.cn"
 
+
+
+typedef enum {
+    Reques_Syn, //同步
+    Reques_Asyn //异步
+}Reques_Mode;
+
 extern NSString *TWITTERFON_FORM_BOUNDARY;
 
 @interface URLConnection : NSObject
@@ -25,9 +32,9 @@ extern NSString *TWITTERFON_FORM_BOUNDARY;
 @property (nonatomic, copy) NSString* requestURL;
 
 - (id)initWithDelegate:(id)delegate engine:(OAuthEngine *)__engine;
-- (void)get:(NSString*)URL;
-- (void)post:(NSString*)aURL body:(NSString*)body;
-- (void)post:(NSString*)aURL data:(NSData*)data;
+- (NSData*)get:(NSString*)URL   requesMode:(Reques_Mode)_requesMode;
+- (NSData*)post:(NSString*)aURL body:(NSString*)body requesMode:(Reques_Mode)_requesMode;
+- (NSData*)post:(NSString*)aURL data:(NSData*)data   requesMode:(Reques_Mode)_requesMode;
 - (void)cancel;
 
 - (void)URLConnectionDidFailWithError:(NSError*)error;

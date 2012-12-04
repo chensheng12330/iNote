@@ -34,7 +34,7 @@ typedef enum {
 
 - (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine action:(SEL)anAction;
 
--(void)getUseInfo;
+-(NSData*)getUseInfoWithRequesMode:(Reques_Mode)_requesMode;
 -(void)getNoteBooks;
 
 //- (void)alert;

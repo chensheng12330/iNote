@@ -11,6 +11,8 @@
 #import "OAuthController.h"
 #import "SHNoteClient.h"
 
+#import "SHNoteUser.h"
+
 //页面登陆事件处理
 @interface SHSettingViewController : UIViewController
 <OAuthControllerDelegate,
@@ -24,6 +26,9 @@
     //nib init table cell
     NSMutableDictionary *myTableCellDit;
     NSArray *myAllCellKey;
+    
+    SHNoteUser *noteUserInfo;
+    
 }
 
 @property (retain, nonatomic) IBOutlet UITableViewCell *myCell1;

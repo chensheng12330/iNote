@@ -39,7 +39,7 @@ NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
 	[super dealloc];
 }
 
-- (void)get:(NSString*)aURL
+- (NSData*)get:(NSString*)aURL   requesMode:(Reques_Mode)_requesMode
 {
     [connection release];
 	[buf release];
@@ -79,13 +79,33 @@ NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
 		NSLog(@"key:%@, value:%@", key, [dic objectForKey:key]);
 	}
 	 */
- 	buf = [[NSMutableData data] retain];
-	connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
-    
+ 	//mode select
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    if (_requesMode == Reques_Asyn) {
+        //异步
+        connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+        
+        return nil;
+    }
+    else if (_requesMode == Reques_Syn)
+    {
+        //同步
+        NSError *err=nil;
+        NSData *data=[NSURLConnection sendSynchronousRequest:req
+                                           returningResponse:nil
+                                                       error:&err];
+        if(data==nil)
+        {
+            NSLog(@"Code:%d,domain:%@,localizedDesc:%@",[err code],[err domain],[err localizedDescription]);
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        return data;
+    }
+    return nil;
+
 }
 
--(void)post:(NSString*)aURL body:(NSString*)body
+-(NSData*)post:(NSString*)aURL body:(NSString*)body  requesMode:(Reques_Mode)_requesMode
 {
     [connection release];
 	[buf release];
@@ -131,12 +151,34 @@ NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
 		[oaReq prepare];
 	
 	buf = [[NSMutableData data] retain];
-	connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+    
+    //mode select
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    if (_requesMode == Reques_Asyn) {
+        //异步
+        connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+        
+        return nil;
+    }
+    else if (_requesMode == Reques_Syn)
+    {
+        //同步
+        NSError *err=nil;
+        NSData *data=[NSURLConnection sendSynchronousRequest:req
+                                           returningResponse:nil
+                                                       error:&err];
+        if(data==nil)
+        {
+            NSLog(@"Code:%d,domain:%@,localizedDesc:%@",[err code],[err domain],[err localizedDescription]);
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        return data;
+    }
+    return nil;
 }
 
--(void)post:(NSString*)aURL data:(NSData*)data
+-(NSData*)post:(NSString*)aURL data:(NSData*)data  requesMode:(Reques_Mode)_requesMode
 {
     [connection release];
 	[buf release];
@@ -170,10 +212,31 @@ NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
     [req setHTTPBody:data];
     if (needAuth)
 		[oaReq prepare];
-	buf = [[NSMutableData data] retain];
-	connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+	
+    //mode select
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    if (_requesMode == Reques_Asyn) {
+        //异步
+        connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+        
+        return nil;
+    }
+    else if (_requesMode == Reques_Syn)
+    {
+        //同步
+        NSError *err=nil;
+        NSData *data=[NSURLConnection sendSynchronousRequest:req
+                                           returningResponse:nil
+                                                       error:&err];
+        if(data==nil)
+        {
+            NSLog(@"Code:%d,domain:%@,localizedDesc:%@",[err code],[err domain],[err localizedDescription]);
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        return data;
+    }
+    return nil;
 }
 
 - (void)cancel

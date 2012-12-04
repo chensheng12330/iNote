@@ -96,6 +96,7 @@
     
     //presentModalViewController
 	if (controller) [self presentModalViewController:controller animated:YES];
+    else [self loadData];
         //[self.navigationController pushViewController: controller animated: YES];
 }
 
@@ -115,9 +116,12 @@
                                                      action:@selector(timelineDidReceive:obj:)];
 	}
     
-    [ydNoteClient getUseInfo];
-    
-    
+    //显示数据
+    NSData * data = [ydNoteClient getUseInfoWithRequesMode:Reques_Syn];
+    NSString *strRep = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSDictionary* dic = [strRep JSONValue];
+    noteUserInfo = [[SHNoteUser alloc] initWithJSON:dic];
+    return;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -208,6 +212,20 @@
         
         UITableViewCell *cell = [arCells objectAtIndex:row];
         NSAssert(cell!=nil, @"Sherwin: SettingMVC:cellForFowAtIndexPath,cell is null");
+        
+        //cell add infomation
+        if (section==1) { //账户信息
+            if (row ==1 ) {
+                UIProgressView *progView = (UIProgressView *)[cell viewWithTag:1];
+                [progView setProgress:[[noteUserInfo objectWithIndex:1] doubleValue]];
+            }
+            else
+            {
+                UILabel *tag4view = (UILabel *)[cell viewWithTag:1];
+                [tag4view setText:[noteUserInfo objectWithIndex:row]];
+            }
+            
+        }
         return cell;
     }
     @catch (NSException *exception) {
