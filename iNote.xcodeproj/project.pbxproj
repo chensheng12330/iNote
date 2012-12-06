@@ -64,6 +64,7 @@
 		D4B82922163E7FF400AE63F0 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B8291B163E7FF400AE63F0 /* StringUtil.m */; };
 		D4B82923163E7FF400AE63F0 /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B8291D163E7FF400AE63F0 /* TimeUtils.m */; };
 		D4B82926163E82E200AE63F0 /* GlobalCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B82925163E82E200AE63F0 /* GlobalCore.m */; };
+		D4BDB792167048A800D6E4E8 /* NSString+SHNSStringForDate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDB791167048A800D6E4E8 /* NSString+SHNSStringForDate.m */; };
 		D4C1471616105CD80072FF17 /* BaseRotateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C1470216105CD80072FF17 /* BaseRotateView.m */; };
 		D4C1471716105CD80072FF17 /* BottomRotateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C1470416105CD80072FF17 /* BottomRotateView.m */; };
 		D4C1471816105CD80072FF17 /* MemberCenterRotateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C1470616105CD80072FF17 /* MemberCenterRotateView.m */; };
@@ -223,6 +224,8 @@
 		D4B8291D163E7FF400AE63F0 /* TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtils.m; sourceTree = "<group>"; };
 		D4B82924163E82E200AE63F0 /* GlobalCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalCore.h; sourceTree = "<group>"; };
 		D4B82925163E82E200AE63F0 /* GlobalCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalCore.m; sourceTree = "<group>"; };
+		D4BDB790167048A800D6E4E8 /* NSString+SHNSStringForDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SHNSStringForDate.h"; sourceTree = "<group>"; };
+		D4BDB791167048A800D6E4E8 /* NSString+SHNSStringForDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SHNSStringForDate.m"; sourceTree = "<group>"; };
 		D4C1470116105CD80072FF17 /* BaseRotateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRotateView.h; sourceTree = "<group>"; };
 		D4C1470216105CD80072FF17 /* BaseRotateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRotateView.m; sourceTree = "<group>"; };
 		D4C1470316105CD80072FF17 /* BottomRotateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomRotateView.h; sourceTree = "<group>"; };
@@ -713,6 +716,8 @@
 				D48E030A166C837400068EF0 /* SHNotebook.m */,
 				D48E030D166C86CF00068EF0 /* SHNote.h */,
 				D48E030E166C86CF00068EF0 /* SHNote.m */,
+				D4BDB790167048A800D6E4E8 /* NSString+SHNSStringForDate.h */,
+				D4BDB791167048A800D6E4E8 /* NSString+SHNSStringForDate.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -906,6 +911,7 @@
 				D48E0327166C958700068EF0 /* SBJsonBase.m in Sources */,
 				D48E0328166C958700068EF0 /* SBJsonParser.m in Sources */,
 				D48E0329166C958700068EF0 /* SBJsonWriter.m in Sources */,
+				D4BDB792167048A800D6E4E8 /* NSString+SHNSStringForDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

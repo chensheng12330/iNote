@@ -22,6 +22,7 @@
 {
     OAuthEngine				 *_engine;       //授权管理
 	SHNoteClient             *ydNoteClient;   //有道api管理
+    BOOL isReqForWeb;
     
     //nib init table cell
     NSMutableDictionary *myTableCellDit;
@@ -52,5 +53,6 @@
 
 - (void)loadTimeline;
 - (void)loadData;
+
 
 @end

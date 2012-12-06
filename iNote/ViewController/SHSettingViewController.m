@@ -12,6 +12,8 @@
 @interface SHSettingViewController (Private)
 - (void)postNewStatus;
 - (void)initTableViewData;
+
+-(void)UserLog:(UIBarButtonItem*)sender;
 @end
 
 
@@ -78,15 +80,45 @@
     NSData *getData = [[NSUserDefaults standardUserDefaults] objectForKey: @"YDauthData"];
     _engine = [[OAuthEngine unarchivedOAuthEngineWithData:getData] retain];
     
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"登陆" style:UIBarButtonItemStylePlain target:self action:@selector(UserLog:)];
+    self.navigationItem.rightBarButtonItem = btn;
+    [btn release];
+    
+    //右标题设置
+    if (_engine) {
+        [self.navigationItem.rightBarButtonItem setTitle:@"注销"];
+        [self.navigationItem.rightBarButtonItem setTag:1];
+    }
+    else
+    {
+        [self.navigationItem.rightBarButtonItem setTitle:@"登陆"];
+        [self.navigationItem.rightBarButtonItem setTag:2];
+    }
+    
     if (!_engine){
 		_engine = [[OAuthEngine alloc] initOAuthWithDelegate: self];
 		_engine.consumerKey    = kOAuthConsumerKey;
 		_engine.consumerSecret = kOAuthConsumerSecret;
 	}
     
-    
     [self loadTimeline];
     return;
+}
+
+-(void)UserLog:(UIBarButtonItem*)sender
+{
+    if (sender.tag == 1) {
+        //登陆操作
+        //初使化数据
+        
+    }else if(sender.tag ==2)
+    {
+        //注销操作
+        //清除缓存
+        
+    }
+    
+    NSLog(@"%@",sender);
 }
 
 - (void)loadTimeline {
@@ -95,8 +127,16 @@
     
     
     //presentModalViewController
-	if (controller) [self presentModalViewController:controller animated:YES];
-    else [self loadData];
+	if (controller)
+    {
+        isReqForWeb = YES;
+        [self presentModalViewController:controller animated:YES];
+    }
+    else
+    {
+        isReqForWeb = NO;
+        [self loadData];
+    }
         //[self.navigationController pushViewController: controller animated: YES];
 }
 
@@ -121,6 +161,10 @@
     NSString *strRep = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSDictionary* dic = [strRep JSONValue];
     noteUserInfo = [[SHNoteUser alloc] initWithJSON:dic];
+    
+    [strRep release];
+    
+    if (isReqForWeb) [self.myTableView reloadData];
     return;
 }
 
