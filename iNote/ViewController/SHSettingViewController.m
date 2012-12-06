@@ -20,6 +20,8 @@
 // 有道云词典
 #define kOAuthConsumerKey				@"448412811a0a2fcac811ca08b8b2c258"		//REPLACE ME
 #define kOAuthConsumerSecret			@"10c6d13eec190b97248591e51b2abe0d"		//REPLACE ME
+
+#define OAUTH_SAVE_KEY  @"YDauthData"
 // end
 
 @implementation SHSettingViewController
@@ -77,7 +79,7 @@
     [self initTableViewData];
     
     //授权管理初使化
-    NSData *getData = [[NSUserDefaults standardUserDefaults] objectForKey: @"YDauthData"];
+    NSData *getData = [[NSUserDefaults standardUserDefaults] objectForKey: OAUTH_SAVE_KEY];
     _engine = [[OAuthEngine unarchivedOAuthEngineWithData:getData] retain];
     
     UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"登陆" style:UIBarButtonItemStylePlain target:self action:@selector(UserLog:)];
@@ -108,14 +110,24 @@
 -(void)UserLog:(UIBarButtonItem*)sender
 {
     if (sender.tag == 1) {
+        if (_engine) [_engine release];
+        
+        _engine = [[OAuthEngine alloc] initOAuthWithDelegate: self];
+		_engine.consumerKey    = kOAuthConsumerKey;
+		_engine.consumerSecret = kOAuthConsumerSecret;
+        
+        [self loadTimeline];
+        
+        [sender setTitle:@"注销"]; sender.tag =2;
         //登陆操作
         //初使化数据
-        
     }else if(sender.tag ==2)
     {
         //注销操作
         //清除缓存
-        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:OAUTH_SAVE_KEY];
+        [_engine release]; _engine = nil;
+        [sender setTitle:@"登陆"]; sender.tag =1;
     }
     
     NSLog(@"%@",sender);
@@ -147,7 +159,7 @@
         NSData *saveEngine = [OAuthEngine archivedDataWithOAuthEngine:_engine];
         
         NSUserDefaults			*defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject: saveEngine forKey: @"YDauthData"];
+        [defaults setObject: saveEngine forKey: OAUTH_SAVE_KEY];
         [defaults synchronize];
         
         //初使化管理
