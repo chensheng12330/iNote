@@ -10,8 +10,8 @@
 
 #import "OAuthController.h"
 #import "SHNoteClient.h"
-
 #import "SHNoteUser.h"
+#import "SHDBManage.h"
 
 //页面登陆事件处理
 @interface SHSettingViewController : UIViewController
@@ -29,7 +29,7 @@
     NSArray *myAllCellKey;
     
     SHNoteUser *noteUserInfo;
-    
+    SHDBManage *dbManage;
 }
 
 @property (retain, nonatomic) IBOutlet UITableViewCell *myCell1;
@@ -45,7 +45,11 @@
 
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
 
+//同步笔记数据-上传-下载
+- (IBAction)synchrodataEven:(UIButton *)sender;
 
+//切换密码保护
+- (IBAction)switchPasswordProtection:(UISwitch *)sender;
 
 //登陆管理
 //- (void)openAuthenticateView;

@@ -12,6 +12,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "SHDBManage.h"
 
 @class SHViewController;
 
@@ -21,4 +22,5 @@
 @property (strong, nonatomic) UINavigationController *navigationController;
 @property (strong, nonatomic) SHViewController *viewController;
 
+@property (readonly) SHDBManage *dbManage;
 @end

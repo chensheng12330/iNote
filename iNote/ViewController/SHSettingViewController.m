@@ -73,6 +73,8 @@
 {
     [super viewDidLoad];
     
+    dbManage = [SHDBManage sharedExerciseManage];
+    
     // Do any additional setup after loading the view from its nib.
     
     // Add view element
@@ -109,7 +111,7 @@
 
 -(void)UserLog:(UIBarButtonItem*)sender
 {
-    if (sender.tag == 1) {
+    if (sender.tag == 2) {
         if (_engine) [_engine release];
         
         _engine = [[OAuthEngine alloc] initOAuthWithDelegate: self];
@@ -118,16 +120,15 @@
         
         [self loadTimeline];
         
-        [sender setTitle:@"注销"]; sender.tag =2;
         //登陆操作
         //初使化数据
-    }else if(sender.tag ==2)
+    }else if(sender.tag ==1)
     {
         //注销操作
         //清除缓存
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:OAUTH_SAVE_KEY];
         [_engine release]; _engine = nil;
-        [sender setTitle:@"登陆"]; sender.tag =1;
+        [sender setTitle:@"登陆"]; sender.tag = 2;
     }
     
     NSLog(@"%@",sender);
@@ -149,9 +150,22 @@
         isReqForWeb = NO;
         [self loadData];
     }
-        //[self.navigationController pushViewController: controller animated: YES];
+    return ;
 }
 
+/*
+ +(BOOL) isNetWork
+ {
+ TeraGoAppDelegate * mydelegate = (TeraGoAppDelegate*)[[UIApplication sharedApplication] delegate];
+ NetworkStatus hostStatus = [mydelegate.hostReachable currentReachabilityStatus];
+ if ( hostStatus == kNotReachable)
+ {
+ return FALSE;
+ }
+ 
+ return TRUE;
+ }
+ */
 - (void)loadData {
     //成功返回授权相关信息
 	if (ydNoteClient==nil) {
@@ -168,7 +182,9 @@
                                                      action:@selector(timelineDidReceive:obj:)];
 	}
     
-    //显示数据
+    //数据显示及处理
+    
+    //
     NSData * data = [ydNoteClient getUseInfoWithRequesMode:Reques_Syn];
     NSString *strRep = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSDictionary* dic = [strRep JSONValue];
@@ -352,6 +368,9 @@
     
     [controller dismissModalViewControllerAnimated:YES];
     
+    [self.navigationItem.rightBarButtonItem setTitle:@"注销"];
+    self.navigationItem.rightBarButtonItem.tag = 1;
+    
     //数据载入
     [OAuthEngine setCurrentOAuthEngine:_engine];
     [self loadData];
@@ -362,6 +381,9 @@
 	//UIViewController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self];
 	NSAssert(controller!=nil, @"Sherwin: OAuthControllerFailed.");
     
+    [self.navigationItem.rightBarButtonItem setTitle:@"登陆"];
+    self.navigationItem.rightBarButtonItem.tag = 2;
+    
     [controller dismissModalViewControllerAnimated:YES];
     
 	
@@ -370,10 +392,20 @@
 - (void) OAuthControllerCanceled: (OAuthController *) controller {
 	NSLog(@"Authentication Canceled.");
     //data process
+    [self.navigationItem.rightBarButtonItem setTitle:@"登陆"];
+    self.navigationItem.rightBarButtonItem.tag = 2;
     //etc:
     [controller dismissModalViewControllerAnimated:YES];
     return;
 
 }
 
+#pragma mark - button event
+- (IBAction)synchrodataEven:(UIButton *)sender {
+    //同步处理
+}
+
+- (IBAction)switchPasswordProtection:(UISwitch *)sender {
+    //数据存储
+}
 @end

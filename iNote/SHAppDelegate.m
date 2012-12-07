@@ -15,6 +15,7 @@
 @synthesize window = _window;
 @synthesize viewController = _viewController;
 @synthesize navigationController = _navigationController;
+@synthesize dbManage = _dbManage;
 
 void uncaughtExceptionHandler(NSException*exception){    NSLog(@"CRASH: %@", exception);    NSLog(@"Stack Trace: %@",[exception callStackSymbols]);    // Internal error reporting
 }
@@ -24,6 +25,7 @@ void uncaughtExceptionHandler(NSException*exception){    NSLog(@"CRASH: %@", exc
     [_window release];
     [_viewController release];
     [_navigationController release];
+    [_dbManage release];
     [super dealloc];
 }
 
@@ -36,6 +38,11 @@ void uncaughtExceptionHandler(NSException*exception){    NSLog(@"CRASH: %@", exc
     self.viewController = [[[SHViewController alloc] initWithNibName:@"SHViewController" bundle:nil] autorelease];
     
     _navigationController = [[UINavigationController alloc] initWithRootViewController:_viewController];
+    
+    //数据库管理初使化
+    _dbManage = [SHDBManage sharedExerciseManage];
+    //
+    
     
     self.window.rootViewController = _navigationController;
     [self.window makeKeyAndVisible];

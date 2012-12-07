@@ -203,6 +203,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
     CFStringRef string = CFUUIDCreateString(NULL, theUUID);
     NSMakeCollectable(theUUID);
     nonce = (NSString *)string;
+    CFRelease(theUUID);
 }
 
 //签名基数据[请求数据头]
