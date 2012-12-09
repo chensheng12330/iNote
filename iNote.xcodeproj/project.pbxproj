@@ -11,6 +11,7 @@
 		840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840808841663A51E00028F77 /* SHSettingViewController.xib */; };
 		84166CBA1610A51900183621 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84166CB91610A51900183621 /* icon.png */; };
 		84DA02B61610897300DAF3A2 /* menuData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DA02B51610897300DAF3A2 /* menuData.plist */; };
+		84DEFAA816743B5C0084289B /* SHWebUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEFAA716743B5C0084289B /* SHWebUtility.m */; };
 		84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84EDABA7165E603C0039F314 /* MarkInfo.rtf */; };
 		D42D87FA165F4706004D3E72 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D42D87F9165F4706004D3E72 /* Default.png */; };
 		D42D8818165F77CB004D3E72 /* half rount.png in Resources */ = {isa = PBXBuildFile; fileRef = D42D8817165F77CB004D3E72 /* half rount.png */; };
@@ -137,6 +138,8 @@
 		84166CB91610A51900183621 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
 		84B4318A164AA0D000ED79D7 /* MacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroDefine.h; path = iNote/Utilities/WeiboEngine/Utils/MacroDefine.h; sourceTree = SOURCE_ROOT; };
 		84DA02B51610897300DAF3A2 /* menuData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = menuData.plist; path = Plists/menuData.plist; sourceTree = "<group>"; };
+		84DEFAA616743B5C0084289B /* SHWebUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHWebUtility.h; sourceTree = "<group>"; };
+		84DEFAA716743B5C0084289B /* SHWebUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHWebUtility.m; sourceTree = "<group>"; };
 		84EDABA7165E603C0039F314 /* MarkInfo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = MarkInfo.rtf; sourceTree = "<group>"; };
 		D42D87F9165F4706004D3E72 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D42D8817165F77CB004D3E72 /* half rount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "half rount.png"; sourceTree = "<group>"; };
@@ -367,6 +370,15 @@
 				840808841663A51E00028F77 /* SHSettingViewController.xib */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		84EE6CE01672DB02009E3EF8 /* PublicClasslib */ = {
+			isa = PBXGroup;
+			children = (
+				84DEFAA616743B5C0084289B /* SHWebUtility.h */,
+				84DEFAA716743B5C0084289B /* SHWebUtility.m */,
+			);
+			path = PublicClasslib;
 			sourceTree = "<group>";
 		};
 		D43BD2EA160C55850091A219 = {
@@ -745,6 +757,7 @@
 		D4D92004161017B300A634CF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				84EE6CE01672DB02009E3EF8 /* PublicClasslib */,
 				D4B828D1163E77E500AE63F0 /* WeiboEngine */,
 				D4C1470016105CD80072FF17 /* RotateView */,
 			);
@@ -964,6 +977,7 @@
 				D4872C341671B7360046D938 /* FMResultSet.m in Sources */,
 				D4872C371671B7580046D938 /* fmdb.m in Sources */,
 				D4872C3A1671C12B0046D938 /* SHDBManage.m in Sources */,
+				84DEFAA816743B5C0084289B /* SHWebUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,7 +1079,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iNote/iNote-Prefix.pch";
 				INFOPLIST_FILE = "iNote/iNote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iNote/Utilities/WeiboEngine\"",
@@ -1085,7 +1099,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iNote/iNote-Prefix.pch";
 				INFOPLIST_FILE = "iNote/iNote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iNote/Utilities/WeiboEngine\"",

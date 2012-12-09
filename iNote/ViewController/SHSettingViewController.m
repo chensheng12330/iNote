@@ -8,6 +8,7 @@
 
 #import "SHSettingViewController.h"
 #import "JSON.h"
+#import "SHWebUtility.h"
 
 @interface SHSettingViewController (Private)
 - (void)postNewStatus;
@@ -73,6 +74,9 @@
 {
     [super viewDidLoad];
     
+    //testing
+    //BOOL isNet = [SHWebUtility isNetWork];
+    
     dbManage = [SHDBManage sharedExerciseManage];
     
     // Do any additional setup after loading the view from its nib.
@@ -109,35 +113,14 @@
     return;
 }
 
--(void)UserLog:(UIBarButtonItem*)sender
-{
-    if (sender.tag == 2) {
-        if (_engine) [_engine release];
-        
-        _engine = [[OAuthEngine alloc] initOAuthWithDelegate: self];
-		_engine.consumerKey    = kOAuthConsumerKey;
-		_engine.consumerSecret = kOAuthConsumerSecret;
-        
-        [self loadTimeline];
-        
-        //登陆操作
-        //初使化数据
-    }else if(sender.tag ==1)
-    {
-        //注销操作
-        //清除缓存
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:OAUTH_SAVE_KEY];
-        [_engine release]; _engine = nil;
-        [sender setTitle:@"登陆"]; sender.tag = 2;
-    }
-    
-    NSLog(@"%@",sender);
-}
-
 - (void)loadTimeline {
-	OAuthController *controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self];
-    [controller setStTitle:@"登陆授权"];
     
+    OAuthController *controller = nil;
+    
+    if ([SHWebUtility isNetWork]) {  //有网络才请求登陆
+        controller = [OAuthController controllerToEnterCredentialsWithEngine: _engine delegate: self];
+    }
+    [controller setStTitle:@"登陆授权"];
     
     //presentModalViewController
 	if (controller)
@@ -153,19 +136,6 @@
     return ;
 }
 
-/*
- +(BOOL) isNetWork
- {
- TeraGoAppDelegate * mydelegate = (TeraGoAppDelegate*)[[UIApplication sharedApplication] delegate];
- NetworkStatus hostStatus = [mydelegate.hostReachable currentReachabilityStatus];
- if ( hostStatus == kNotReachable)
- {
- return FALSE;
- }
- 
- return TRUE;
- }
- */
 - (void)loadData {
     //成功返回授权相关信息
 	if (ydNoteClient==nil) {
@@ -183,7 +153,14 @@
 	}
     
     //数据显示及处理
-    
+    if ([SHWebUtility isNetWork]) {
+        //从网络下载数据，并更新数据库
+    }
+    else
+    {
+        //从数据库读取数据
+        
+    }
     //
     NSData * data = [ydNoteClient getUseInfoWithRequesMode:Reques_Syn];
     NSString *strRep = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -401,6 +378,31 @@
 }
 
 #pragma mark - button event
+-(void)UserLog:(UIBarButtonItem*)sender
+{
+    if (sender.tag == 2) {
+        if (_engine) [_engine release];
+        
+        _engine = [[OAuthEngine alloc] initOAuthWithDelegate: self];
+		_engine.consumerKey    = kOAuthConsumerKey;
+		_engine.consumerSecret = kOAuthConsumerSecret;
+        
+        [self loadTimeline];
+        
+        //登陆操作
+        //初使化数据
+    }else if(sender.tag ==1)
+    {
+        //注销操作
+        //清除缓存
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:OAUTH_SAVE_KEY];
+        [_engine release]; _engine = nil;
+        [sender setTitle:@"登陆"]; sender.tag = 2;
+    }
+    
+    NSLog(@"%@",sender);
+}
+
 - (IBAction)synchrodataEven:(UIButton *)sender {
     //同步处理
 }
