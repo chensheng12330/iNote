@@ -10,6 +10,7 @@
 
 @interface NSString (SHNSStringForDate)
 
-
++(NSDate*)   dateFormatString:(NSString*)_string;
 +(NSString*) stringFormatDate:(NSDate*)_date;
+
 @end

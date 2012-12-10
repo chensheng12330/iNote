@@ -40,7 +40,7 @@ void uncaughtExceptionHandler(NSException*exception){    NSLog(@"CRASH: %@", exc
     _navigationController = [[UINavigationController alloc] initWithRootViewController:_viewController];
     
     //数据库管理初使化
-    _dbManage = [SHDBManage sharedExerciseManage];
+    _dbManage = [SHDBManage sharedDBManage];
     //
     
     

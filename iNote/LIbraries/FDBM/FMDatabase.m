@@ -24,7 +24,7 @@
 }
 -(void) debugLog_s:(NSString *)info
 {
-    NSLog(@"%@",info);
+    NSLog(@"FMDatabase Error:%@",info);
 }
 
 + (id)databaseWithPath:(NSString*)aPath {

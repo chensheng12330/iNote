@@ -38,7 +38,6 @@
 @synthesize myCell10= _myCell10;
 @synthesize myTableView = _myTableView;
 
-
 - (id)init
 {
     self = [super init];
@@ -74,10 +73,7 @@
 {
     [super viewDidLoad];
     
-    //testing
-    //BOOL isNet = [SHWebUtility isNetWork];
-    
-    dbManage = [SHDBManage sharedExerciseManage];
+    dbManage = [SHDBManage sharedDBManage];
     
     // Do any additional setup after loading the view from its nib.
     
@@ -154,21 +150,22 @@
     
     //数据显示及处理
     if ([SHWebUtility isNetWork]) {
-        //从网络下载数据，并更新数据库
+        //从网络下载数据
+        NSData * data = [ydNoteClient getUseInfoWithRequesMode:Reques_Syn];
+        NSString *strRep = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSDictionary* dic = [strRep JSONValue];
+        noteUserInfo = [[SHNoteUser alloc] initWithJSON:dic];
+        
+        //更新数据库
+        [dbManage setNoteUserDataToDB:noteUserInfo];
+        [strRep release];
     }
     else
     {
         //从数据库读取数据
-        
+        noteUserInfo = [dbManage getNoteUserInfo];
     }
-    //
-    NSData * data = [ydNoteClient getUseInfoWithRequesMode:Reques_Syn];
-    NSString *strRep = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSDictionary* dic = [strRep JSONValue];
-    noteUserInfo = [[SHNoteUser alloc] initWithJSON:dic];
-    
-    [strRep release];
-    
+
     if (isReqForWeb) [self.myTableView reloadData];
     return;
 }

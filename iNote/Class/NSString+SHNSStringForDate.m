@@ -27,4 +27,20 @@
     return _tempstring;
 }
 
++(NSDate*) dateFormatString:(NSString*)_string
+{
+    NSAssert(_string != nil, @"Sherwin: SHNSStringForDate.stringFormatDate parmant is nil.");
+    if ([_string isEqualToString:@""]) {
+        return nil;
+    }
+    
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss"];
+    
+    NSDate *_date = [format dateFromString:_string];
+    [format release];
+    
+    return _date;
+}
+
 @end

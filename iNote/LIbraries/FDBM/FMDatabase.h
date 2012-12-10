@@ -76,6 +76,7 @@
 
 + (id)databaseWithPath:(NSString*)inPath;
 - (id)initWithPath:(NSString*)inPath;
+- (id)initWithDBName:(NSString*)_dbName;
 
 - (BOOL)open;
 #if SQLITE_VERSION_NUMBER >= 3005000

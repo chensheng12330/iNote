@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
+#import "SHNoteUser.h"
 
 /*
  class property: Singleton model
@@ -25,5 +26,19 @@
 /*
  初使化对象唯一方法
  */
-+(SHDBManage*) sharedExerciseManage;
++(SHDBManage*) sharedDBManage;
+
+//********///
+// NoteUser 
+// get note user all info
+-(SHNoteUser*) getNoteUserInfo;
+
+// set note user info with SHNoteUser object [id user unique]
+-(BOOL) setNoteUserDataToDB:(SHNoteUser*)_noteUser;
+
+//delete Note User Data
+-(BOOL) deleteNoteUserForDB;
+////////////
+
+
 @end

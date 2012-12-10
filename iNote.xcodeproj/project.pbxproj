@@ -92,6 +92,7 @@
 		D4C1472516105CD80072FF17 /* New01.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C1471416105CD80072FF17 /* New01.png */; };
 		D4C1472616105CD80072FF17 /* Product01.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C1471516105CD80072FF17 /* Product01.png */; };
 		D4C1472A161061390072FF17 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C14729161061390072FF17 /* AudioToolbox.framework */; };
+		D4D035121675C48300CF10FA /* inote.db in Resources */ = {isa = PBXBuildFile; fileRef = D4872C3B1671E1160046D938 /* inote.db */; };
 		D4D91F921610148600A634CF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D91F911610148600A634CF /* CFNetwork.framework */; };
 		D4D91F94161014B400A634CF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D91F93161014B400A634CF /* MobileCoreServices.framework */; };
 		D4D91F96161014BE00A634CF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D91F95161014BE00A634CF /* SystemConfiguration.framework */; };
@@ -850,6 +851,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4D035121675C48300CF10FA /* inote.db in Resources */,
 				D43BD304160C55850091A219 /* InfoPlist.strings in Resources */,
 				D43BD310160C55850091A219 /* SHViewController.xib in Resources */,
 				D4C1471916105CD80072FF17 /* Brand01.png in Resources */,
