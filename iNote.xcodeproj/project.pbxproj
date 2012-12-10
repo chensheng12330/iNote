@@ -10,6 +10,8 @@
 		840808851663A51E00028F77 /* SHSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840808831663A51E00028F77 /* SHSettingViewController.m */; };
 		840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840808841663A51E00028F77 /* SHSettingViewController.xib */; };
 		84166CBA1610A51900183621 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84166CB91610A51900183621 /* icon.png */; };
+		8436846F1676177B00122999 /* SHSynSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436846D1676177B00122999 /* SHSynSettingViewController.m */; };
+		843684701676177B00122999 /* SHSynSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8436846E1676177B00122999 /* SHSynSettingViewController.xib */; };
 		84DA02B61610897300DAF3A2 /* menuData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DA02B51610897300DAF3A2 /* menuData.plist */; };
 		84DEFAA816743B5C0084289B /* SHWebUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEFAA716743B5C0084289B /* SHWebUtility.m */; };
 		84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84EDABA7165E603C0039F314 /* MarkInfo.rtf */; };
@@ -137,6 +139,9 @@
 		840808831663A51E00028F77 /* SHSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSettingViewController.m; sourceTree = "<group>"; };
 		840808841663A51E00028F77 /* SHSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSettingViewController.xib; sourceTree = "<group>"; };
 		84166CB91610A51900183621 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
+		8436846C1676177B00122999 /* SHSynSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSynSettingViewController.h; sourceTree = "<group>"; };
+		8436846D1676177B00122999 /* SHSynSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSynSettingViewController.m; sourceTree = "<group>"; };
+		8436846E1676177B00122999 /* SHSynSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSynSettingViewController.xib; sourceTree = "<group>"; };
 		84B4318A164AA0D000ED79D7 /* MacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroDefine.h; path = iNote/Utilities/WeiboEngine/Utils/MacroDefine.h; sourceTree = SOURCE_ROOT; };
 		84DA02B51610897300DAF3A2 /* menuData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = menuData.plist; path = Plists/menuData.plist; sourceTree = "<group>"; };
 		84DEFAA616743B5C0084289B /* SHWebUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHWebUtility.h; sourceTree = "<group>"; };
@@ -366,11 +371,22 @@
 		840808801663A43A00028F77 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8436846A167616C400122999 /* Setting */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8436846A167616C400122999 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
 				840808821663A51E00028F77 /* SHSettingViewController.h */,
 				840808831663A51E00028F77 /* SHSettingViewController.m */,
 				840808841663A51E00028F77 /* SHSettingViewController.xib */,
+				8436846C1676177B00122999 /* SHSynSettingViewController.h */,
+				8436846D1676177B00122999 /* SHSynSettingViewController.m */,
+				8436846E1676177B00122999 /* SHSynSettingViewController.xib */,
 			);
-			path = ViewController;
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		84EE6CE01672DB02009E3EF8 /* PublicClasslib */ = {
@@ -875,6 +891,7 @@
 				D42D8818165F77CB004D3E72 /* half rount.png in Resources */,
 				840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */,
 				D48E032B166CA84200068EF0 /* FlowChartStoryboard.storyboard in Resources */,
+				843684701676177B00122999 /* SHSynSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,6 +997,7 @@
 				D4872C371671B7580046D938 /* fmdb.m in Sources */,
 				D4872C3A1671C12B0046D938 /* SHDBManage.m in Sources */,
 				84DEFAA816743B5C0084289B /* SHWebUtility.m in Sources */,
+				8436846F1676177B00122999 /* SHSynSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

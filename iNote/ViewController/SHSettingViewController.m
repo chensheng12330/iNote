@@ -7,8 +7,10 @@
 //
 
 #import "SHSettingViewController.h"
+
 #import "JSON.h"
 #import "SHWebUtility.h"
+#import "SHSynSettingViewController.h"
 
 @interface SHSettingViewController (Private)
 - (void)postNewStatus;
@@ -179,7 +181,6 @@
     return;
 }
 
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     //NSLog(@"viewDidAppear 被调用");
@@ -295,6 +296,15 @@
     return @"";
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section ==2 && indexPath.row ==0) {
+        SHSynSettingViewController *synSettingViewController = [[SHSynSettingViewController alloc] init];
+        [self.navigationController pushViewController:synSettingViewController animated:YES];
+        [synSettingViewController release];
+    }
+}
+
 #pragma mark WeiBoOpreate
 - (void)timelineDidReceive:(SHNoteClient*)sender obj:(NSObject*)obj
 {
@@ -313,24 +323,7 @@
     return;
 }
 
-#pragma mark OAuthEngineDelegate
-- (void) storeCachedOAuthData: (NSString *) data forUsername: (NSString *) username {
-	NSUserDefaults			*defaults = [NSUserDefaults standardUserDefaults];
-	
-	[defaults setObject: data forKey: @"authData"];
-	[defaults synchronize];
-}
 
-- (NSString *) cachedOAuthDataForUsername: (NSString *) username {
-	return [[NSUserDefaults standardUserDefaults] objectForKey: @"authData"];
-}
-
-- (void)removeCachedOAuthDataForUsername:(NSString *) username{
-	NSUserDefaults			*defaults = [NSUserDefaults standardUserDefaults];
-	
-	[defaults removeObjectForKey: @"authData"];
-	[defaults synchronize];
-}
 //=============================================================================================================================
 #pragma mark OAuthSinaWeiboControllerDelegate
 - (void) OAuthController: (OAuthController *) controller authenticatedWithUsername: (NSString *) username {
@@ -371,7 +364,6 @@
     //etc:
     [controller dismissModalViewControllerAnimated:YES];
     return;
-
 }
 
 #pragma mark - button event
@@ -395,6 +387,9 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:OAUTH_SAVE_KEY];
         [_engine release]; _engine = nil;
         [sender setTitle:@"登陆"]; sender.tag = 2;
+        
+        //清除数据库用户表数据
+        [dbManage deleteNoteUserForDB];
     }
     
     NSLog(@"%@",sender);
