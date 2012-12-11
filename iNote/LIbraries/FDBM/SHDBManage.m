@@ -198,4 +198,42 @@ static SHDBManage *_sharedDBManage = nil;
     DBMQuickCheck(db);
     return [db executeUpdate:@"delete from UserInfoTable"];
 }
+
+/*NotebookTable
+ notebook_id
+ path ,
+ name ,
+ notes_num ,
+ create_time ,
+ modify_time ,
+ is_update bool
+ */
+-(NSMutableArray*) getAllNoteBooks
+{
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select * from NoteBookTable"];
+    
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    
+    NSMutableArray *returnArrVal = [[[NSMutableArray alloc]init] autorelease];
+    //get note'user info
+    while ([rs next])
+    {
+        SHNotebook *fNotebook = [[SHNotebook alloc] init];
+        fNotebook.strPath = [rs objectForColumnIndex:1];
+        fNotebook.strNotebookName = [rs objectForColumnIndex:2];
+        fNotebook.strNotes_num    = [rs objectForColumnIndex:3];
+        fNotebook.dateCreate_time = [NSString dateFormatString:[rs objectForColumnIndex:4]];
+        fNotebook.dateModify_time = [NSString dateFormatString:[rs objectForColumnIndex:5]];
+        //fNotebook.isUpdatef       =
+        [returnArrVal addObject:fNotebook];
+        [fNotebook release];
+    }
+    
+    //close the result set.
+    [rs close];
+    
+    return returnArrVal;
+}
 @end

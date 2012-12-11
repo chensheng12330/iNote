@@ -13,16 +13,17 @@
 
 @implementation SHNotebook
 @synthesize strPath,strNotes_num,strNotebookName;
-@synthesize strCreate_time,strModify_time;
+@synthesize dateCreate_time,dateModify_time;
+@synthesize isUpdate;
 
 -(void)initAllNil
 {
     self.strPath = nil;
     self.strNotes_num   = nil;
     self.strNotebookName= nil;
-    self.strCreate_time = nil;
-    self.strModify_time = nil;
-    
+    self.dateCreate_time = nil;
+    self.dateModify_time = nil;
+    self.isUpdate = NO;
     return;
 }
 
@@ -42,7 +43,7 @@
 }
 
 -(NSString *) description{
-    NSString *descripton=[NSString stringWithFormat:@"strPath:%@  strNotes_num:%@  strNotebookName:%@ /nstrCreate_time:%@  strModify_time:%@  ",self.strPath,self.strNotes_num,self.strNotebookName,self.strCreate_time,self.strModify_time];
+    NSString *descripton=[NSString stringWithFormat:@"strPath:%@  strNotes_num:%@  strNotebookName:%@ /nstrCreate_time:%@  strModify_time:%@  isUpdate:%d",self.strPath,self.strNotes_num,self.strNotebookName,self.dateCreate_time,self.dateModify_time,self.isUpdate];
     return (descripton);
 }
 @end

@@ -2,7 +2,7 @@
 //  NSObject+info.h
 //  iNote
 //
-//  Created by 1322 on 12-11-7.
+//  Created by sherwin.chen on 12-11-7.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 

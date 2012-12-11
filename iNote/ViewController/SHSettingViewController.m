@@ -2,7 +2,7 @@
 //  SHSettingViewController.m
 //  iNote
 //
-//  Created by 1322 on 12-11-26.
+//  Created by sherwin.chen on 12-11-26.
 //
 //
 

@@ -10,6 +10,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "SHSettingViewController.h"
+#import "SHNoteBookListViewController.h"
 
 @interface SHViewController ()
 
@@ -130,11 +131,24 @@
 //    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"you click" message:[NSString stringWithFormat:@"%d",btn.tag] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] autorelease];
 //    [alert show];
     
-    UIViewController *subViewController = [[SHSettingViewController alloc] init];
+    UIViewController *subViewController = nil;
 
     //id subClass = 
     switch (btn.tag) {
-            NSLog(@"%d",btn.tag);
+        case 1:
+            subViewController = [[SHSettingViewController alloc] init];
+            break;
+        case 2:
+            subViewController = [[SHNoteBookListViewController alloc] init];
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        default:
+            subViewController =nil;
     }
     
     if (subViewController) {

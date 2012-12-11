@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 #import "SHNoteUser.h"
+#import "SHNotebook.h"
 
 /*
  class property: Singleton model
@@ -40,5 +41,8 @@
 -(BOOL) deleteNoteUserForDB;
 ////////////
 
-
+//*********////
+//Notebook info
+//get notebook of all
+-(NSMutableArray*) getAllNoteBooks;
 @end
