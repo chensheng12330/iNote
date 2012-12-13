@@ -13,6 +13,11 @@
 @end
 
 @implementation SHSynSettingViewController
+@synthesize myCell1 = _myCell1;
+@synthesize myCell2 = _myCell2;
+@synthesize myCell3 = _myCell3;
+@synthesize myCell4 = _myCell4;
+@synthesize myCell5 = _myCell5;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

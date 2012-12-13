@@ -29,6 +29,13 @@
 
 static SHDBManage *_sharedDBManage = nil;
 
+@interface SHDBManage (private)
+
+//get notebook count with notebook name;
+-(int) getNoteBookCountWithName:(NSString *)_stringName;
+@end
+
+
 @implementation SHDBManage
 
 #pragma mark - object init
@@ -120,7 +127,18 @@ static SHDBManage *_sharedDBManage = nil;
     return NSUIntegerMax; // This is sooo not zero
 }
 
-#pragma mark - fuction method
+#pragma mark - SHDBManage_Private_fuction
+-(int) getNoteBookCountWithName:(NSString *)_stringName
+{
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select name from NoteBookTable where name=?",_stringName];
+    NSInteger row_num = [rs rowDataCount];
+    [rs close];
+    
+    return row_num;
+}
+
+#pragma mark - NoteUser_fuction_method
 /* UserInfoTable
  userid
  user
@@ -179,7 +197,14 @@ static SHDBManage *_sharedDBManage = nil;
     [self deleteNoteUserForDB];
     
     //add user info to db
-    [db executeUpdate:@"insert into UserInfoTable (user, total_size, used_size, last_login_time, last_modify_time, register_time,default_notebook) values (?, ?, ?, ?, ?, ?, ?)" ,
+    [db executeUpdate:@"insert into UserInfoTable( \
+     user, total_size, \
+     used_size, \
+     last_login_time,\
+     last_modify_time,\
+     register_time,\
+     default_notebook) \
+     values (?, ?, ?, ?, ?, ?, ?)" ,
      _noteUser.strUser,
      _noteUser.strTotal_size,
      _noteUser.strUsed_size,
@@ -189,6 +214,7 @@ static SHDBManage *_sharedDBManage = nil;
      _noteUser.strDefault_notebook
     ];
     
+    //get query db log
     DEBUG_DB_ERROR_LOG;
     return YES;
 }
@@ -199,6 +225,7 @@ static SHDBManage *_sharedDBManage = nil;
     return [db executeUpdate:@"delete from UserInfoTable"];
 }
 
+#pragma mark - Notebook_fuction
 /*NotebookTable
  notebook_id
  path ,
@@ -206,8 +233,39 @@ static SHDBManage *_sharedDBManage = nil;
  notes_num ,
  create_time ,
  modify_time ,
- is_update bool
+ is_update
  */
+-(BOOL) addNoteBook:(SHNotebook*) _noteBook
+{
+    
+    //check parameter
+    if (NULL == _noteBook) return FALSE;
+    
+    DBMQuickCheck(db);
+    
+    //check notebook'name is unique
+    
+    [db executeUpdate:@"insert into UserInfoTable( \
+     path, \
+     name, \
+     used_size, \
+     notes_num,\
+     create_time,\
+     modify_time,\
+     is_update\
+     values (?, ?, ?, ?, ?, ?)" ,
+     _noteBook.strPath,
+     _noteBook.strNotebookName,
+     _noteBook.strNotes_num,
+     [NSString stringFormatDate:_noteBook.dateCreate_time],
+     [NSString stringFormatDate:_noteBook.dateModify_time],
+     _noteBook.isUpdate];
+    
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    return YES;
+}
+
 -(NSMutableArray*) getAllNoteBooks
 {
     DBMQuickCheck(db);
@@ -221,12 +279,14 @@ static SHDBManage *_sharedDBManage = nil;
     while ([rs next])
     {
         SHNotebook *fNotebook = [[SHNotebook alloc] init];
-        fNotebook.strPath = [rs objectForColumnIndex:1];
+        fNotebook.nTable_id       = [rs intForColumnIndex:0];
+        fNotebook.strPath         = [rs objectForColumnIndex:1];
         fNotebook.strNotebookName = [rs objectForColumnIndex:2];
         fNotebook.strNotes_num    = [rs objectForColumnIndex:3];
         fNotebook.dateCreate_time = [NSString dateFormatString:[rs objectForColumnIndex:4]];
         fNotebook.dateModify_time = [NSString dateFormatString:[rs objectForColumnIndex:5]];
-        //fNotebook.isUpdatef       =
+        fNotebook.isUpdate        = [[rs objectForColumnIndex:6] boolValue];
+        
         [returnArrVal addObject:fNotebook];
         [fNotebook release];
     }
@@ -235,5 +295,12 @@ static SHDBManage *_sharedDBManage = nil;
     [rs close];
     
     return returnArrVal;
+}
+
+
+-(BOOL) deleteNotebookWithName:(NSString*)_stringName
+{
+    //delete notebook
+    //delete all notes
 }
 @end

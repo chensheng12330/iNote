@@ -61,6 +61,11 @@
     return sqlite3_column_count([_statement statement]);
 }
 
+//add with sherwin on 2012.12.13
+- (int)rowDataCount{
+     return (NSUInteger)sqlite3_data_count([_statement statement]);
+}
+
 - (void)setupColumnNames {
     
     if (!_columnNameToIndexMap) {

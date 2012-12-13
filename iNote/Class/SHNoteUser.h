@@ -16,6 +16,7 @@
     NSString *strUsableRate;
 }
 
+@property (assign)         int      nTable_id;            //数据库表id值
 @property (nonatomic,copy) NSString *strUser;             //“test@163.com”, // 用户ID
 @property (nonatomic,copy) NSString *strTotal_size;       // “10293736383”, // 用户总的空间大小，单位字节
 @property (nonatomic,copy) NSString *strUsed_size;        //“1024” // 用户已经使用了的空间大小，单位字节

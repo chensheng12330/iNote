@@ -154,10 +154,10 @@ int test_main (int argc, const char * argv[]) {
     rs = [db executeQuery:@"select rowid, a, b, c from test"];
     while ([rs next]) {
         
-        FMDBQuickCheck([rs[0] isEqualTo:rs[@"rowid"]]);
-        FMDBQuickCheck([rs[1] isEqualTo:rs[@"a"]]);
-        FMDBQuickCheck([rs[2] isEqualTo:rs[@"b"]]);
-        FMDBQuickCheck([rs[3] isEqualTo:rs[@"c"]]);
+        //FMDBQuickCheck([rs[0] isEqualTo:rs[@"rowid"]]);
+        //FMDBQuickCheck([rs[1] isEqualTo:rs[@"a"]]);
+        //FMDBQuickCheck([rs[2] isEqualTo:rs[@"b"]]);
+        //FMDBQuickCheck([rs[3] isEqualTo:rs[@"c"]]);
     }
     [rs close];
     

@@ -15,7 +15,12 @@
 
 
 @implementation SHNoteUser
-@synthesize strUser = _strUser,strUsed_size = _strUsed_size,strTotal_size =_strTotal_size,dateRegister_time= _dateRegister_time;
+@synthesize 
+strUser          = _strUser,
+strUsed_size     = _strUsed_size,
+strTotal_size    = _strTotal_size,
+dateRegister_time= _dateRegister_time,
+nTable_id        = _nTable_id;
 
 @synthesize strDefault_notebook =_strDefault_notebook,dateLast_login_time=_dateLast_login_time,dateLast_modify_time=_dateLast_modify_time;
 
@@ -28,7 +33,7 @@
     self.dateLast_modify_time = nil;
     self.dateLast_login_time  = nil;
     self.strDefault_notebook = nil;
-    
+    _nTable_id = -1;
     return;
 }
 

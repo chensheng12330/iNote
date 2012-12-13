@@ -44,5 +44,12 @@
 //*********////
 //Notebook info
 //get notebook of all
+//array for SHNoteBook class
 -(NSMutableArray*) getAllNoteBooks;
+
+-(BOOL) addNoteBook:(SHNotebook*) _noteBook;
+
+-(BOOL) deleteNotebookWithName:(NSString*)_stringName;
+
+
 @end

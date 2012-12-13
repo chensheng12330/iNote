@@ -39,6 +39,7 @@
 - (BOOL)hasAnotherRow;
 
 - (int)columnCount;
+- (int)rowDataCount;
 
 - (int)columnIndexForName:(NSString*)columnName;
 - (NSString*)columnNameForIndex:(int)columnIdx;
