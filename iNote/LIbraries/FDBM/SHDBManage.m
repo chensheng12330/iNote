@@ -266,6 +266,40 @@ static SHDBManage *_sharedDBManage = nil;
     return YES;
 }
 
+/*
+ update NoteBookTable set name='asdf'  path='asdf' where name ='1'
+ */
+-(BOOL) updateNoteBook:(SHNotebook*)_newNoteBook oldNoteBookName:(NSString*) _stringName
+{
+    //check parameter
+    if (NULL == _newNoteBook) return FALSE;
+    
+    DBMQuickCheck(db);
+    
+    //check notebook'name is unique
+    
+    [db executeUpdate:@"update UserInfoTable set  \
+     path=?, \
+     name=?, \
+     used_size=?, \
+     notes_num=?,\
+     create_time=?,\
+     modify_time=?,\
+     is_update=?\
+     where name=?" ,
+     _newNoteBook.strPath,
+     _newNoteBook.strNotebookName,
+     _newNoteBook.strNotes_num,
+     [NSString stringFormatDate:_newNoteBook.dateCreate_time],
+     [NSString stringFormatDate:_newNoteBook.dateModify_time],
+     _newNoteBook.isUpdate,
+     _stringName];
+    
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    return YES;
+}
+
 -(NSMutableArray*) getAllNoteBooks
 {
     DBMQuickCheck(db);

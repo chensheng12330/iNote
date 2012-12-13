@@ -48,7 +48,7 @@
 -(NSMutableArray*) getAllNoteBooks;
 
 -(BOOL) addNoteBook:(SHNotebook*) _noteBook;
-
+-(BOOL) updateNoteBook:(SHNotebook*)_newNoteBook oldNoteBookName:(NSString*) _stringName;
 -(BOOL) deleteNotebookWithName:(NSString*)_stringName;
 
 
