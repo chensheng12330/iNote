@@ -21,6 +21,7 @@
     FMDatabase *db;
 }
 
+@property(readonly) NSString *dbErrorInfo;
 //***************************************
 //object init Method
 
@@ -51,5 +52,7 @@
 -(BOOL) updateNoteBook:(SHNotebook*)_newNoteBook oldNoteBookName:(NSString*) _stringName;
 -(BOOL) deleteNotebookWithName:(NSString*)_stringName;
 
-
+//get notebook count with notebook name;
+-(int) getNoteBookCountWithName:(NSString *)_stringName;
+-(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName;
 @end

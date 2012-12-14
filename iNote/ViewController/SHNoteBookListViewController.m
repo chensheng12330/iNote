@@ -7,6 +7,7 @@
 //
 
 #import "SHNoteBookListViewController.h"
+#import "NSString+SHNSStringForDate.h"
 
 @interface SHNoteBookListViewController ()
 
@@ -29,8 +30,17 @@
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
     
-    id pid = [dbManage getAllNoteBooks];
-    NSLog(pid);
+    SHNotebook *notebook = [[SHNotebook alloc] init];
+    notebook.strNotebookName = @"ios devlpoment";
+    notebook.strNotes_num    = @"8";
+    notebook.strPath = @"11";
+    notebook.dateCreate_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
+    notebook.dateModify_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
+    notebook.isUpdate = YES;
+    
+    BOOL b =[dbManage addNoteBook:notebook];
+    //[dbManage updateNoteBook:notebook oldNoteBookName:@"aa"];
+    //id pid = [dbManage getAllNoteBooks];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
