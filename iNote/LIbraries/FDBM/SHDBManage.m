@@ -331,10 +331,13 @@ static SHDBManage *_sharedDBManage = nil;
     
     //delete notebook
     //delete all notes
+    return true;
 }
 
 -(int) getNoteBookCountWithName:(NSString *)_stringName
 {
+    if (_stringName==NULL || [_stringName isEqualToString:@""]) return 0;
+    
     DBMQuickCheck(db);
     FMResultSet *rs = [db executeQuery:@"select name from NoteBookTable where name=?",_stringName];
     NSInteger row_num = [rs rowDataCount];
@@ -345,11 +348,24 @@ static SHDBManage *_sharedDBManage = nil;
 
 -(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName
 {
+    if (_stringName==NULL || [_stringName isEqualToString:@""]) return nil;
+    
     DBMQuickCheck(db);
     FMResultSet *rs = [db executeQuery:@"select name from NoteBookTable where name=?",_stringName];
+    
+    DEBUG_DB_ERROR_LOG;
+    
+    SHNotebook *notebook = [[SHNotebook alloc] init];
     if([rs next])
     {
-        
+        notebook.nTable_id      = [rs intForColumnIndex:0];
+        notebook.strPath        = [rs stringForColumnIndex:1];
+        notebook.strNotebookName= [rs stringForColumnIndex:2];
+        notebook.strNotes_num   = [rs stringForColumnIndex:3];
+        notebook.dateCreate_time= [NSString dateFormatString:[rs objectForColumnIndex:4]];
+        notebook.dateModify_time= [NSString dateFormatString:[rs objectForColumnIndex:5]];
+        notebook.isUpdate       = [[rs stringForColumnIndex:6] boolValue];
     }
+    return [notebook autorelease];
 }
 @end

@@ -10,11 +10,14 @@
 #import "NSString+SHNSStringForDate.h"
 
 @interface SHNoteBookListViewController ()
-
+-(void) SetMyTableDataSource:(NSMutableArray*) _arry;
 @end
 
 @implementation SHNoteBookListViewController
 
+#pragma mark - class variable seter
+
+#pragma mark - init
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -29,6 +32,12 @@
     [super viewDidLoad];
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
+    
+    // get all notebooks in db
+    [myTableDataSource release];  //数据分组，同步问题
+    
+    
+    SHNotebook *bk = [dbManage getNoteBookInfoWithNoteBookName:@"aa"];
     
     SHNotebook *notebook = [[SHNotebook alloc] init];
     notebook.strNotebookName = @"ios devlpoment";
