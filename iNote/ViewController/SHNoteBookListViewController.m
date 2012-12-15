@@ -8,6 +8,7 @@
 
 #import "SHNoteBookListViewController.h"
 #import "NSString+SHNSStringForDate.h"
+#import "SHNotebook.h"
 
 @interface SHNoteBookListViewController ()
 -(void) SetMyTableDataSource:(NSMutableArray*) _arry;
@@ -16,6 +17,14 @@
 @implementation SHNoteBookListViewController
 
 #pragma mark - class variable seter
+-(void) SetMyTableDataSource:(NSMutableArray*) _arry
+{
+    if (_arry == myTableDataSource) return;
+    
+    [myTableDataSource release];
+    myTableDataSource = [_arry retain];
+    return;
+}
 
 #pragma mark - init
 - (id)initWithStyle:(UITableViewStyle)style
@@ -27,6 +36,14 @@
     return self;
 }
 
+-(void) dealloc
+{
+    [myTableDataSource release];
+    
+    [super dealloc];
+    return;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,20 +51,23 @@
     dbManage = [SHDBManage sharedDBManage];  //db manage
     
     // get all notebooks in db
-    [myTableDataSource release];  //数据分组，同步问题
+    [self SetMyTableDataSource:nil];  //数据分组，同步问题
     
+    //notebooks
+    myTableDataSource = [[dbManage getAllNoteBooks] retain];
     
-    SHNotebook *bk = [dbManage getNoteBookInfoWithNoteBookName:@"aa"];
+    //myTableDataSource =
     
-    SHNotebook *notebook = [[SHNotebook alloc] init];
-    notebook.strNotebookName = @"ios devlpoment";
-    notebook.strNotes_num    = @"8";
-    notebook.strPath = @"11";
-    notebook.dateCreate_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
-    notebook.dateModify_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
-    notebook.isUpdate = YES;
+//    SHNotebook *bk = [dbManage getNoteBookInfoWithNoteBookName:@"aa"];
+//    SHNotebook *notebook = [[SHNotebook alloc] init];
+//    notebook.strNotebookName = @"ios devlpoment";
+//    notebook.strNotes_num    = @"8";
+//    notebook.strPath = @"11";
+//    notebook.dateCreate_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
+//    notebook.dateModify_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
+//    notebook.isUpdate = YES;
     
-    BOOL b =[dbManage addNoteBook:notebook];
+    //BOOL b =[dbManage addNoteBook:notebook];
     //[dbManage updateNoteBook:notebook oldNoteBookName:@"aa"];
     //id pid = [dbManage getAllNoteBooks];
     // Uncomment the following line to preserve selection between presentations.
@@ -67,16 +87,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return 0;
+    return [myTableDataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,10 +103,13 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
+    SHNotebook *notebook = [myTableDataSource objectAtIndex:indexPath.row];
+    
+    [cell.textLabel setText:notebook.strNotebookName];
+    [cell.detailTextLabel setText:notebook.strNotes_num];
     
     return cell;
 }
