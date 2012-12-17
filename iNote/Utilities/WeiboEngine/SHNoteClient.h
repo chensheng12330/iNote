@@ -18,9 +18,11 @@ typedef enum {
 
 @protocol SHNoteClientDelegate<NSObject>
 @required
-- (void)Auth
 - (void)requestFinished:(SHNoteClient *)_noteClient object:(id)_obj;
 - (void)requestFailed:  (SHNoteClient *)request;
+
+@optional
+- (void)CancelAuthentication:(SHNoteClient*) _noteClient;
 @end
 
 @interface SHNoteClient : URLConnection
@@ -42,7 +44,7 @@ typedef enum {
 @property(nonatomic, copy) NSString* errorDetail;
 @property(assign) id<SHNoteClientDelegate> noteClienDelegate;
 
-+(SHNoteClient*) shareNoteClient;
++(SHNoteClient*) shareNoteClient:(id)_delegate;
 
 - (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine;
 //获取用户信息

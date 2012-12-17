@@ -7,11 +7,15 @@
 //
 
 #import "JSON.h"
+#import "Header.h"
 #import "SHNoteClient.h"
 //#import "SBJSON.h"
 #import "StringUtil.h"
 
 #define ERROR_INFO {self.errorMessage = @"Authentication Failed"; self.errorDetail  = @"Wrong username/Email and password combination.";}
+
+
+SHNoteClient *staticNoteClient;
 
 @implementation SHNoteClient
 
@@ -28,6 +32,30 @@
     //action = anAction;
     hasError = false;
     return self;
+}
+
+
++(SHNoteClient*) shareNoteClient:(id)_delegate
+{
+    @synchronized(self)
+    {
+        if (staticNoteClient) staticNoteClient.noteClienDelegate = _delegate;
+        else
+        {
+            //Engine load from config data
+            NSData *getData = [[NSUserDefaults standardUserDefaults] objectForKey: OAUTH_SAVE_KEY];
+            OAuthEngine *_engine = [[OAuthEngine unarchivedOAuthEngineWithData:getData] retain];
+            //
+            if (_engine ==NULL) {
+                //action processing +++ addtion
+            }
+            else{
+                SHNoteClient *noteClient = [[SHNoteClient alloc] initWithTarget:_delegate engine:_engine];
+                return [noteClient autorelease];
+            }
+        }
+    }
+    return nil;
 }
 
 - (void)dealloc
@@ -404,8 +432,11 @@
 - (void)authError
 {
     self.errorMessage = @"Authentication Failed";
-    self.errorDetail  = @"Wrong username/Email and password combination.";    
-    [delegate performSelector:action withObject:self withObject:nil];    
+    self.errorDetail  = @"Wrong username/Email and password combination.";
+    if (noteClienDelegate && [noteClienDelegate respondsToSelector:@selector(CancelAuthentication:)]) {
+        [delegate performSelector:@selector(CancelAuthentication:) withObject:self];  
+    }
+    return;
 }
 
 //auth challenge
@@ -423,6 +454,7 @@
     }
 }
 
+//
 - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     hasError = true;

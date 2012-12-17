@@ -9,6 +9,7 @@
 #import "SHSettingViewController.h"
 
 #import "JSON.h"
+#import "Header.h"
 #import "SHWebUtility.h"
 #import "SHSynSettingViewController.h"
 
@@ -19,13 +20,6 @@
 -(void)UserLog:(UIBarButtonItem*)sender;
 @end
 
-
-// 有道云词典
-#define kOAuthConsumerKey				@"448412811a0a2fcac811ca08b8b2c258"		//REPLACE ME
-#define kOAuthConsumerSecret			@"10c6d13eec190b97248591e51b2abe0d"		//REPLACE ME
-
-#define OAUTH_SAVE_KEY  @"YDauthData"
-// end
 
 @implementation SHSettingViewController
 @synthesize myCell1 = _myCell1;
@@ -298,7 +292,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section ==2 && indexPath.row ==0) {
-        SHSynSettingViewController *synSettingViewController = [[SHSynSettingViewController alloc] init];
+        SHSynSettingViewController *synSettingViewController = [[SHSynSettingViewController alloc] initWithNibName:@"SHSynSettingViewController" bundle:nil];
         [self.navigationController pushViewController:synSettingViewController animated:YES];
         [synSettingViewController release];
     }

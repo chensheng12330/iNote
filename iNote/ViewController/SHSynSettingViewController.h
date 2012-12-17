@@ -13,10 +13,10 @@
     NSArray *arCells;
 }
 
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell1;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell2;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell3;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell4;
-@property (retain, nonatomic) IBOutlet UITableViewCell *myCell5;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell1;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell2;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell3;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell4;
+@property (nonatomic,retain) IBOutlet UITableViewCell *myCell5;
 
 @end

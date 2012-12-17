@@ -24,7 +24,7 @@
 	UIWebView									*_webView;
 	UINavigationBar								*_navBar;
 	
-	id <OAuthControllerDelegate>			_delegate;
+	id <OAuthControllerDelegate>                _delegate;
 	UIView										*_blockerView;
 	
 	UIInterfaceOrientation                      _orientation;

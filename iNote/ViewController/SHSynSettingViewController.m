@@ -33,7 +33,8 @@
     [super viewDidLoad];
     
     //polymerize all cell
-    arCells = [[NSArray alloc] initWithObjects:_myCell1,_myCell2,_myCell3,_myCell4,_myCell5, nil];
+
+    arCells = [[NSArray alloc] initWithObjects:self.myCell1,_myCell2,_myCell3,_myCell4,_myCell5, nil];
     
     [self.navigationItem setTitle:@"同步设置"];
 
