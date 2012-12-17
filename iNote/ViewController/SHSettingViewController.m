@@ -146,8 +146,7 @@
         
         //初使化管理
         ydNoteClient = [[SHNoteClient alloc] initWithTarget:self
-                                                     engine:_engine
-                                                     action:@selector(timelineDidReceive:obj:)];
+                                                     engine:_engine];
 	}
     
     //数据显示及处理

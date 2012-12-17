@@ -11,6 +11,8 @@
 //#import "SBJSON.h"
 #import "StringUtil.h"
 
+#define ERROR_INFO {self.errorMessage = @"Authentication Failed"; self.errorDetail  = @"Wrong username/Email and password combination.";}
+
 @implementation SHNoteClient
 
 @synthesize request;
@@ -18,11 +20,12 @@
 @synthesize hasError;
 @synthesize errorMessage;
 @synthesize errorDetail;
+@synthesize noteClienDelegate;
 
-- (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine action:(SEL)anAction
+- (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine
 {
     self = [super initWithDelegate:aDelegate engine:__engine];
-    action = anAction;
+    //action = anAction;
     hasError = false;
     return self;
 }
@@ -405,33 +408,19 @@
     [delegate performSelector:action withObject:self withObject:nil];    
 }
 
-- (void)URLConnectionDidFailWithError:(NSError*)error
-{
-    hasError = true;
-    if (error.code ==  NSURLErrorUserCancelledAuthentication) {
-        statusCode = 401;
-        [self authError];
-    }
-    else {
-        self.errorMessage = @"Connection Failed";
-        self.errorDetail  = [error localizedDescription];
-        [delegate performSelector:action withObject:self withObject:nil];
-    }
-    [self autorelease];
-}
-
+//auth challenge
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-//    if ([challenge previousFailureCount] == 0) {
-//        NSLog(@"Authentication Challenge");
-//        NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-//        NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"password"];
-//        NSURLCredential* cred = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceNone];
-//        [[challenge sender] useCredential:cred forAuthenticationChallenge:challenge];
-//    } else {
-//        NSLog(@"Failed auth (%d times)", [challenge previousFailureCount]);
-//        [[challenge sender] cancelAuthenticationChallenge:challenge];
-//    }
+    if ([challenge previousFailureCount] == 0) {
+        NSLog(@"Authentication Challenge");
+        NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+        NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"password"];
+        NSURLCredential* cred = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceNone];
+        [[challenge sender] useCredential:cred forAuthenticationChallenge:challenge];
+    } else {
+        NSLog(@"Failed auth (%d times)", [challenge previousFailureCount]);
+        [[challenge sender] cancelAuthenticationChallenge:challenge];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
@@ -441,6 +430,7 @@
     [self autorelease];
 }
 
+#pragma mark - URL_Rev_Method
 - (void)URLConnectionDidFinishLoading:(NSString*)content
 {
     switch (statusCode) {
@@ -450,7 +440,10 @@
             goto out;
             
         case 304: // Not Modified: there was no new data to return.
-            [delegate performSelector:action withObject:self withObject:nil];
+            if (noteClienDelegate && [noteClienDelegate respondsToSelector:@selector(requestFailed:)]) {
+                ERROR_INFO;
+                [noteClienDelegate performSelector:@selector(requestFailed:) withObject:self];
+            }
             goto out;
             
         case 400: // Bad Request: your request is invalid, and we'll return an error message that tells you why. This is the status code returned if you've exceeded the rate limit
@@ -467,27 +460,13 @@
             hasError = true;
             self.errorMessage = @"Server responded with an error";
             self.errorDetail  = [NSHTTPURLResponse localizedStringForStatusCode:statusCode];
-            [delegate performSelector:action withObject:self withObject:nil];
+            if (noteClienDelegate && [noteClienDelegate respondsToSelector:@selector(requestFailed:)])
+            {
+                [noteClienDelegate performSelector:@selector(requestFailed:) withObject:self];
+            }
             goto out;
         }
     }
-#if 0
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *pathStr;
-    if (request == 0) {
-        pathStr = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"friends_timeline.json"];
-    }
-    else if (request == 1) {
-        pathStr = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"replies.json"];
-    }
-    else if (request == 2) {
-        pathStr = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"direct_messages.json"];
-    }
-    if (request <= 2) {
-        NSData *data = [fileManager contentsAtPath:pathStr];
-        content = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    }
-#endif
 
     NSObject *obj = [content JSONValue];
     if (request == WEIBO_REQUEST_FRIENDSHIP_EXISTS) {
@@ -506,9 +485,31 @@
         }
     }
     
-    [delegate performSelector:action withObject:self withObject:obj];
+    if (noteClienDelegate && [noteClienDelegate respondsToSelector:@selector(requestFinished:object:)]) {
+        self.errorMessage = @"OK"; self.errorDetail = @"OK";
+        [noteClienDelegate performSelector:@selector(requestFinished:object:) withObject:self  withObject:obj];
+    }
     
   out:
+    [self autorelease];
+}
+
+- (void)URLConnectionDidFailWithError:(NSError*)error
+{
+    hasError = true;
+    if (error.code ==  NSURLErrorUserCancelledAuthentication) {
+        statusCode = 401;
+        [self authError];
+    }
+    else {
+        self.errorMessage = @"Connection Failed";
+        self.errorDetail  = [error localizedDescription];
+        if (noteClienDelegate && [noteClienDelegate respondsToSelector:@selector(requestFailed:)])
+        {
+            [noteClienDelegate performSelector:@selector(requestFailed:) withObject:self];
+        }
+    
+    }
     [self autorelease];
 }
 

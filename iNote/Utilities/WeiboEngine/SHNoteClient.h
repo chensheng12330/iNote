@@ -14,6 +14,15 @@ typedef enum {
     WEIBO_REQUEST_FRIENDSHIP_EXISTS,
 } RequestType;
 
+@class SHNoteClient;
+
+@protocol SHNoteClientDelegate<NSObject>
+@required
+- (void)Auth
+- (void)requestFinished:(SHNoteClient *)_noteClient object:(id)_obj;
+- (void)requestFailed:  (SHNoteClient *)request;
+@end
+
 @interface SHNoteClient : URLConnection
 {
     RequestType request;
@@ -31,8 +40,11 @@ typedef enum {
 @property(nonatomic, assign) BOOL hasError;
 @property(nonatomic, copy) NSString* errorMessage;
 @property(nonatomic, copy) NSString* errorDetail;
+@property(assign) id<SHNoteClientDelegate> noteClienDelegate;
 
-- (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine action:(SEL)anAction;
++(SHNoteClient*) shareNoteClient;
+
+- (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine;
 //获取用户信息
 -(NSData*)getUseInfoWithRequesMode:(Reques_Mode)_requesMode;
 
