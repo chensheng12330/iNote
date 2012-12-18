@@ -17,7 +17,17 @@
     SHNoteClient *_noteClient;
 }
 
+@property (readonly) SHDBManage   *_dbManage;
+@property (readonly) SHNoteClient *_noteClient;
+
+/*
+ (id)aDelegate engine:(OAuthEngine *)__engine action:(SEL)anAction
+ */
 //down note data from youdao Cloud Server
+//异步请求
+-(void) pullCloudDataAndUpdateDBWith:(id)aDelegate action:(SEL)anAction;
+
+//同步请求
 -(NSMutableArray*) pullCloudDataAndUpdateDB;
 
 -(void) pushDBDataToCloud;

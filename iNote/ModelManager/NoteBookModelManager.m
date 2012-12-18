@@ -6,9 +6,13 @@
 //
 //
 
+#import "JSON.h"
 #import "NoteBookModelManager.h"
 
 @implementation NoteBookModelManager
+@synthesize _dbManage;
+@synthesize _noteClient;
+
 - (id)init
 {
     self = [super init];
@@ -21,6 +25,27 @@
 - (void)dealloc
 {
     [super dealloc];
+}
+
+#pragma mark -Peripheral Interface
+-(NSMutableArray*) pullCloudDataAndUpdateDB
+{
+    //同步 ,
+    
+    //get data from web cloud
+    NSData * _data = [_noteClient getNoteBooksWithRequesMode:Reques_Syn];
+    if (_data ==NULL) return nil;
+    
+    NSString *strRep = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+    NSMutableArray* dic = [strRep JSONValue];
+    
+    NSMutableArray *noteBookArray = [SHNotebook objectsForJSON:dic];
+    if (noteBookArray) {
+        //synchronization db for noteBook
+        
+        //_dbManage
+    }
+    return nil;
 }
 
 #pragma mark - noteClient delegate

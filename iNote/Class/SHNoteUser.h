@@ -28,4 +28,6 @@
 
 -(id) initWithJSON:(NSDictionary*) _dict;
 -(NSString*) objectWithIndex:(int)_index;
+
+
 @end

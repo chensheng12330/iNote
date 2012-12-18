@@ -145,12 +145,12 @@ SHNoteClient *staticNoteClient;
 	return [super get:[self getURL:path queryParameters:nil] requesMode:_requesMode];
 }
 
--(void) getNoteBooks
+-(NSData*) getNoteBooksWithRequesMode:(Reques_Mode)_requesMode;
 {
     //yws/open/notebook/all.json
     needAuth = YES;
     NSString *path = [NSString stringWithFormat:@"yws/open/notebook/all.%@", API_FORMAT];
-	[super post:[self getURL:path queryParameters:nil] body:nil requesMode:Reques_Asyn];
+	return [super post:[self getURL:path queryParameters:nil] body:nil requesMode:_requesMode];
 }
 
 #pragma mark -

@@ -368,4 +368,13 @@ static SHDBManage *_sharedDBManage = nil;
     }
     return [notebook autorelease];
 }
+
+-(void) synchronizationNoteBooK:(NSArray*) _arryData
+{
+    if(_arryData==nil || _arryData.count<1) return;
+    DBMQuickCheck(db);
+    
+    
+    
+}
 @end

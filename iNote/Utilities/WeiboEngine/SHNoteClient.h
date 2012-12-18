@@ -51,7 +51,7 @@ typedef enum {
 -(NSData*)getUseInfoWithRequesMode:(Reques_Mode)_requesMode;
 
 //查看用户全部笔记本 :post
--(void)getNoteBooks;
+-(NSData*)getNoteBooksWithRequesMode:(Reques_Mode)_requesMode;
 
 //列出笔记本下的笔记 :post
 -(void)getNoteDetail;

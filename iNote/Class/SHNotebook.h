@@ -18,4 +18,6 @@
 @property (nonatomic,copy) NSString *strNotes_num;     // “3” // 该笔记本中笔记的数目
 @property (nonatomic,copy) NSDate *dateCreate_time;    //“1323310917” // 笔记本的创建时间，单位秒
 @property (nonatomic,copy) NSDate *dateModify_time;    //“1323310949” // 笔记本的最后修改时间，单位秒
+
++(NSMutableArray*) objectsForJSON:(NSArray*)_arry;
 @end

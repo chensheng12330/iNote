@@ -9,6 +9,7 @@
 #import "SHNoteBookListViewController.h"
 #import "NSString+SHNSStringForDate.h"
 #import "SHNotebook.h"
+#import "NoteBookModelManager.h"
 
 @interface SHNoteBookListViewController ()
 -(void) SetMyTableDataSource:(NSMutableArray*) _arry;
@@ -54,6 +55,9 @@
     [self SetMyTableDataSource:nil];  //数据分组，同步问题
     
     //notebooks
+    NoteBookModelManager *notebookMM = [[NoteBookModelManager alloc] init];
+    [notebookMM pullCloudDataAndUpdateDB];
+    
     myTableDataSource = [[dbManage getAllNoteBooks] retain];
     
     //myTableDataSource =
