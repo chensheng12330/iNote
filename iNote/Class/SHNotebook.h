@@ -12,6 +12,7 @@
 @interface SHNotebook : NSObject
 
 @property (assign) BOOL    isUpdate;                   //是否更新
+@property (assign) BOOL    isDelete;                   //是否删除
 @property (assign) int     nTable_id;                  //数据库表id值
 @property (nonatomic,copy) NSString *strNotebookName;  //“笔记本1”, // 笔记本的名称
 @property (nonatomic,copy) NSString *strPath;          //“/4AF64012E9864C”, // 笔记本的路径

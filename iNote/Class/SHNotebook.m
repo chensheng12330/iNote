@@ -16,7 +16,7 @@
 @implementation SHNotebook
 @synthesize strPath,strNotes_num,strNotebookName;
 @synthesize dateCreate_time,dateModify_time;
-@synthesize isUpdate,nTable_id;
+@synthesize isUpdate,isDelete,nTable_id;
 
 -(void)initAllNil
 {
@@ -26,6 +26,7 @@
     self.dateCreate_time = nil;
     self.dateModify_time = nil;
     
+    self.isDelete = NO;
     self.isUpdate = NO;
     self.nTable_id = -1;
     return;

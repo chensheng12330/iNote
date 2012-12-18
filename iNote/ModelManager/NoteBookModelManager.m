@@ -39,9 +39,17 @@
     NSString *strRep = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
     NSMutableArray* dic = [strRep JSONValue];
     
-    NSMutableArray *noteBookArray = [SHNotebook objectsForJSON:dic];
-    if (noteBookArray) {
+    NSMutableArray *noteBookArrayWeb = [SHNotebook objectsForJSON:dic];
+    
+    for (NSDictionary *tempDict in noteBookArrayWeb) {
+        //时间对比，> = <
+        //只下载新数据   //只上传新数据，update数据
+        //NSString *strName =
+    }
+    
+    if (noteBookArrayWeb) {
         //synchronization db for noteBook
+        
         
         //_dbManage
     }
