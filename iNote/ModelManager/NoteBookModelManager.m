@@ -7,6 +7,8 @@
 //
 
 #import "JSON.h"
+#import "Header.h"
+#import "NSString+SHNSStringForDate.h"
 #import "NoteBookModelManager.h"
 
 @implementation NoteBookModelManager
@@ -30,7 +32,7 @@
 #pragma mark -Peripheral Interface
 -(NSMutableArray*) pullCloudDataAndUpdateDB
 {
-    //同步 ,
+    //synchronization db for noteBook
     
     //get data from web cloud
     NSData * _data = [_noteClient getNoteBooksWithRequesMode:Reques_Syn];
@@ -39,21 +41,40 @@
     NSString *strRep = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
     NSMutableArray* dic = [strRep JSONValue];
     
+    //
     NSMutableArray *noteBookArrayWeb = [SHNotebook objectsForJSON:dic];
     
-    for (NSDictionary *tempDict in noteBookArrayWeb) {
+    for (NSDictionary *tempDict in dic) {
         //时间对比，> = <
         //只下载新数据   //只上传新数据，update数据
-        //NSString *strName =
+        NSString *strName = [tempDict objectForKey:JK_NOTEBOOK_NAME];
+        
+        //search from db
+        SHNotebook *dbTempNotebook = [_dbManage getNoteBookInfoWithNoteBookName:strName];
+        if (dbTempNotebook==NULL) { //no record in db
+            //add current record to db
+            [_dbManage addNoteBook:dbTempNotebook];
+        }
+        else
+        {
+            // compare modify time
+            NSDate *tempDate = [NSString ToNSDateWithNSDecimalNumber:[tempDict objectForKey:JK_NOTEBOOK_MODIFYTIME] precision:PRECISION_DEFAULT];
+            
+            if ([dbTempNotebook.dateModify_time compare:tempDate]) {
+                //update record
+                SHNotebook *webNoteBook = [[SHNotebook alloc] initWithJSON:tempDict];
+                webNoteBook.nTable_id   = dbTempNotebook.nTable_id;  //set tabelid
+                [_dbManage updateNoteBook:webNoteBook oldNoteBookName:dbTempNotebook.strNotebookName];
+                [webNoteBook release];
+            }
+        }
     }
     
-    if (noteBookArrayWeb) {
-        //synchronization db for noteBook
-        
-        
-        //_dbManage
-    }
-    return nil;
+    //synchronization finish
+    //now db's notebook is newest
+    
+    //get all notebook from db
+    return [_dbManage getAllNoteBooks];
 }
 
 #pragma mark - noteClient delegate

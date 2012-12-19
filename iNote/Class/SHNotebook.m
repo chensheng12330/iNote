@@ -6,6 +6,7 @@
 //
 //
 
+#import "Header.h"
 #import "SHNotebook.h"
 #import "NSString+SHNSStringForDate.h"
 
@@ -53,6 +54,27 @@
 }
 
 #pragma mark - method
+
+-(id) initWithJSON:(NSDictionary*) _dict
+{
+    self = [super init];
+    if (self) {
+        if (_dict==nil || [_dict count]==0) {
+            [self initAllNil];
+            return self;
+        }
+        
+        //set all value
+        self.strNotebookName   = [_dict objectForKey:JK_NOTEBOOK_NAME];
+        self.strPath           = [_dict objectForKey:JK_NOTEBOOK_PATH];
+        self.strNotes_num      = [_dict objectForKey:JK_NOTEBOOK_NOTESNUM];
+        self.dateCreate_time   = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEBOOK_CREATETIME]
+                                                             precision:PRECISION_DEFAULT];
+        self.dateModify_time   = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEBOOK_MODIFYTIME]
+                                                             precision:PRECISION_DEFAULT];
+    }
+    return self;
+}
 /*
  name,path,notes_num,modify_time,create_time
  */
@@ -63,13 +85,7 @@
     NSMutableArray *returnVal = [[NSMutableArray alloc]init];
     
     for (NSDictionary *_tempDict in _arry) {
-        SHNotebook *_noteBook = [[SHNotebook alloc] init];
-        _noteBook.strNotebookName   = [_tempDict objectForKey:@"name"];
-        _noteBook.strPath           = [_tempDict objectForKey:@"path"];
-        _noteBook.strNotes_num      = [_tempDict objectForKey:@"notes_num"];
-        _noteBook.dateCreate_time   = [NSString dateFormatString:[_tempDict objectForKey:@"create_time"]];
-        _noteBook.dateModify_time   = [NSString dateFormatString:[_tempDict objectForKey:@"modify_time"]];
-        
+        SHNotebook *_noteBook = [[SHNotebook alloc] initWithJSON:_tempDict];
         [returnVal addObject:_noteBook];
         [_noteBook release];
     }

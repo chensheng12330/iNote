@@ -43,4 +43,20 @@
     return _date;
 }
 
+//////
++(NSString*)ToStringWithNSDecimalNumber:(NSDecimalNumber*)_num
+{
+    double _dnum = [_num doubleValue];
+    return [NSString stringWithFormat:@"%.2lf",_dnum];
+}
+
+
++(NSDate*)ToNSDateWithNSDecimalNumber:(NSDecimalNumber*)_num precision:(float) _precision
+{
+    double _dnum = [_num doubleValue]/_precision;
+    //NSString *str = [NSString stringWithFormat:@"%.lf",(_dnum/1000.0)];
+    NSDate *data = [NSDate dateWithTimeIntervalSince1970:_dnum];
+    return data;
+}
+
 @end

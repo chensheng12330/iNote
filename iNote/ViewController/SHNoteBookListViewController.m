@@ -56,9 +56,9 @@
     
     //notebooks
     NoteBookModelManager *notebookMM = [[NoteBookModelManager alloc] init];
-    [notebookMM pullCloudDataAndUpdateDB];
+    myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
     
-    myTableDataSource = [[dbManage getAllNoteBooks] retain];
+    //myTableDataSource = [[dbManage getAllNoteBooks] retain];
     
     //myTableDataSource =
     

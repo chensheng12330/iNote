@@ -6,6 +6,7 @@
 //
 //
 
+#import "Header.h"
 #import "SHNoteUser.h"
 #import "NSString+SHNSStringForDate.h"
 
@@ -46,20 +47,6 @@ nTable_id        = _nTable_id;
     return self;
 }
 
--(NSString*)ToStringWithNSDecimalNumber:(NSDecimalNumber*)_num
-{
-    double _dnum = [_num doubleValue];
-    return [NSString stringWithFormat:@"%.2lf",_dnum];
-}
-
--(NSDate*)ToNSDateWithNSDecimalNumber:(NSDecimalNumber*)_num
-{
-    double _dnum = [_num doubleValue]/1000.0;
-    //NSString *str = [NSString stringWithFormat:@"%.lf",(_dnum/1000.0)];
-    NSDate *data = [NSDate dateWithTimeIntervalSince1970:_dnum];
-    return data;
-}
-
 -(id) initWithJSON:(NSDictionary*) _dict
 {
     self = [super init];
@@ -70,13 +57,16 @@ nTable_id        = _nTable_id;
         }
         
         // all values
-        self.strUser = [_dict objectForKey:@"user"];
-        self.strTotal_size = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"total_size"]];
-        self.strUsed_size  = [self ToStringWithNSDecimalNumber:[_dict objectForKey:@"used_size"]];
-        self.dateRegister_time    = [self ToNSDateWithNSDecimalNumber:[_dict objectForKey:@"register_time"]];
-        self.dateLast_modify_time = [self ToNSDateWithNSDecimalNumber:[_dict objectForKey:@"last_login_time"]];
-        self.dateLast_login_time  = [self ToNSDateWithNSDecimalNumber:[_dict objectForKey:@"last_modify_time"]];
-        self.strDefault_notebook = [_dict objectForKey:@"default_notebook"];
+        self.strUser            = [_dict objectForKey:JK_NOTEUSER_USER];
+        self.strTotal_size      = [NSString ToStringWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_TOTALSIZE]];
+        self.strUsed_size       = [NSString ToStringWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_USEDSIZE]];
+        self.dateRegister_time  = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_REGISTERTIME]
+                                                                precision:PRECISION_DEFAULT];
+        self.dateLast_modify_time = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_LASTLOGINTIME]
+                                                                precision:PRECISION_DEFAULT];
+        self.dateLast_login_time  = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_LASTMODIFYTIME]
+                                                                precision:PRECISION_DEFAULT];
+        self.strDefault_notebook = [_dict objectForKey:JK_NOTEUSER_DEFAULTNOTEBOOK];
     }
     
     return self;
