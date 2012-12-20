@@ -15,6 +15,10 @@
 {
     SHDBManage   *_dbManage;
     SHNoteClient *_noteClient;
+    
+    //Asyn
+    id  _objDelegate;
+    SEL _anAction;
 }
 
 @property (readonly) SHDBManage   *_dbManage;

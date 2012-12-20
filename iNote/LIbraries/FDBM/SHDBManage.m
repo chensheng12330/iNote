@@ -351,13 +351,14 @@ static SHDBManage *_sharedDBManage = nil;
     if (_stringName==NULL || [_stringName isEqualToString:@""]) return nil;
     
     DBMQuickCheck(db);
-    FMResultSet *rs = [db executeQuery:@"select name from NoteBookTable where name=?",_stringName];
+    FMResultSet *rs = [db executeQuery:@"select * from NoteBookTable where name=?",_stringName];
     
     DEBUG_DB_ERROR_LOG;
     
-    SHNotebook *notebook = [[SHNotebook alloc] init];
+    SHNotebook *notebook =nil;
     if([rs next])
     {
+        notebook = [[[SHNotebook alloc] init] autorelease];
         notebook.nTable_id      = [rs intForColumnIndex:0];
         notebook.strPath        = [rs stringForColumnIndex:1];
         notebook.strNotebookName= [rs stringForColumnIndex:2];
@@ -366,7 +367,7 @@ static SHDBManage *_sharedDBManage = nil;
         notebook.dateModify_time= [NSString dateFormatString:[rs objectForColumnIndex:5]];
         notebook.isUpdate       = [[rs stringForColumnIndex:6] boolValue];
     }
-    return [notebook autorelease];
+    return notebook;
 }
 
 -(void) synchronizationNoteBooK:(NSArray*) _arryData

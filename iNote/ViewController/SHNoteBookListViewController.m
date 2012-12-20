@@ -57,6 +57,7 @@
     //notebooks
     NoteBookModelManager *notebookMM = [[NoteBookModelManager alloc] init];
     myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
+    [notebookMM release];
     
     //myTableDataSource = [[dbManage getAllNoteBooks] retain];
     
@@ -92,7 +93,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
