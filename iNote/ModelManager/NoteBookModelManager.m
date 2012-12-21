@@ -99,7 +99,7 @@
 
 -(void) pullCloudDataAndUpdateDBWith:(id)aDelegate action:(SEL)anAction
 {
-    if (aDelegate==NULL || anAction == NULL || ![self respondsToSelector:anAction]) return;
+    if (aDelegate==NULL || anAction == NULL || ![aDelegate respondsToSelector:anAction]) return;
     
     _anAction    = anAction;
     _objDelegate = aDelegate;
@@ -111,12 +111,20 @@
 //success
 - (void)requestFinished:(SHNoteClient *)_noteClient object:(id)_obj
 {
+    if (_anAction==NULL || _objDelegate==NULL) return;
     
+    // process request object
+    [self comparePullData:_obj];
+    
+    NSMutableArray* _marry = [_dbManage getAllNoteBooks];
+    [_objDelegate performSelector:_anAction withObject:_marry];
+    return;
 }
 
 //fail
 - (void)requestFailed:  (SHNoteClient *)request
 {
-    
+    if (_anAction==NULL || _objDelegate==NULL) return;
+    [_objDelegate performSelector:_anAction withObject:nil];
 }
 @end

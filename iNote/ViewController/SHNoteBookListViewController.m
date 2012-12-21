@@ -48,6 +48,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    myTableDataSource = [[NSMutableArray alloc] init];
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
     
@@ -56,8 +57,9 @@
     
     //notebooks
     NoteBookModelManager *notebookMM = [[NoteBookModelManager alloc] init];
-    myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
-    [notebookMM release];
+    //myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
+    [notebookMM pullCloudDataAndUpdateDBWith:self action:@selector(didLoadBookList:)];
+    //[notebookMM release];
     
     //myTableDataSource = [[dbManage getAllNoteBooks] retain];
     
@@ -172,4 +174,15 @@
      */
 }
 
+#pragma mark - Datasource
+-(void) didLoadBookList:(NSMutableArray*) _array
+{
+    //[myTableDataSource release];
+    
+    //myTableDataSource = [NSMutableArray all
+    if(_array==NULL) return;
+    
+    [myTableDataSource release];
+    myTableDataSource = [_array retain];
+}
 @end

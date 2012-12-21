@@ -14,4 +14,6 @@
     NSMutableArray *myTableDataSource;
     SHDBManage *dbManage;
 }
+
+-(void) didLoadBookList:(NSMutableArray*) _array;
 @end
