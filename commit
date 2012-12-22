@@ -1,8 +1,9 @@
 #! /bin/sh
-if [ -n "$1" ]
-then echo "a"
-else exit 1
+if [ -n "$1" ]; then echo "";
+else echo "please commit log....."; exit 1
 fi
+
+#proceing
 
 git add *
 echo "\n********add finishing*******\n"
