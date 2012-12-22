@@ -1,0 +1,6 @@
+#!/bin/sh
+git add *
+git commit -m $1
+echo "commit finishing"
+
+git push -u origin master
