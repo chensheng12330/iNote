@@ -15,7 +15,7 @@
 #define ERROR_INFO {self.errorMessage = @"Authentication Failed"; self.errorDetail  = @"Wrong username/Email and password combination.";}
 
 
-SHNoteClient *staticNoteClient;
+static SHNoteClient *staticNoteClient;
 
 @implementation SHNoteClient
 
@@ -28,8 +28,9 @@ SHNoteClient *staticNoteClient;
 
 - (id)initWithTarget:(id)aDelegate engine:(OAuthEngine *)__engine
 {
-    self = [super initWithDelegate:aDelegate engine:__engine];
+    self = [super initWithEngine:__engine];
     //action = anAction;
+    self.noteClienDelegate = aDelegate;
     hasError = false;
     return self;
 }
@@ -50,12 +51,12 @@ SHNoteClient *staticNoteClient;
                 //action processing +++ addtion
             }
             else{
-                SHNoteClient *noteClient = [[SHNoteClient alloc] initWithTarget:_delegate engine:_engine];
-                return [noteClient autorelease];
+                staticNoteClient = [[SHNoteClient alloc] initWithTarget:_delegate engine:_engine];
+                return staticNoteClient;
             }
         }
     }
-    return nil;
+    return staticNoteClient;
 }
 
 - (void)dealloc
@@ -434,7 +435,7 @@ SHNoteClient *staticNoteClient;
     self.errorMessage = @"Authentication Failed";
     self.errorDetail  = @"Wrong username/Email and password combination.";
     if (noteClienDelegate && [noteClienDelegate respondsToSelector:@selector(CancelAuthentication:)]) {
-        [delegate performSelector:@selector(CancelAuthentication:) withObject:self];  
+        [noteClienDelegate performSelector:@selector(CancelAuthentication:) withObject:self];  
     }
     return;
 }
@@ -459,7 +460,7 @@ SHNoteClient *staticNoteClient;
 {
     hasError = true;
     [self authError];
-    [self autorelease];
+    //[self autorelease];
 }
 
 #pragma mark - URL_Rev_Method
@@ -469,14 +470,16 @@ SHNoteClient *staticNoteClient;
         case 401: // Not Authorized: either you need to provide authentication credentials, or the credentials provided aren't valid.
             hasError = true;
             [self authError];
-            goto out;
+            //goto out;
+            return;
             
         case 304: // Not Modified: there was no new data to return.
             if (noteClienDelegate && [noteClienDelegate respondsToSelector:@selector(requestFailed:)]) {
                 ERROR_INFO;
                 [noteClienDelegate performSelector:@selector(requestFailed:) withObject:self];
             }
-            goto out;
+            //goto out;
+            return;
             
         case 400: // Bad Request: your request is invalid, and we'll return an error message that tells you why. This is the status code returned if you've exceeded the rate limit
         case 200: // OK: everything went awesome.
@@ -496,7 +499,8 @@ SHNoteClient *staticNoteClient;
             {
                 [noteClienDelegate performSelector:@selector(requestFailed:) withObject:self];
             }
-            goto out;
+            //goto out;
+            return;
         }
     }
 
@@ -522,8 +526,9 @@ SHNoteClient *staticNoteClient;
         [noteClienDelegate performSelector:@selector(requestFinished:object:) withObject:self  withObject:obj];
     }
     
-  out:
-    [self autorelease];
+  //out:
+    
+    //[self autorelease];
 }
 
 - (void)URLConnectionDidFailWithError:(NSError*)error
@@ -542,7 +547,7 @@ SHNoteClient *staticNoteClient;
         }
     
     }
-    [self autorelease];
+    //[self autorelease];
 }
 
 

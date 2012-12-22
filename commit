@@ -14,6 +14,9 @@ git commit -m "$1"
 echo "\n********commit finishing*******"
 
 echo "\n********push all files*******"
+git pull
+
+echo "\n********push all files*******"
 git push -u origin master
 echo "\n********push finishing*******\n"
 

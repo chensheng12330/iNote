@@ -27,6 +27,7 @@
     if (self) {
         _dbManage   = [SHDBManage sharedDBManage];
         _noteClient = [SHNoteClient shareNoteClient:self];
+        //_noteClient.noteClienDelegate = self;
     }
     return self;
 }

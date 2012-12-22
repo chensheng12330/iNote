@@ -177,12 +177,13 @@
 #pragma mark - Datasource
 -(void) didLoadBookList:(NSMutableArray*) _array
 {
-    //[myTableDataSource release];
+    [myTableDataSource release];
     
     //myTableDataSource = [NSMutableArray all
     if(_array==NULL) return;
     
-    [myTableDataSource release];
+    //[myTableDataSource release];
     myTableDataSource = [_array retain];
+    [self.tableView reloadData];
 }
 @end

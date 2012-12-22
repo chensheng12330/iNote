@@ -20,11 +20,11 @@
 
 NSString *TWITTERFON_FORM_BOUNDARY = @"0194784892923";
 
-- (id)initWithDelegate:(id)aDelegate engine:(OAuthEngine *)__engine
+- (id)initWithEngine:(OAuthEngine *)__engine
 {
 	self = [super init];
 	_engine = [__engine retain];
-	delegate = aDelegate;
+	//delegate = aDelegate;
     statusCode = 0;
     needAuth = false;
 	return self;

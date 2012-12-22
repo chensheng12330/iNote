@@ -18,7 +18,7 @@ extern NSString *TWITTERFON_FORM_BOUNDARY;
 
 @interface URLConnection : NSObject
 {
-	id                  delegate;
+	//id                  delegate;
     NSString*           requestURL;
 	NSURLConnection*    connection;
 	NSMutableData*      buf;
@@ -31,7 +31,7 @@ extern NSString *TWITTERFON_FORM_BOUNDARY;
 @property (nonatomic, assign) int statusCode;
 @property (nonatomic, copy) NSString* requestURL;
 
-- (id)initWithDelegate:(id)delegate engine:(OAuthEngine *)__engine;
+- (id)initWithEngine:(OAuthEngine *)__engine;
 - (NSData*)get:(NSString*)URL   requesMode:(Reques_Mode)_requesMode;
 - (NSData*)post:(NSString*)aURL body:(NSString*)body requesMode:(Reques_Mode)_requesMode;
 - (NSData*)post:(NSString*)aURL data:(NSData*)data   requesMode:(Reques_Mode)_requesMode;
