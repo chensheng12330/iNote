@@ -1,6 +1,8 @@
 #!/bin/sh
 git add *
+echo "/n********add finishing*******/n"
 git commit -m $1
-echo "commit finishing"
+echo "/n********commit finishing*******/n"
 
 git push -u origin master
+echo "/n********push finishing*******/n"
