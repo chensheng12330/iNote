@@ -44,7 +44,7 @@ static SHDBManage *_sharedDBManage = nil;
     @synchronized(self)
     {
         if (nil == _sharedDBManage ) {
-            [[self alloc] init];
+            [[[self alloc] init] autorelease];
         }
     }
     return _sharedDBManage;

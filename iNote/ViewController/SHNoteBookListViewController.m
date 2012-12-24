@@ -11,8 +11,14 @@
 #import "SHNotebook.h"
 #import "NoteBookModelManager.h"
 
+#define TABLE_SECTION_0 @"经常使用"
+#define TABLE_SECTION_1 @"最近使用"
+
 @interface SHNoteBookListViewController ()
 -(void) SetMyTableDataSource:(NSMutableArray*) _arry;
+
+-(void) sortArrayWithNumber;
+-(void) sortArrayWithModfiyTime;
 @end
 
 @implementation SHNoteBookListViewController
@@ -39,7 +45,9 @@
 
 -(void) dealloc
 {
-    [myTableDataSource release];
+    [myOftenUsed        release];
+    [myMostRecentlyUsed release];
+    [myTableDataSource  release];
     
     [super dealloc];
     return;
@@ -48,7 +56,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    myOftenUsed       = [[NSMutableArray alloc] init];
+    myMostRecentlyUsed= [[NSMutableArray alloc] init];
     myTableDataSource = [[NSMutableArray alloc] init];
+    
+    
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
     
@@ -57,11 +70,18 @@
     
     //notebooks
     NoteBookModelManager *notebookMM = [[NoteBookModelManager alloc] init];
-    //myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
-    [notebookMM pullCloudDataAndUpdateDBWith:self action:@selector(didLoadBookList:)];
+    myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
+    //[notebookMM pullCloudDataAndUpdateDBWith:self action:@selector(didLoadBookList:)];
     //[notebookMM release];
     
     //myTableDataSource = [[dbManage getAllNoteBooks] retain];
+    
+    //排序
+    [self sortArrayWithModfiyTime];
+    
+    return;
+    //
+    
     
     //myTableDataSource =
     
@@ -97,6 +117,10 @@
     // Return the number of sections.
     return 1;
 }
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"testing";
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -116,7 +140,8 @@
     SHNotebook *notebook = [myTableDataSource objectAtIndex:indexPath.row];
     
     [cell.textLabel setText:notebook.strNotebookName];
-    [cell.detailTextLabel setText:notebook.strNotes_num];
+    //[cell.detailTextLabel setText:notebook.strNotes_num];
+    [cell.detailTextLabel setText:[NSString stringFormatDate:notebook.dateModify_time]];
     
     return cell;
 }
@@ -185,5 +210,44 @@
     //[myTableDataSource release];
     myTableDataSource = [_array retain];
     [self.tableView reloadData];
+}
+
+#pragma mark - private_Method
+-(void) sortArrayWithNumber
+{
+    if (myTableDataSource ==NULL || myTableDataSource.count<1) return;
+    
+    [myOftenUsed removeAllObjects];
+    
+    NSMutableArray *tempAry = [NSMutableArray arrayWithArray:myTableDataSource];
+    
+    for (int i=0; i<tempAry.count; i++) {
+        
+        SHNotebook *bigNoteBook = [tempAry lastObject];
+        for (SHNotebook* notebook in tempAry) {
+            if ([notebook.strNotes_num intValue]>[bigNoteBook.strNotes_num intValue]) {
+                bigNoteBook = notebook;
+            }
+        }
+        [myOftenUsed addObject:bigNoteBook];
+        [tempAry delete:bigNoteBook];
+        
+        if(myOftenUsed.count>3) break;
+    }
+    
+}
+
+-(void) sortArrayWithModfiyTime
+{
+    if (myTableDataSource ==NULL || myTableDataSource.count<1) return;
+    
+    [myTableDataSource sortUsingComparator:^NSComparisonResult(SHNotebook* obj1, SHNotebook* obj2) {
+    
+        NSDate *date1 = obj1.dateModify_time;
+        NSDate *date2 = obj2.dateModify_time;
+
+        //return [date1 compare:date2] == NSOrderedDescending; // 升序
+        return [date1 compare:date2] == NSOrderedAscending;  // 降序
+    }];
 }
 @end

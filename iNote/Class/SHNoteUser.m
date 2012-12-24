@@ -60,12 +60,14 @@ nTable_id        = _nTable_id;
         self.strUser            = [_dict objectForKey:JK_NOTEUSER_USER];
         self.strTotal_size      = [NSString ToStringWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_TOTALSIZE]];
         self.strUsed_size       = [NSString ToStringWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_USEDSIZE]];
+        
+        //精确到秒 unix time /1000
         self.dateRegister_time  = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_REGISTERTIME]
-                                                                precision:PRECISION_DEFAULT];
+                                                                precision:1000.0];
         self.dateLast_modify_time = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_LASTLOGINTIME]
-                                                                precision:PRECISION_DEFAULT];
+                                                                precision:1000.0];
         self.dateLast_login_time  = [NSString ToNSDateWithNSDecimalNumber:[_dict objectForKey:JK_NOTEUSER_LASTMODIFYTIME]
-                                                                precision:PRECISION_DEFAULT];
+                                                                precision:1000.0];
         self.strDefault_notebook = [_dict objectForKey:JK_NOTEUSER_DEFAULTNOTEBOOK];
     }
     

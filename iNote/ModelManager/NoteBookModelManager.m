@@ -26,13 +26,14 @@
     self = [super init];
     if (self) {
         _dbManage   = [SHDBManage sharedDBManage];
-        _noteClient = [SHNoteClient shareNoteClient:self];
+        _noteClient = [[SHNoteClient shareNoteClient:self] retain];
         //_noteClient.noteClienDelegate = self;
     }
     return self;
 }
 - (void)dealloc
 {
+    [_noteClient release];
     [super dealloc];
 }
 
@@ -58,7 +59,7 @@
             // compare modify time
             NSDate *tempDate = [NSString ToNSDateWithNSDecimalNumber:[tempDict objectForKey:JK_NOTEBOOK_MODIFYTIME] precision:PRECISION_DEFAULT];
             
-            if ([dbTempNotebook.dateModify_time compare:tempDate]) {
+            if ([tempDate compare:dbTempNotebook.dateModify_time]>NSOrderedAscending) {
                 //update record
                 webNoteBook.nTable_id   = dbTempNotebook.nTable_id;  //set tabelid
                 [_dbManage updateNoteBook:webNoteBook oldNoteBookName:dbTempNotebook.strNotebookName];
@@ -86,7 +87,7 @@
     
     NSString *strRep = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
     NSMutableArray* dic = [strRep JSONValue];
-    
+    [strRep release];
     //
     //NSMutableArray *noteBookArrayWeb = [SHNotebook objectsForJSON:dic];
     [self comparePullData:dic];

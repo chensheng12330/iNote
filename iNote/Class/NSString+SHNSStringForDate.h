@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define PRECISION_DEFAULT   (1000.0f)
+#define PRECISION_DEFAULT   (1.0f)
 
 @interface NSString (SHNSStringForDate)
 

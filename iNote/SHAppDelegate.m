@@ -17,6 +17,8 @@
 @synthesize navigationController = _navigationController;
 @synthesize dbManage = _dbManage;
 
+//@synthesize noteClenitSingleton;
+
 void uncaughtExceptionHandler(NSException*exception){    NSLog(@"CRASH: %@", exception);    NSLog(@"Stack Trace: %@",[exception callStackSymbols]);    // Internal error reporting
 }
     
@@ -26,6 +28,8 @@ void uncaughtExceptionHandler(NSException*exception){    NSLog(@"CRASH: %@", exc
     [_viewController release];
     [_navigationController release];
     [_dbManage release];
+    
+    //noteClenitSingleton = nil;
     [super dealloc];
 }
 

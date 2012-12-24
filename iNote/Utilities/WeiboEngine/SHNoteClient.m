@@ -11,11 +11,12 @@
 #import "SHNoteClient.h"
 //#import "SBJSON.h"
 #import "StringUtil.h"
+#import "SHAppDelegate.h"
 
 #define ERROR_INFO {self.errorMessage = @"Authentication Failed"; self.errorDetail  = @"Wrong username/Email and password combination.";}
 
 
-static SHNoteClient *staticNoteClient;
+static SHNoteClient *staticNoteClient=nil;
 
 @implementation SHNoteClient
 
@@ -51,7 +52,8 @@ static SHNoteClient *staticNoteClient;
                 //action processing +++ addtion
             }
             else{
-                staticNoteClient = [[SHNoteClient alloc] initWithTarget:_delegate engine:_engine];
+                staticNoteClient = [[[SHNoteClient alloc] initWithTarget:_delegate engine:_engine] autorelease];
+                //((SHAppDelegate*)[UIApplication sharedApplication].delegate).noteClenitSingleton = staticNoteClient;
                 return staticNoteClient;
             }
         }
@@ -61,6 +63,8 @@ static SHNoteClient *staticNoteClient;
 
 - (void)dealloc
 {
+    self.noteClienDelegate = nil;
+    
     [errorMessage release];
     [errorDetail release];
     [super dealloc];

@@ -13,6 +13,9 @@
 {
     NSMutableArray *myTableDataSource;
     SHDBManage *dbManage;
+    
+    NSMutableArray *myMostRecentlyUsed;   //最近使用
+    NSMutableArray *myOftenUsed;          //经常使用
 }
 
 -(void) didLoadBookList:(NSMutableArray*) _array;
