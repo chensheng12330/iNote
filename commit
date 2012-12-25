@@ -6,20 +6,20 @@ fi
 #proceing
 echo "\n********pull all files*******"
 git pull
-echo "\n********pull finishing*******\n"
+echo "********pull finishing*******\n"
 
 
 echo "\n********add all files*******"
 git add *
-echo "\n********add finishing*******\n"
+echo "********add finishing*******\n"
 
 echo "\n********commit all files*******"
 git commit -m "$1"
-echo "\n********commit finishing*******\n"
+echo "********commit finishing*******\n"
 
 echo "\n********push all files*******"
 git push -u origin master
-echo "\n********push finishing*******\n"
+echo "********push finishing*******\n"
 
 
 git log -n 1
