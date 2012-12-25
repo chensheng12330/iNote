@@ -17,8 +17,7 @@
 @interface SHNoteBookListViewController ()
 -(void) SetMyTableDataSource:(NSMutableArray*) _arry;
 
--(void) sortArrayWithNumber;
--(void) sortArrayWithModfiyTime;
+-(void)sortArrayWithOftenUsedAndMostRecent;
 @end
 
 @implementation SHNoteBookListViewController
@@ -57,10 +56,9 @@
 {
     [super viewDidLoad];
     
-    myOftenUsed       = [[NSMutableArray alloc] init];
-    myMostRecentlyUsed= [[NSMutableArray alloc] init];
-    myTableDataSource = [[NSMutableArray alloc] init];
-    
+    //myOftenUsed       = [[NSMutableArray alloc] init];
+    //myMostRecentlyUsed= [[NSMutableArray alloc] init];
+    //myTableDataSource = [[NSMutableArray alloc] init];
     
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
@@ -71,13 +69,15 @@
     //notebooks
     NoteBookModelManager *notebookMM = [[NoteBookModelManager alloc] init];
     myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
+    
+    [notebookMM release];
     //[notebookMM pullCloudDataAndUpdateDBWith:self action:@selector(didLoadBookList:)];
     //[notebookMM release];
     
     //myTableDataSource = [[dbManage getAllNoteBooks] retain];
     
     //排序
-    [self sortArrayWithModfiyTime];
+    [self sortArrayWithOftenUsedAndMostRecent];
     
     return;
     //
@@ -115,18 +115,20 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    int c1 = myMostRecentlyUsed.count>0;
+    int c2 = myOftenUsed.count>0;
+    return (c1+c2);
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"testing";
+    return section==0?TABLE_SECTION_0:TABLE_SECTION_1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
     // Return the number of rows in the section.
-    return [myTableDataSource count];
+    return section==0?myOftenUsed.count:myMostRecentlyUsed.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,9 +139,12 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    SHNotebook *notebook = [myTableDataSource objectAtIndex:indexPath.row];
+    SHNotebook *notebook = nil;
+    indexPath.section==0? (notebook= [myOftenUsed objectAtIndex:indexPath.row]):(notebook = [myMostRecentlyUsed objectAtIndex:indexPath.row]);
+    //SHNotebook *notebook = [myTableDataSource objectAtIndex:indexPath.row];
     
     [cell.textLabel setText:notebook.strNotebookName];
+    //cell.backgroundColor = [UIColor grayColor];
     //[cell.detailTextLabel setText:notebook.strNotes_num];
     [cell.detailTextLabel setText:[NSString stringFormatDate:notebook.dateModify_time]];
     
@@ -213,39 +218,34 @@
 }
 
 #pragma mark - private_Method
--(void) sortArrayWithNumber
+-(void) sortArrayWithOftenUsedAndMostRecent
 {
     if (myTableDataSource ==NULL || myTableDataSource.count<1) return;
     
-    [myOftenUsed removeAllObjects];
+    myOftenUsed = [[NSMutableArray alloc] init];
     
-    NSMutableArray *tempAry = [NSMutableArray arrayWithArray:myTableDataSource];
+    myMostRecentlyUsed = [[NSMutableArray alloc] initWithArray:myTableDataSource];
     
-    for (int i=0; i<tempAry.count; i++) {
+    for (int i=0; i<myMostRecentlyUsed.count; i++) {
         
-        SHNotebook *bigNoteBook = [tempAry lastObject];
-        for (SHNotebook* notebook in tempAry) {
+        SHNotebook *bigNoteBook = [myMostRecentlyUsed lastObject];
+        for (SHNotebook* notebook in myMostRecentlyUsed) {
             if ([notebook.strNotes_num intValue]>[bigNoteBook.strNotes_num intValue]) {
                 bigNoteBook = notebook;
             }
         }
         [myOftenUsed addObject:bigNoteBook];
-        [tempAry delete:bigNoteBook];
+        [myMostRecentlyUsed removeObject:bigNoteBook];
+        //[myMostRecentlyUsed delete:bigNoteBook];
         
         if(myOftenUsed.count>3) break;
     }
     
-}
-
--(void) sortArrayWithModfiyTime
-{
-    if (myTableDataSource ==NULL || myTableDataSource.count<1) return;
-    
-    [myTableDataSource sortUsingComparator:^NSComparisonResult(SHNotebook* obj1, SHNotebook* obj2) {
-    
+    [myMostRecentlyUsed sortUsingComparator:^NSComparisonResult(SHNotebook* obj1, SHNotebook* obj2) {
+        
         NSDate *date1 = obj1.dateModify_time;
         NSDate *date2 = obj2.dateModify_time;
-
+        
         //return [date1 compare:date2] == NSOrderedDescending; // 升序
         return [date1 compare:date2] == NSOrderedAscending;  // 降序
     }];
