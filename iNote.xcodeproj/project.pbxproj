@@ -124,6 +124,8 @@
 		D4D9201A161017B300A634CF /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D91FCF161017B300A634CF /* ASIS3Request.m */; };
 		D4D9201B161017B300A634CF /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D91FD1161017B300A634CF /* ASIS3ServiceRequest.m */; };
 		D4DE7E2F166C777C00870FC0 /* SHNoteUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DE7E2E166C777C00870FC0 /* SHNoteUser.m */; };
+		D4E8F6A0168A93BE00956DB9 /* SHNoteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E8F69E168A93BE00956DB9 /* SHNoteListViewController.m */; };
+		D4E8F6A1168A93BE00956DB9 /* SHNoteListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4E8F69F168A93BE00956DB9 /* SHNoteListViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -341,6 +343,9 @@
 		D4D91FD1161017B300A634CF /* ASIS3ServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIS3ServiceRequest.m; sourceTree = "<group>"; };
 		D4DE7E2D166C777C00870FC0 /* SHNoteUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteUser.h; sourceTree = "<group>"; };
 		D4DE7E2E166C777C00870FC0 /* SHNoteUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteUser.m; sourceTree = "<group>"; };
+		D4E8F69D168A93BE00956DB9 /* SHNoteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteListViewController.h; sourceTree = "<group>"; };
+		D4E8F69E168A93BE00956DB9 /* SHNoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteListViewController.m; sourceTree = "<group>"; };
+		D4E8F69F168A93BE00956DB9 /* SHNoteListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHNoteListViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +384,7 @@
 		840808801663A43A00028F77 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D4E8F69B168A937500956DB9 /* NoteList */,
 				84F2D13F1677761D00D2EFC7 /* NoteBooks */,
 				8436846A167616C400122999 /* Setting */,
 			);
@@ -826,6 +832,16 @@
 			path = Class;
 			sourceTree = "<group>";
 		};
+		D4E8F69B168A937500956DB9 /* NoteList */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8F69D168A93BE00956DB9 /* SHNoteListViewController.h */,
+				D4E8F69E168A93BE00956DB9 /* SHNoteListViewController.m */,
+				D4E8F69F168A93BE00956DB9 /* SHNoteListViewController.xib */,
+			);
+			name = NoteList;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -922,6 +938,7 @@
 				840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */,
 				843684701676177B00122999 /* SHSynSettingViewController.xib in Resources */,
 				84F2D14516777B3A00D2EFC7 /* SHNoteBookListViewController.xib in Resources */,
+				D4E8F6A1168A93BE00956DB9 /* SHNoteListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1030,6 +1047,7 @@
 				8436846F1676177B00122999 /* SHSynSettingViewController.m in Sources */,
 				84F2D14416777B3A00D2EFC7 /* SHNoteBookListViewController.m in Sources */,
 				843EFD84167F55370095B11E /* NoteBookModelManager.m in Sources */,
+				D4E8F6A0168A93BE00956DB9 /* SHNoteListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

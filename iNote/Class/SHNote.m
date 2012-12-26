@@ -14,15 +14,18 @@
 @implementation SHNote
 @synthesize strTitle,strAuthor,strSource;
 @synthesize strContent,strNoteSize,strCreate_time;
-
+@synthesize strNotebookName,strPath;
 
 -(void)initAllNil
 {
+    self.strPath     = nil;
     self.strTitle    = nil;
     self.strAuthor   = nil;
     self.strSource   = nil;
     self.strContent  = nil;
     self.strNoteSize = nil;
+    
+    self.strNotebookName= nil;
     self.strCreate_time = nil;
     return;
 }
@@ -43,7 +46,7 @@
 }
 
 -(NSString *) description{
-    NSString *descripton=[NSString stringWithFormat:@"strTitle:%@  strAuthor:%@  strSource:%@ /nstrContent:%@ strCreate_time:%@  strNoteSize:%@",self.strTitle,self.strAuthor,self.strSource,self.strContent,self.strCreate_time,self.strNoteSize];
+    NSString *descripton=[NSString stringWithFormat:@"\nstrTitle:%@  strNotebookName:%@ strPath:%@ strAuthor:%@  \nstrSource:%@ strContent:%@ strCreate_time:%@  strNoteSize:%@",self.strTitle,self.strNotebookName,self.strPath, self.strAuthor,self.strSource,self.strContent,self.strCreate_time,self.strNoteSize];
     return (descripton);
 }
 @end

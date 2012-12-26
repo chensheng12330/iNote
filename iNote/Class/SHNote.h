@@ -13,6 +13,9 @@
 @interface SHNote : NSObject
 
 @property (assign) BOOL    isDelete;                //是否删除
+@property (nonatomic,copy) NSString *strNotebookName;  //“笔记本1”, // 笔记本的名称
+@property (nonatomic,copy) NSString *strPath;          //“/4AF64012E9864C”, // 笔记的路径
+
 @property (nonatomic,copy) NSString *strTitle;      //“工作记录”, // 笔记标题
 @property (nonatomic,copy) NSString *strAuthor;     //“Tom”, // 笔记作者
 @property (nonatomic,copy) NSString *strSource;     //“http://note.youdao.com”, // 笔记来源URL
