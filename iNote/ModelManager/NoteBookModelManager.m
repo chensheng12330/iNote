@@ -18,23 +18,16 @@
 @end
 
 @implementation NoteBookModelManager
-@synthesize _dbManage;
-@synthesize _noteClient;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        _dbManage   = [SHDBManage sharedDBManage];
-        _noteClient = [[SHNoteClient shareNoteClient:self] retain];
-        //_noteClient.noteClienDelegate = self;
     }
     return self;
 }
 - (void)dealloc
 {
-    _dbManage = nil;
-    [_noteClient release]; _noteClient = nil;
     [super dealloc];
 }
 

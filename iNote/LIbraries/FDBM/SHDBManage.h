@@ -10,7 +10,7 @@
 #import "FMDatabase.h"
 #import "SHNoteUser.h"
 #import "SHNotebook.h"
-
+#import "SHNote.h"
 /*
  class property: Singleton model
 */
@@ -51,6 +51,7 @@
 //synchronization notebook table
 -(void) synchronizationNoteBooK:(NSArray*) _arryData;
 
+//notebook edit
 -(BOOL) addNoteBook:(SHNotebook*) _noteBook;
 -(BOOL) updateNoteBook:(SHNotebook*)_newNoteBook oldNoteBookName:(NSString*) _stringName;
 -(BOOL) deleteNotebookWithName:(NSString*)_stringName;
@@ -58,4 +59,11 @@
 //get notebook count with notebook name;
 -(int) getNoteBookCountWithName:(NSString *)_stringName;
 -(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName;
+//*************End/////
+
+//*************////
+//Note info
+-(BOOL) addNote:(SHNote*) _note;
+-(BOOL) updateNote;
+-(BOOL) deleteNote;
 @end
