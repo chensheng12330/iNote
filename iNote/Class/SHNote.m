@@ -13,8 +13,9 @@
 
 @implementation SHNote
 @synthesize strTitle,strAuthor,strSource;
-@synthesize strContent,strNoteSize,strCreate_time;
+@synthesize strContent,strNoteSize,dateCreate_time,dateModify_time;
 @synthesize strNotebookName,strPath;
+@synthesize nTable_id,isDelete,isUpdate;
 
 -(void)initAllNil
 {
@@ -24,9 +25,13 @@
     self.strSource   = nil;
     self.strContent  = nil;
     self.strNoteSize = nil;
-    
+    self.nTable_id   = -1;
     self.strNotebookName= nil;
-    self.strCreate_time = nil;
+    self.dateCreate_time = nil;
+    self.dateModify_time = nil;
+    
+    self.isDelete =0;
+    self.isUpdate =0;
     return;
 }
 
@@ -46,7 +51,7 @@
 }
 
 -(NSString *) description{
-    NSString *descripton=[NSString stringWithFormat:@"\nstrTitle:%@  strNotebookName:%@ strPath:%@ strAuthor:%@  \nstrSource:%@ strContent:%@ strCreate_time:%@  strNoteSize:%@",self.strTitle,self.strNotebookName,self.strPath, self.strAuthor,self.strSource,self.strContent,self.strCreate_time,self.strNoteSize];
+    NSString *descripton=[NSString stringWithFormat:@" \nnote_id:%d strTitle:%@  strNotebookName:%@ strPath:%@ strAuthor:%@  \nstrSource:%@ dateCreate_time:%@ dateModify_time:%@ strNoteSize:%@",self.nTable_id,self.strTitle,self.strNotebookName,self.strPath, self.strAuthor,self.strSource,self.dateCreate_time,self.dateModify_time,self.strNoteSize];
     return (descripton);
 }
 @end

@@ -374,8 +374,152 @@ static SHDBManage *_sharedDBManage = nil;
 {
     if(_arryData==nil || _arryData.count<1) return;
     DBMQuickCheck(db);
-    
-    
-    
 }
+
+#pragma mark - NoteTable 
+-(NSMutableArray*)getAllNotes
+{
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select * from NoteTable"];
+    
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    
+    NSMutableArray *returnArrVal = [[[NSMutableArray alloc]init] autorelease];
+    //get note'user info
+    while ([rs next])
+    {
+        SHNotebook *fNotebook = [[SHNotebook alloc] init];
+        fNotebook.nTable_id       = [rs intForColumnIndex:0];
+        fNotebook.strPath         = [rs objectForColumnIndex:1];
+        fNotebook.strNotebookName = [rs objectForColumnIndex:2];
+        fNotebook.strNotes_num    = [rs objectForColumnIndex:3];
+        fNotebook.dateCreate_time = [NSString dateFormatString:[rs objectForColumnIndex:4]];
+        fNotebook.dateModify_time = [NSString dateFormatString:[rs objectForColumnIndex:5]];
+        fNotebook.isUpdate        = [[rs objectForColumnIndex:6] boolValue];
+        
+        [returnArrVal addObject:fNotebook];
+        [fNotebook release];
+    }
+    
+    //close the result set.
+    [rs close];
+    
+    return returnArrVal;
+}
+-(SHNote*)getNoteWithNoteID:(int)_note_id
+{
+    return nil;
+}
+-(SHNote*)getNoteWithNotePath:(NSString*)_notepath
+{
+    return nil;
+}
+
+//以note_id做为主键，对象唯一标识
+-(BOOL) addNote:(SHNote*) _note
+{
+    if (_note ==NULL || _note.retainCount <1) return NO;
+    DBMQuickCheck(db);
+    
+    //get add note_id value
+    int seq_num=0;
+    FMResultSet *rs = [db executeQuery:@"select max(note_id) from NoteTable"];
+    if([rs next]) seq_num = [rs intForColumnIndex:0]+1;
+    
+    _note.nTable_id = seq_num;
+    
+    //add to noteTable
+    [db executeUpdate:@"insert into NoteTable \
+     note_id, \
+     title, \
+     author,\
+     source_url,\
+     note_size,\
+     create_time,\
+     modify_time,\
+     content,\
+     notebook_name,\
+     path,\
+     is_update) \
+     values (?, ?, ?, ?, ?, ?)" ,
+     _note.nTable_id,
+     _note.strTitle,
+     _note.strAuthor,
+     _note.strSource,
+     [NSString stringFormatDate:_note.dateCreate_time],
+     [NSString stringFormatDate:_note.dateModify_time],
+     _note.strContent,
+     _note.strNotebookName,
+     _note.strPath,
+     [NSString stringWithFormat:@"%d",_note.isUpdate]];
+    
+    //get add db log
+    DEBUG_DB_ERROR_LOG;
+    return TRUE;
+}
+
+-(BOOL) updateNote:(SHNote*) _note
+{
+    if (_note ==NULL || _note.retainCount <1) return NO;
+    
+    DBMQuickCheck(db);
+    
+    [db executeUpdate:@"update NoteTable set \
+     title=?, \
+     author=?,\
+     source_url=?,\
+     note_size=?,\
+     create_time=?,\
+     modify_time=?,\
+     content=?,\
+     notebook_name=?,\
+     path=?,\
+     is_update=? \
+     where note_id=?",
+     _note.strTitle,
+     _note.strAuthor,
+     _note.strSource,
+     [NSString stringFormatDate:_note.dateCreate_time],
+     [NSString stringFormatDate:_note.dateModify_time],
+     _note.strContent,
+     _note.strNotebookName,
+     _note.strPath,
+     [NSString stringWithFormat:@"%d",_note.isUpdate],
+     _note.nTable_id];
+
+    //get update db log
+    DEBUG_DB_ERROR_LOG;
+
+    return YES;
+}
+
+// logic delete
+-(BOOL) logicDeleteNoteWithNoteID:(int)_note_id
+{
+    if (_note_id < 1) return NO;
+    
+    DBMQuickCheck(db);
+    
+    BOOL bExe = [db executeUpdate:@"update NoteTable set \
+     is_delete=? ",
+     "1"];
+    
+    DEBUG_DB_ERROR_LOG;
+    
+    return bExe;
+}
+
+-(BOOL) physicsDeleteNoteWithNoteID:(int)_note_id
+{
+    if(_note_id <1) return NO;
+    DBMQuickCheck(db);
+    
+    BOOL bExe = [db executeUpdate:@"delete from NoteTable where \
+                 note_id=?",_note_id];
+    
+    DEBUG_DB_ERROR_LOG;
+    return YES;
+}
+
 @end
