@@ -30,7 +30,7 @@
 static SHDBManage *_sharedDBManage = nil;
 
 @interface SHDBManage (private)
-
+-(SHNote*) analyzingNoteResultSet:(FMResultSet*)rs;
 
 @end
 
@@ -377,6 +377,27 @@ static SHDBManage *_sharedDBManage = nil;
 }
 
 #pragma mark - NoteTable 
+-(SHNote*) analyzingNoteResultSet:(FMResultSet*)rs
+{
+    if(rs ==NULL) return nil;
+    
+    SHNote *fNote = [[SHNote alloc] init];
+    fNote.nTable_id         = [rs intForColumnIndex:0];
+    fNote.strTitle          = [rs objectForColumnIndex:1];
+    fNote.strAuthor         = [rs objectForColumnIndex:2];
+    fNote.strSource         = [rs objectAtIndexedSubscript:3];
+    fNote.strNoteSize       = [rs objectForColumnIndex:4];
+    fNote.dateCreate_time   = [NSString dateFormatString:[rs objectForColumnIndex:5]];
+    fNote.dateModify_time   = [NSString dateFormatString:[rs objectForColumnIndex:6]];
+    fNote.strContent        = [rs objectForColumnIndex:7];
+    fNote.strNotebookName   = [rs objectAtIndexedSubscript:8];
+    fNote.strPath           = [rs objectForColumnIndex:9];
+    fNote.isUpdate          = [[rs stringForColumnIndex:10] boolValue];
+    fNote.isDelete          = [[rs stringForColumnIndex:11] boolValue];
+
+    return [fNote autorelease];
+}
+
 -(NSMutableArray*)getAllNotes
 {
     DBMQuickCheck(db);
@@ -389,17 +410,8 @@ static SHDBManage *_sharedDBManage = nil;
     //get note'user info
     while ([rs next])
     {
-        SHNotebook *fNotebook = [[SHNotebook alloc] init];
-        fNotebook.nTable_id       = [rs intForColumnIndex:0];
-        fNotebook.strPath         = [rs objectForColumnIndex:1];
-        fNotebook.strNotebookName = [rs objectForColumnIndex:2];
-        fNotebook.strNotes_num    = [rs objectForColumnIndex:3];
-        fNotebook.dateCreate_time = [NSString dateFormatString:[rs objectForColumnIndex:4]];
-        fNotebook.dateModify_time = [NSString dateFormatString:[rs objectForColumnIndex:5]];
-        fNotebook.isUpdate        = [[rs objectForColumnIndex:6] boolValue];
-        
-        [returnArrVal addObject:fNotebook];
-        [fNotebook release];
+        SHNote *fNote = [self analyzingNoteResultSet:rs];
+        [returnArrVal addObject:fNote];
     }
     
     //close the result set.
@@ -409,11 +421,36 @@ static SHDBManage *_sharedDBManage = nil;
 }
 -(SHNote*)getNoteWithNoteID:(int)_note_id
 {
-    return nil;
+    if(_note_id<1) return nil;
+    
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select * from NoteTable where note_id=?",_note_id];
+    
+    SHNote *fNote = nil;
+    if([rs next])
+    {
+        fNote = [self analyzingNoteResultSet:rs];
+    }
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    return fNote;
 }
+
 -(SHNote*)getNoteWithNotePath:(NSString*)_notepath
 {
-    return nil;
+    if(_notepath==NULL || _notepath.retainCount<1) return nil;
+    
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select * from NoteTable where path=?",_notepath];
+    
+    SHNote *fNote = nil;
+    if([rs next])
+    {
+        fNote = [self analyzingNoteResultSet:rs];
+    }
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    return fNote;
 }
 
 //以note_id做为主键，对象唯一标识
@@ -519,7 +556,7 @@ static SHDBManage *_sharedDBManage = nil;
                  note_id=?",_note_id];
     
     DEBUG_DB_ERROR_LOG;
-    return YES;
+    return bExe;
 }
 
 @end

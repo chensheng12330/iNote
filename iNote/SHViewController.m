@@ -10,6 +10,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "SHSettingViewController.h"
+#import "SHNoteListViewController.h"
 #import "SHNoteBookListViewController.h"
 
 @interface SHViewController ()
@@ -142,6 +143,7 @@
             subViewController = [[SHNoteBookListViewController alloc] init];
             break;
         case 3:
+            subViewController = [[SHNoteListViewController alloc] init];
             break;
         case 4:
             break;

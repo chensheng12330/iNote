@@ -7,6 +7,7 @@
 //
 
 #import "SHNoteListViewController.h"
+//#import "`"
 
 @interface SHNoteListViewController ()
 
@@ -26,6 +27,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    dbManage = [SHDBManage sharedDBManage];  //db manage
+    
+    NSArray *ar = [dbManage getAllNotes];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

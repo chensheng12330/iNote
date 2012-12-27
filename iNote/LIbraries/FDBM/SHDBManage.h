@@ -69,6 +69,7 @@
 -(SHNote*)getNoteWithNotePath:(NSString*)_notepath;
 -(BOOL) addNote:(SHNote*) _note;
 -(BOOL) updateNote:(SHNote*) _note;
+
 //逻辑删除
 -(BOOL) logicDeleteNoteWithNoteID:(int)_note_id;
 //物理删除
