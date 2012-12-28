@@ -30,13 +30,32 @@
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
     
-    NSArray *ar = [dbManage getAllNotes];
+    //NSArray *ar = [dbManage getAllNotes];
+    //SHNote* note = [dbManage getNoteWithNoteID:3];
+
+    //[dbManage deleteLogicNoteWithNoteID:3];
+    
+    //[dbManage deletePhysicsNoteWithNoteID:3];
+    
+    myTableDataSource = [[dbManage getAllNotes] retain];
+    return;
+//    [dbManage addNote:note];
+//    
+//    note.isDelete = YES;
+//    note.isUpdate = YES;
+//    [dbManage updateNote:note];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)dealloc
+{
+    [myTableDataSource release];
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,16 +68,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return 0;
+    return myTableDataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,9 +84,12 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    SHNote *note = [myTableDataSource objectAtIndex:indexPath.row];
+    [cell.textLabel setText:note.strTitle];
+    [cell.detailTextLabel setText:note.strContent];
     // Configure the cell...
     
     return cell;

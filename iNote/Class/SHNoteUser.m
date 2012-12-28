@@ -106,7 +106,7 @@ nTable_id        = _nTable_id;
 }
 
 -(NSString *) description{
-    NSString *descripton=[NSString stringWithFormat:@"strUser:%@  strTotal_size:%@  strUsed_size:%@ /ndateRegister_time:%@  dateLast_login_time:%@  dateLast_modify_time:%@  strDefault_notebook:%@ ",self.strUser,self.strTotal_size,self.strUsed_size,self.dateRegister_time,self.dateLast_login_time,self.dateLast_modify_time,self.strDefault_notebook];
+    NSString *descripton=[NSString stringWithFormat:@" strUser:%@\n strTotal_size:%@\n strUsed_size:%@\n dateRegister_time:%@\n dateLast_login_time:%@\n dateLast_modify_time:%@\n strDefault_notebook:%@\n ",self.strUser,self.strTotal_size,self.strUsed_size,self.dateRegister_time,self.dateLast_login_time,self.dateLast_modify_time,self.strDefault_notebook];
     return (descripton);
 }
 

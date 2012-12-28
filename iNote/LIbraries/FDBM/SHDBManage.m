@@ -424,7 +424,8 @@ static SHDBManage *_sharedDBManage = nil;
     if(_note_id<1) return nil;
     
     DBMQuickCheck(db);
-    FMResultSet *rs = [db executeQuery:@"select * from NoteTable where note_id=?",_note_id];
+    FMResultSet *rs = [db executeQuery:@"select * from NoteTable where note_id=?",
+                       [NSNumber numberWithInt:_note_id]];
     
     SHNote *fNote = nil;
     if([rs next])
@@ -433,6 +434,7 @@ static SHDBManage *_sharedDBManage = nil;
     }
     //get query db log
     DEBUG_DB_ERROR_LOG;
+    [rs close];
     return fNote;
 }
 
@@ -450,6 +452,7 @@ static SHDBManage *_sharedDBManage = nil;
     }
     //get query db log
     DEBUG_DB_ERROR_LOG;
+    [rs close];
     return fNote;
 }
 
@@ -467,7 +470,7 @@ static SHDBManage *_sharedDBManage = nil;
     _note.nTable_id = seq_num;
     
     //add to noteTable
-    [db executeUpdate:@"insert into NoteTable \
+    [db executeUpdate:@"insert into NoteTable( \
      note_id, \
      title, \
      author,\
@@ -478,21 +481,26 @@ static SHDBManage *_sharedDBManage = nil;
      content,\
      notebook_name,\
      path,\
-     is_update) \
-     values (?, ?, ?, ?, ?, ?)" ,
-     _note.nTable_id,
+     is_update,\
+     is_delete ) \
+     values (?,?,?,?, ?, ?, ?, ?, ?, ?, ?,?)",
+     [NSNumber numberWithInt:_note.nTable_id],
      _note.strTitle,
      _note.strAuthor,
      _note.strSource,
+     _note.strNoteSize,
      [NSString stringFormatDate:_note.dateCreate_time],
      [NSString stringFormatDate:_note.dateModify_time],
      _note.strContent,
      _note.strNotebookName,
      _note.strPath,
-     [NSString stringWithFormat:@"%d",_note.isUpdate]];
+     [NSString stringWithFormat:@"%d",_note.isUpdate],
+     [NSString stringWithFormat:@"%d",_note.isDelete]
+     ];
     
     //get add db log
     DEBUG_DB_ERROR_LOG;
+    [rs close];
     return TRUE;
 }
 
@@ -512,48 +520,50 @@ static SHDBManage *_sharedDBManage = nil;
      content=?,\
      notebook_name=?,\
      path=?,\
-     is_update=? \
+     is_update=?,\
+     is_delete=? \
      where note_id=?",
      _note.strTitle,
      _note.strAuthor,
      _note.strSource,
+     _note.strNoteSize,
      [NSString stringFormatDate:_note.dateCreate_time],
      [NSString stringFormatDate:_note.dateModify_time],
      _note.strContent,
      _note.strNotebookName,
      _note.strPath,
      [NSString stringWithFormat:@"%d",_note.isUpdate],
-     _note.nTable_id];
+     [NSString stringWithFormat:@"%d",_note.isDelete],
+     [NSNumber numberWithInt:_note.nTable_id]];
 
     //get update db log
     DEBUG_DB_ERROR_LOG;
-
     return YES;
 }
 
 // logic delete
--(BOOL) logicDeleteNoteWithNoteID:(int)_note_id
+-(BOOL) deleteLogicNoteWithNoteID:(int)_note_id
 {
     if (_note_id < 1) return NO;
     
     DBMQuickCheck(db);
     
     BOOL bExe = [db executeUpdate:@"update NoteTable set \
-     is_delete=? ",
-     "1"];
+     is_delete=? where note_id=?",
+     @"1",[NSNumber numberWithInt:_note_id]];
     
     DEBUG_DB_ERROR_LOG;
     
     return bExe;
 }
 
--(BOOL) physicsDeleteNoteWithNoteID:(int)_note_id
+-(BOOL) deletePhysicsNoteWithNoteID:(int)_note_id
 {
     if(_note_id <1) return NO;
     DBMQuickCheck(db);
     
     BOOL bExe = [db executeUpdate:@"delete from NoteTable where \
-                 note_id=?",_note_id];
+                 note_id=?",[NSNumber numberWithInt:_note_id]];
     
     DEBUG_DB_ERROR_LOG;
     return bExe;

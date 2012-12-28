@@ -51,6 +51,10 @@ typedef enum {
 -(NSData*)getUseInfoWithRequesMode:(Reques_Mode)_requesMode;
 
 //查看用户全部笔记本 :post
+//1、获取成功，把每个笔记本所对应笔记path进行网络请求
+//2、对所获取当前笔记本内的笔记path进行db存储
+//3、path_table 增加、删除、修改
+//4、每个笔记保存一份相关的path
 -(NSData*)getNoteBooksWithRequesMode:(Reques_Mode)_requesMode;
 
 //列出笔记本下的笔记 :post

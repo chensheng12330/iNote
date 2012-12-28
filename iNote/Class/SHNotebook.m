@@ -49,7 +49,7 @@
 }
 
 -(NSString *) description{
-    NSString *descripton=[NSString stringWithFormat:@"strPath:%@  strNotes_num:%@  strNotebookName:%@ /nstrCreate_time:%@  strModify_time:%@  isUpdate:%d",self.strPath,self.strNotes_num,self.strNotebookName,self.dateCreate_time,self.dateModify_time,self.isUpdate];
+    NSString *descripton=[NSString stringWithFormat:@"strPath:%@\n strNotes_num:%@\n strNotebookName:%@\n strCreate_time:%@\n strModify_time:%@\n isUpdate:%d",self.strPath,self.strNotes_num,self.strNotebookName,self.dateCreate_time,self.dateModify_time,self.isUpdate];
     return (descripton);
 }
 

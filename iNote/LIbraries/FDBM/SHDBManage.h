@@ -71,9 +71,9 @@
 -(BOOL) updateNote:(SHNote*) _note;
 
 //逻辑删除
--(BOOL) logicDeleteNoteWithNoteID:(int)_note_id;
+-(BOOL) deleteLogicNoteWithNoteID:(int)_note_id;
 //物理删除
--(BOOL) physicsDeleteNoteWithNoteID:(int)_note_id;
+-(BOOL) deletePhysicsNoteWithNoteID:(int)_note_id;
 
 //get note count with note_table_id
 @end

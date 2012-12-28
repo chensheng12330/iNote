@@ -51,7 +51,7 @@
 }
 
 -(NSString *) description{
-    NSString *descripton=[NSString stringWithFormat:@" \nnote_id:%d strTitle:%@  strNotebookName:%@ strPath:%@ strAuthor:%@  \nstrSource:%@ dateCreate_time:%@ dateModify_time:%@ strNoteSize:%@",self.nTable_id,self.strTitle,self.strNotebookName,self.strPath, self.strAuthor,self.strSource,self.dateCreate_time,self.dateModify_time,self.strNoteSize];
+    NSString *descripton=[NSString stringWithFormat:@" note_id:%d\n strTitle:%@\n strNotebookName:%@\n strPath:%@\n strAuthor:%@\n strSource:%@\n dateCreate_time:%@\n dateModify_time:%@\n strNoteSize:%@\n",self.nTable_id,self.strTitle,self.strNotebookName,self.strPath, self.strAuthor,self.strSource,self.dateCreate_time,self.dateModify_time,self.strNoteSize];
     return (descripton);
 }
 @end
