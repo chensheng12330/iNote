@@ -10,7 +10,7 @@
 #import "SHModelManagerBase.h"
 
 
-@interface NoteBookModelManager : SHModelManagerBase
+@interface SHNoteBookModelManager : SHModelManagerBase
 {
     //Asyn
     id  _objDelegate;

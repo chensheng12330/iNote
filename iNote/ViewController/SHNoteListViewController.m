@@ -37,7 +37,8 @@
     
     //[dbManage deletePhysicsNoteWithNoteID:3];
     
-    myTableDataSource = [[dbManage getAllNotes] retain];
+    //myTableDataSource = [[dbManage getAllNotes] retain];
+    
     return;
 //    [dbManage addNote:note];
 //    

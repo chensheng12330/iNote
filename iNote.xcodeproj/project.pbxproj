@@ -14,7 +14,7 @@
 		84166CBA1610A51900183621 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84166CB91610A51900183621 /* icon.png */; };
 		8436846F1676177B00122999 /* SHSynSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436846D1676177B00122999 /* SHSynSettingViewController.m */; };
 		843684701676177B00122999 /* SHSynSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8436846E1676177B00122999 /* SHSynSettingViewController.xib */; };
-		843EFD84167F55370095B11E /* NoteBookModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 843EFD83167F55370095B11E /* NoteBookModelManager.m */; };
+		843EFD84167F55370095B11E /* SHNoteBookModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 843EFD83167F55370095B11E /* SHNoteBookModelManager.m */; };
 		84DA02B61610897300DAF3A2 /* menuData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DA02B51610897300DAF3A2 /* menuData.plist */; };
 		84DEFAA816743B5C0084289B /* SHWebUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEFAA716743B5C0084289B /* SHWebUtility.m */; };
 		84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84EDABA7165E603C0039F314 /* MarkInfo.rtf */; };
@@ -153,8 +153,8 @@
 		8436846D1676177B00122999 /* SHSynSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSynSettingViewController.m; sourceTree = "<group>"; };
 		8436846E1676177B00122999 /* SHSynSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSynSettingViewController.xib; sourceTree = "<group>"; };
 		843EFD7F167F42FC0095B11E /* Header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = Header.h; sourceTree = "<group>"; };
-		843EFD82167F55370095B11E /* NoteBookModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteBookModelManager.h; sourceTree = "<group>"; };
-		843EFD83167F55370095B11E /* NoteBookModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteBookModelManager.m; sourceTree = "<group>"; };
+		843EFD82167F55370095B11E /* SHNoteBookModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteBookModelManager.h; sourceTree = "<group>"; };
+		843EFD83167F55370095B11E /* SHNoteBookModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteBookModelManager.m; sourceTree = "<group>"; };
 		84B4318A164AA0D000ED79D7 /* MacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroDefine.h; path = iNote/Utilities/WeiboEngine/Utils/MacroDefine.h; sourceTree = SOURCE_ROOT; };
 		84DA02B51610897300DAF3A2 /* menuData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = menuData.plist; path = Plists/menuData.plist; sourceTree = "<group>"; };
 		84DEFAA616743B5C0084289B /* SHWebUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHWebUtility.h; sourceTree = "<group>"; };
@@ -417,8 +417,8 @@
 				582D7D12168B383800497528 /* SHModelManagerBase.m */,
 				582D7D0E168B325200497528 /* SHNoteModelManager.h */,
 				582D7D0F168B325200497528 /* SHNoteModelManager.m */,
-				843EFD82167F55370095B11E /* NoteBookModelManager.h */,
-				843EFD83167F55370095B11E /* NoteBookModelManager.m */,
+				843EFD82167F55370095B11E /* SHNoteBookModelManager.h */,
+				843EFD83167F55370095B11E /* SHNoteBookModelManager.m */,
 			);
 			path = ModelManager;
 			sourceTree = "<group>";
@@ -1056,7 +1056,7 @@
 				84DEFAA816743B5C0084289B /* SHWebUtility.m in Sources */,
 				8436846F1676177B00122999 /* SHSynSettingViewController.m in Sources */,
 				84F2D14416777B3A00D2EFC7 /* SHNoteBookListViewController.m in Sources */,
-				843EFD84167F55370095B11E /* NoteBookModelManager.m in Sources */,
+				843EFD84167F55370095B11E /* SHNoteBookModelManager.m in Sources */,
 				D4E8F6A0168A93BE00956DB9 /* SHNoteListViewController.m in Sources */,
 				582D7D10168B325200497528 /* SHNoteModelManager.m in Sources */,
 				582D7D13168B383800497528 /* SHModelManagerBase.m in Sources */,

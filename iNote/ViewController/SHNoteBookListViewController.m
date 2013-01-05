@@ -9,7 +9,7 @@
 #import "SHNoteBookListViewController.h"
 #import "NSString+SHNSStringForDate.h"
 #import "SHNotebook.h"
-#import "NoteBookModelManager.h"
+#import "SHNoteBookModelManager.h"
 
 #define TABLE_SECTION_0 @"经常使用"
 #define TABLE_SECTION_1 @"最近使用"
@@ -67,7 +67,8 @@
     [self SetMyTableDataSource:nil];  //数据分组，同步问题
     
     //notebooks
-    NoteBookModelManager *notebookMM = [[NoteBookModelManager alloc] init];
+    SHNoteBookModelManager *notebookMM = [[SHNoteBookModelManager alloc] init];
+    //notebookMM
     myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
     
     [notebookMM release];

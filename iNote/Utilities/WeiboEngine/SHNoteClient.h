@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "URLConnection.h"
-
+#import "SHNotebook.h"
+#import "SHNote.h"
 
 typedef enum {
     WEIBO_REQUEST_TIMELINE,
@@ -57,11 +58,31 @@ typedef enum {
 //4、每个笔记保存一份相关的path
 -(NSData*)getNoteBooksWithRequesMode:(Reques_Mode)_requesMode;
 
-//列出笔记本下的笔记 :post
--(void)getNoteDetail;
+//列出笔记本下的所有笔记 :post
+/*列出笔记本下的笔记
+ l URL：http://[baseURL]/yws/open/notebook/list.json
+ l 请求方式：POST
+ l Content-Type：application/x-www-form-urlencoded
+ l 支持格式：JSON
+ l 是否需要用户认证：是 (关于登录授权，参见请求用户授权)
+ l 请求参数：笔记本路径
+ l 返回结果：操作成功时http状态为200，并返回该笔记本下的笔记列表（只有笔记路径，笔记内容需要通过笔记接口获取
+*/
+-(NSData*)getNotesPathWithNotebookPath:(NSString*)_path
+                        RequesMode:(Reques_Mode)_requesMode;
 
 //创建笔记本
--(void) createNoteBook;
+/*
+ URL： http://[baseURL]/yws/open/notebook/create.json
+ l 请求方式：POST
+ l Content-Type：application/x-www-form-urlencoded
+ l 支持格式：JSON
+ l 是否需要用户认证：是 (关于登录授权，参见请求用户授权)
+ l 请求参数：name 笔记本名称
+ l 返回结果：操作成功时http状态200，并返回新创建笔记本的路径；失败时http状态500并返回错误码和错误信息
+ */
+-(NSData*) createNotebook:(NSString*) _notebookName
+            RequesMode:(Reques_Mode)_requesMode;
 
 //删除笔记本
 -(void) deleteNoteBook;

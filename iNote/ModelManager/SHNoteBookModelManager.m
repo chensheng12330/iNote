@@ -1,5 +1,5 @@
 //
-//  NoteBookModelManager.m
+//  SHNoteBookModelManager.m
 //  iNote
 //
 //  Created by sherwin.chen on 12-12-17.
@@ -9,15 +9,15 @@
 #import "JSON.h"
 #import "Header.h"
 #import "NSString+SHNSStringForDate.h"
-#import "NoteBookModelManager.h"
+#import "SHNoteBookModelManager.h"
 
 
-@interface NoteBookModelManager (Private)
+@interface SHNoteBookModelManager (Private)
 -(void)comparePullData:(NSMutableArray*)_array;
 -(void)comparePushData:(NSMutableArray*)_array;
 @end
 
-@implementation NoteBookModelManager
+@implementation SHNoteBookModelManager
 
 - (id)init
 {
@@ -71,12 +71,17 @@
 }
 
 #pragma mark -Peripheral Interface
+//更新本地
 -(NSMutableArray*) pullCloudDataAndUpdateDB
 {
+    
+    
+    
     //synchronization db for noteBook
     
     //get data from web cloud
-    NSData * _data = [_noteClient getNoteBooksWithRequesMode:Reques_Syn];
+    //NSData * _data = [_noteClient getNoteBooksWithRequesMode:Reques_Syn];
+    NSData * _data = [_noteClient getNotesPathWithNotebookPath:@"2C25249E01824844A02E5D14D4BF9CCC" RequesMode:Reques_Syn];
     if (_data ==NULL) return nil;
     
     NSString *strRep = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
@@ -102,7 +107,9 @@
     
     //satrt request
     [_noteClient getNoteBooksWithRequesMode:Reques_Asyn];
+    //[_noteClient getNotesWithNotebookPath:@"" RequesMode:Reques_Asyn];
 }
+
 #pragma mark - noteClient delegate
 //success
 - (void)requestFinished:(SHNoteClient *)_noteClient object:(id)_obj

@@ -158,6 +158,41 @@ static SHNoteClient *staticNoteClient=nil;
 	return [super post:[self getURL:path queryParameters:nil] body:nil requesMode:_requesMode];
 }
 
+/*
+ postString = [NSString stringWithFormat:@"id=%lld&cid=%lld&comment=%@",
+ //					  statusId,
+ //					  commentId,
+ //					  [comment encodeAsURIComponent]];
+ */
+
+-(NSData*)getNotesPathWithNotebookPath:(NSString*)_path
+                        RequesMode:(Reques_Mode)_requesMode
+{
+    if(_path==NULL || [_path isEqualToString:@""]) return nil;
+    
+    //请求参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:[NSString stringWithFormat:@"%@", _path] forKey:@"notebook"];
+    
+    //NSString *postString = [NSString stringWithFormat:@"notebook=%@",_path];
+    //yws/open/notebook/list.json
+    needAuth = YES;
+    NSString *path = [NSString stringWithFormat:@"yws/open/notebook/list.%@", API_FORMAT];
+	return [super post:[self getURL:path queryParameters:params] body:nil requesMode:_requesMode];
+}
+
+-(NSData*) createNotebook:(NSString*) _notebookName
+               RequesMode:(Reques_Mode)_requesMode
+{
+    
+    ///yws/open/notebook/create.json
+    NSString *postString = [NSString stringWithFormat:@"name=%@",_notebookName];
+    
+    needAuth = YES;
+    NSString *path = [NSString stringWithFormat:@"yws/open/notebook/list.%@", API_FORMAT];
+	return [super post:[self getURL:path queryParameters:nil] body:postString requesMode:_requesMode];
+}
+
 #pragma mark -
 #pragma mark Followed Timeline
 
