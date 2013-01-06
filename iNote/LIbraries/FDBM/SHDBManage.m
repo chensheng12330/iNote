@@ -484,19 +484,26 @@ static SHDBManage *_sharedDBManage = nil;
     
     DBMQuickCheck(db);
     
-    BOOL bExe = [db executeUpdate:@"update NoteTable set \
-                 is_delete=? where note_id=?",_path];
+    BOOL bExe = [db executeUpdate:@"delete from NoteRelationTable where \
+                 notebook_path=?",_path];
     
     DEBUG_DB_ERROR_LOG;
     
     return bExe;
-    
-    return TRUE;
 }
 
 -(BOOL) deleteNoteRelationWithNotePath:(NSString*)_path
 {
-    return TRUE;
+    if(_path ==NULL || [_path isEqualToString:@""]) return NO;
+    
+    DBMQuickCheck(db);
+    
+    BOOL bExe = [db executeUpdate:@"delete from NoteRelationTable where \
+                 note_path=?",_path];
+    
+    DEBUG_DB_ERROR_LOG;
+    
+    return bExe;
 }
 
 

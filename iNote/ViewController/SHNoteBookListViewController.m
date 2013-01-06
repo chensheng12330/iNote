@@ -63,6 +63,31 @@
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
     
+    SHNoteRelation *notere = [[SHNoteRelation alloc] init];
+    notere.strNotebookPath = @"notebook1";
+    notere.strNotePath     = @"note1";
+    [dbManage addNoteRelation:notere];
+    notere.strNotePath = @"note2";
+    [dbManage addNoteRelation:notere];
+    notere.strNotebookPath= @"notebook2";
+    [dbManage addNoteRelation:notere];
+    
+    //get
+    [notere release];
+    notere = [dbManage getNoteRelationWithNotePath:@"note2"];
+    
+    NSMutableArray *ar = [dbManage getNoteRelationWithNotebookPath:@"notebook1"];
+    [ar release];
+    
+    ar = [dbManage getNoteRelations];
+    
+    //delete
+    BOOL isSu;
+    isSu = [dbManage deleteNoteRelationWithNotePath:@"note1"];
+    isSu = [dbManage deleteNoteRelationWithNotebookPath:@"notebook1"];
+    
+    return;
+    
     // get all notebooks in db
     [self SetMyTableDataSource:nil];  //数据分组，同步问题
     

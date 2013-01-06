@@ -95,6 +95,7 @@
 -(NSMutableArray*)getAllNotes;
 -(SHNote*)getNoteWithNoteID:(int)_note_id;
 -(SHNote*)getNoteWithNotePath:(NSString*)_notepath;
+
 -(BOOL) addNote:(SHNote*) _note;
 -(BOOL) updateNote:(SHNote*) _note;
 
