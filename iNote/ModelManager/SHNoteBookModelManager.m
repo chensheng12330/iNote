@@ -76,7 +76,7 @@
 {
     
     
-    
+    return nil;
     //synchronization db for noteBook
     
     //get data from web cloud

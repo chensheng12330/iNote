@@ -10,6 +10,12 @@
 #import "SHNotebook.h"
 #import "NSString+SHNSStringForDate.h"
 
+
+@implementation SHNoteRelation
+@synthesize strNotebookPath,strNotePath;
+@end
+
+
 @interface SHNotebook (prvate)
 -(void)initAllNil;
 @end

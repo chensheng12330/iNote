@@ -33,32 +33,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "iNote/LIbraries/FDBM/SHDBManage.m"
-         timestampString = "378358166.417784"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "509"
-         endingLineNumber = "509"
-         landmarkName = "-updateNote:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iNote/LIbraries/FDBM/SHDBManage.m"
-         timestampString = "378358166.417784"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "503"
-         endingLineNumber = "503"
-         landmarkName = "-addNote:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "iNote/ViewController/SHNoteListViewController.m"
          timestampString = "378365882.475377"
          startingColumnNumber = "9223372036854775807"
@@ -105,45 +79,6 @@
          startingLineNumber = "70"
          endingLineNumber = "70"
          landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iNote/ModelManager/SHNoteBookModelManager.m"
-         timestampString = "379067643.43916"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
-         landmarkName = "-pullCloudDataAndUpdateDB"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iNote/ModelManager/SHNoteBookModelManager.m"
-         timestampString = "379067643.983194"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
-         landmarkName = "-pullCloudDataAndUpdateDB"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iNote/ModelManager/SHNoteBookModelManager.m"
-         timestampString = "379067644.863213"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
-         landmarkName = "-pullCloudDataAndUpdateDB"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

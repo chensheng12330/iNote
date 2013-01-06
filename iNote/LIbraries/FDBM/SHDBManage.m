@@ -31,7 +31,7 @@ static SHDBManage *_sharedDBManage = nil;
 
 @interface SHDBManage (private)
 -(SHNote*) analyzingNoteResultSet:(FMResultSet*)rs;
-
+-(SHNoteRelation*) analyzingNoteRelationResultSet:(FMResultSet*)rs;
 @end
 
 
@@ -278,7 +278,8 @@ static SHDBManage *_sharedDBManage = nil;
      notes_num=?,\
      create_time=?,\
      modify_time=?,\
-     is_update=? \
+     is_update=?, \
+     is_delete=?, \
      where name=?" ,
      _newNoteBook.strPath,
      _newNoteBook.strNotebookName,
@@ -286,6 +287,7 @@ static SHDBManage *_sharedDBManage = nil;
      [NSString stringFormatDate:_newNoteBook.dateCreate_time],
      [NSString stringFormatDate:_newNoteBook.dateModify_time],
      [NSString stringWithFormat:@"%d",_newNoteBook.isUpdate],
+     [NSString stringWithFormat:@"%d",_newNoteBook.isDelete],
      _stringName];
     
     //get query db log
@@ -324,14 +326,23 @@ static SHDBManage *_sharedDBManage = nil;
     return returnArrVal;
 }
 
-
--(BOOL) deleteNotebookWithName:(NSString*)_stringName
+//逻辑删除
+-(BOOL) deleteLogicNotebookWithNotebookPath:(NSString*)_path
 {
+    if(_path==NULL || [_path isEqualToString:@""]) return NO;
+    DBMQuickCheck(db);
+    
     //使用事物管理
     
     //delete notebook
     //delete all notes
-    return true;
+    return TRUE;
+}
+
+//物理删除
+-(BOOL) deletePhysicsNotebookWithNotebookPath:(NSString*)_path
+{
+    return TRUE;
 }
 
 -(int) getNoteBookCountWithName:(NSString *)_stringName
@@ -375,6 +386,119 @@ static SHDBManage *_sharedDBManage = nil;
     if(_arryData==nil || _arryData.count<1) return;
     DBMQuickCheck(db);
 }
+
+
+#pragma mark - NoteRelation
+-(SHNoteRelation*) analyzingNoteRelationResultSet:(FMResultSet*)rs
+{
+    SHNoteRelation *fNoteRelation = [[[SHNoteRelation alloc] init] autorelease];
+    fNoteRelation.strNotebookPath = [rs stringForColumnIndex:1];
+    fNoteRelation.strNotePath     = [rs stringForColumnIndex:2];
+    
+    return fNoteRelation;
+}
+
+-(NSMutableArray*) getNoteRelations
+{
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select * from NoteRelationTable"];
+    
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    
+    NSMutableArray *returnArrVal = [[[NSMutableArray alloc]init] autorelease];
+    //get note'user info
+    while ([rs next])
+    {
+        SHNoteRelation *fNoteRelation = [self analyzingNoteRelationResultSet:rs];
+        [returnArrVal addObject:fNoteRelation];
+    }
+    //close the result set.
+    [rs close];
+    
+    return returnArrVal;
+}
+
+-(NSMutableArray*) getNoteRelationWithNotebookPath:(NSString*)_path
+{
+    if(_path ==NULL || [_path isEqualToString:@""]) return NULL;
+    
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select * from NoteRelationTable where notebook_path=? ",_path];
+    
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    
+    NSMutableArray *returnArrVal = [[[NSMutableArray alloc]init] autorelease];
+    //get note'user info
+    while ([rs next])
+    {
+        SHNoteRelation *fNoteRelation = [self analyzingNoteRelationResultSet:rs];
+        [returnArrVal addObject:fNoteRelation];
+    }
+    //close the result set.
+    [rs close];
+    
+    return returnArrVal;
+}
+
+-(SHNoteRelation*) getNoteRelationWithNotePath:(NSString *)_path
+{
+    if(_path ==NULL || [_path isEqualToString:@""]) return NULL;
+    
+    DBMQuickCheck(db);
+    FMResultSet *rs = [db executeQuery:@"select * from NoteRelationTable where note_path=? ",_path];
+    
+    //get query db log
+    DEBUG_DB_ERROR_LOG;
+    
+    SHNoteRelation *returnArrVal = NULL;
+    //get note'user info
+    if ([rs next])
+    {
+        returnArrVal = [self analyzingNoteRelationResultSet:rs];
+    }
+    return returnArrVal;
+}
+
+-(BOOL) addNoteRelation:(SHNoteRelation*)_noteRelation
+{
+    if (_noteRelation ==NULL || _noteRelation.retainCount <1) return NO;
+    DBMQuickCheck(db);
+    
+    //add to noteTable
+    [db executeUpdate:@"insert into NoteRelationTable( \
+     notebook_path,\
+     note_path) \
+     values (?,?)",
+     _noteRelation.strNotebookPath,
+     _noteRelation.strNotePath];
+    
+    DEBUG_DB_ERROR_LOG;
+    return TRUE;
+}
+
+-(BOOL) deleteNoteRelationWithNotebookPath:(NSString*)_path
+{
+    if(_path ==NULL || [_path isEqualToString:@""]) return NO;
+    
+    DBMQuickCheck(db);
+    
+    BOOL bExe = [db executeUpdate:@"update NoteTable set \
+                 is_delete=? where note_id=?",_path];
+    
+    DEBUG_DB_ERROR_LOG;
+    
+    return bExe;
+    
+    return TRUE;
+}
+
+-(BOOL) deleteNoteRelationWithNotePath:(NSString*)_path
+{
+    return TRUE;
+}
+
 
 #pragma mark - NoteTable 
 -(SHNote*) analyzingNoteResultSet:(FMResultSet*)rs
@@ -466,6 +590,7 @@ static SHDBManage *_sharedDBManage = nil;
     int seq_num=0;
     FMResultSet *rs = [db executeQuery:@"select max(note_id) from NoteTable"];
     if([rs next]) seq_num = [rs intForColumnIndex:0]+1;
+    [rs close];
     
     _note.nTable_id = seq_num;
     
@@ -500,7 +625,6 @@ static SHDBManage *_sharedDBManage = nil;
     
     //get add db log
     DEBUG_DB_ERROR_LOG;
-    [rs close];
     return TRUE;
 }
 

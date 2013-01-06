@@ -9,6 +9,11 @@
 
 #import <Foundation/Foundation.h>
 
+@interface SHNoteRelation : NSObject
+@property (nonatomic, copy) NSString *strNotebookPath;
+@property (nonatomic, copy) NSString *strNotePath;
+@end
+
 @interface SHNotebook : NSObject
 
 @property (assign) BOOL    isUpdate;                   //是否更新
