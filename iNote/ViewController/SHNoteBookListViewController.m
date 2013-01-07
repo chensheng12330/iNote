@@ -63,6 +63,17 @@
     
     dbManage = [SHDBManage sharedDBManage];  //db manage
     
+    //note db api
+    [dbManage deleteLogicNoteWithNOTE_FIELD:NF_NOTE_ID Value:@"2"];
+    [dbManage deleteLogicNoteWithNOTE_FIELD:NF_NOTE_PATH Value:@"qer2"];
+    [dbManage deleteLogicNoteWithNOTE_FIELD:NF_NOTEBOOK_NAME Value:@"qer3"];
+    
+    //
+    [dbManage deletePhysicsNoteWithNOTE_FIELD:NF_NOTE_ID Value:@"2"];
+    [dbManage deletePhysicsNoteWithNOTE_FIELD:NF_NOTE_PATH Value:@"qer2"];
+    [dbManage deletePhysicsNoteWithNOTE_FIELD:NF_NOTEBOOK_NAME Value:@"qer3"];
+    return;
+    // note relation
     SHNoteRelation *notere = [[SHNoteRelation alloc] init];
     notere.strNotebookPath = @"notebook1";
     notere.strNotePath     = @"note1";

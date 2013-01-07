@@ -15,6 +15,12 @@
  class property: Singleton model
 */
 
+typedef enum {
+    NF_NOTE_ID=0,
+    NF_NOTEBOOK_NAME,
+    NF_NOTE_PATH
+}NOTE_FIELD;
+
 @interface SHDBManage : NSObject
 {
 @private
@@ -86,8 +92,8 @@
 
 -(BOOL) deleteNoteRelationWithNotebookPath:(NSString*)_path;
 -(BOOL) deleteNoteRelationWithNotePath:(NSString*)_path;
-
 //*************End////
+
 
 //*************////
 //定时整理 note_id值[]
@@ -100,9 +106,9 @@
 -(BOOL) updateNote:(SHNote*) _note;
 
 //逻辑删除
--(BOOL) deleteLogicNoteWithNoteID:(int)_note_id;
+-(BOOL) deleteLogicNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value;
 //物理删除
--(BOOL) deletePhysicsNoteWithNoteID:(int)_note_id;
+-(BOOL) deletePhysicsNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value;
 
 //get note count with note_table_id
 @end

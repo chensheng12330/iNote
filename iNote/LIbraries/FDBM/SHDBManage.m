@@ -326,6 +326,10 @@ static SHDBManage *_sharedDBManage = nil;
     return returnArrVal;
 }
 
+/*
+ //查询note_path为 "path1" 的所有笔记
+  select path from NoteTable where
+ */
 //逻辑删除
 -(BOOL) deleteLogicNotebookWithNotebookPath:(NSString*)_path
 {
@@ -333,7 +337,11 @@ static SHDBManage *_sharedDBManage = nil;
     DBMQuickCheck(db);
     
     //使用事物管理
+    [db beginTransaction];
+    //1、逻辑删除该笔记本下所有笔记
+    //self deleteLogicNoteWithNoteID:<#(int)#>
     
+    [db commit];//结束事物
     //delete notebook
     //delete all notes
     return TRUE;
@@ -673,28 +681,50 @@ static SHDBManage *_sharedDBManage = nil;
 }
 
 // logic delete
--(BOOL) deleteLogicNoteWithNoteID:(int)_note_id
+-(BOOL) deleteLogicNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value
 {
-    if (_note_id < 1) return NO;
-    
+    if(_note_fd < NF_NOTE_ID || _note_fd > NF_NOTE_PATH) return NO;
     DBMQuickCheck(db);
     
-    BOOL bExe = [db executeUpdate:@"update NoteTable set \
-     is_delete=? where note_id=?",
-     @"1",[NSNumber numberWithInt:_note_id]];
+    //NS
+    BOOL bExe = NO;
+    
+    if (_note_fd == NF_NOTE_ID) {
+        NSString *sql = [NSString stringWithFormat:@"update NoteTable set is_delete=\"1\" where note_id=%@",_value];
+        bExe = [db executeUpdate:sql];
+    }
+    else if (_note_fd == NF_NOTE_PATH){
+        bExe = [db executeUpdate:@"update NoteTable set \
+                is_delete=? where path=?",@"1",_value];
+    }
+    else if (_note_fd == NF_NOTEBOOK_NAME){
+        bExe = [db executeUpdate:@"update NoteTable set \
+                is_delete=? where notebook_name=?",@"1",_value];
+    }
     
     DEBUG_DB_ERROR_LOG;
     
     return bExe;
 }
 
--(BOOL) deletePhysicsNoteWithNoteID:(int)_note_id
+-(BOOL) deletePhysicsNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value
 {
-    if(_note_id <1) return NO;
+    if(_note_fd < NF_NOTE_ID || _note_fd > NF_NOTE_PATH) return NO;
     DBMQuickCheck(db);
     
-    BOOL bExe = [db executeUpdate:@"delete from NoteTable where \
-                 note_id=?",[NSNumber numberWithInt:_note_id]];
+    BOOL bExe = NO;
+    if (_note_fd == NF_NOTE_ID) {
+        NSString *sql = [NSString stringWithFormat:@"delete from NoteTable where note_id=%@",_value];
+        bExe = [db executeUpdate:sql];
+    }
+    else if (_note_fd == NF_NOTE_PATH){
+        bExe = [db executeUpdate:@"delete from NoteTable where \
+                path=?",_value];
+    }
+    else if (_note_fd == NF_NOTEBOOK_NAME){
+        bExe = [db executeUpdate:@"delete from NoteTable where \
+                notebook_name=?",_value];
+    }
     
     DEBUG_DB_ERROR_LOG;
     return bExe;
