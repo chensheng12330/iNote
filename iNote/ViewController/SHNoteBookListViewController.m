@@ -56,6 +56,12 @@
 {
     [super viewDidLoad];
     
+    //notebooks
+    SHNoteBookModelManager *notebookMM = [[SHNoteBookModelManager alloc] init];
+    //notebookMM
+    myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
+    return;
+    
     //myOftenUsed       = [[NSMutableArray alloc] init];
     //myMostRecentlyUsed= [[NSMutableArray alloc] init];
     //myTableDataSource = [[NSMutableArray alloc] init];
@@ -102,10 +108,7 @@
     // get all notebooks in db
     [self SetMyTableDataSource:nil];  //数据分组，同步问题
     
-    //notebooks
-    SHNoteBookModelManager *notebookMM = [[SHNoteBookModelManager alloc] init];
-    //notebookMM
-    myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
+    
     
     [notebookMM release];
     //[notebookMM pullCloudDataAndUpdateDBWith:self action:@selector(didLoadBookList:)];

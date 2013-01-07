@@ -76,12 +76,12 @@
 {
     
     
-    return nil;
+    //return nil;
     //synchronization db for noteBook
     
     //get data from web cloud
     //NSData * _data = [_noteClient getNoteBooksWithRequesMode:Reques_Syn];
-    NSData * _data = [_noteClient getNotesPathWithNotebookPath:@"2C25249E01824844A02E5D14D4BF9CCC" RequesMode:Reques_Syn];
+    NSData * _data = [_noteClient getNotesPathWithNotebookPath:@"123" RequesMode:Reques_Syn];
     if (_data ==NULL) return nil;
     
     NSString *strRep = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];

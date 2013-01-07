@@ -117,7 +117,7 @@ static SHNoteClient *staticNoteClient=nil;
                 [str appendString:@"&"];
             }
             NSString *name = [names objectAtIndex:i];
-            [str appendString:[NSString stringWithFormat:@"%@=%@", 
+            [str appendString:[NSString stringWithFormat:@"%@=%@",
 							   name, [self _encodeString:[params objectForKey:name]]]];
         }
     }
@@ -174,7 +174,7 @@ static SHNoteClient *staticNoteClient=nil;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[NSString stringWithFormat:@"%@", _path] forKey:@"notebook"];
     
-    //NSString *postString = [NSString stringWithFormat:@"notebook=%@",_path];
+    NSString *postString = [NSString stringWithFormat:@"notebook=%@",[_path encodeAsURIComponent]];
     //yws/open/notebook/list.json
     needAuth = YES;
     NSString *path = [NSString stringWithFormat:@"yws/open/notebook/list.%@", API_FORMAT];
