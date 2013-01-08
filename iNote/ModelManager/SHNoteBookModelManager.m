@@ -75,19 +75,20 @@
 -(NSMutableArray*) pullCloudDataAndUpdateDB
 {
     
-    [_dbManage deleteLogicNotebookWithNotebookPath:@"1"];
-    [_dbManage deletePhysicsNotebookWithNotebookPath:@"1"];
-    return nil;
+//    [_dbManage deleteLogicNotebookWithNotebookPath:@"1"];
+//    [_dbManage deletePhysicsNotebookWithNotebookPath:@"1"];
+//    return nil;
     //synchronization db for noteBook
     
     //get data from web cloud
-    //NSData * _data = [_noteClient getNoteBooksWithRequesMode:Reques_Syn];
-    NSData * _data = [_noteClient getNotesPathWithNotebookPath:@"123" RequesMode:Reques_Syn];
+    NSData * _data = [_noteClient getNoteBooksWithRequesMode:Reques_Syn];
+    //NSData * _data = [_noteClient getNotesPathWithNotebookPath:@"123" RequesMode:Reques_Syn];
     if (_data ==NULL) return nil;
     
     NSString *strRep = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
     NSMutableArray* dic = [strRep JSONValue];
     [strRep release];
+    
     //
     //NSMutableArray *noteBookArrayWeb = [SHNotebook objectsForJSON:dic];
     [self comparePullData:dic];
@@ -130,5 +131,11 @@
 {
     if (_anAction==NULL || _objDelegate==NULL) return;
     [_objDelegate performSelector:_anAction withObject:nil];
+}
+
+#pragma mark - selfMethod
+-(NSMutableArray*) getAllNotebookFromDB
+{
+    return [_dbManage getAllNoteBooks];
 }
 @end

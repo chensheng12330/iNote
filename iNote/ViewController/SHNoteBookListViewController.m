@@ -9,7 +9,7 @@
 #import "SHNoteBookListViewController.h"
 #import "NSString+SHNSStringForDate.h"
 #import "SHNotebook.h"
-#import "SHNoteBookModelManager.h"
+
 
 #define TABLE_SECTION_0 @"经常使用"
 #define TABLE_SECTION_1 @"最近使用"
@@ -54,94 +54,29 @@
 
 - (void)viewDidLoad
 {
+    //本地载入数据
     [super viewDidLoad];
     
-    //notebooks
-    SHNoteBookModelManager *notebookMM = [[SHNoteBookModelManager alloc] init];
-    //notebookMM
-    myTableDataSource = [[notebookMM pullCloudDataAndUpdateDB] retain];
-    return;
-    
-    //myOftenUsed       = [[NSMutableArray alloc] init];
-    //myMostRecentlyUsed= [[NSMutableArray alloc] init];
-    //myTableDataSource = [[NSMutableArray alloc] init];
-    
-    
-    dbManage = [SHDBManage sharedDBManage];  //db manage
-    
-    //note db api
-    [dbManage deleteLogicNoteWithNOTE_FIELD:NF_NOTE_ID Value:@"2"];
-    [dbManage deleteLogicNoteWithNOTE_FIELD:NF_NOTE_PATH Value:@"qer2"];
-    [dbManage deleteLogicNoteWithNOTE_FIELD:NF_NOTEBOOK_NAME Value:@"qer3"];
-    
-    //
-    [dbManage deletePhysicsNoteWithNOTE_FIELD:NF_NOTE_ID Value:@"2"];
-    [dbManage deletePhysicsNoteWithNOTE_FIELD:NF_NOTE_PATH Value:@"qer2"];
-    [dbManage deletePhysicsNoteWithNOTE_FIELD:NF_NOTEBOOK_NAME Value:@"qer3"];
-    return;
-    // note relation
-    SHNoteRelation *notere = [[SHNoteRelation alloc] init];
-    notere.strNotebookPath = @"notebook1";
-    notere.strNotePath     = @"note1";
-    [dbManage addNoteRelation:notere];
-    notere.strNotePath = @"note2";
-    [dbManage addNoteRelation:notere];
-    notere.strNotebookPath= @"notebook2";
-    [dbManage addNoteRelation:notere];
-    
-    //get
-    [notere release];
-    notere = [dbManage getNoteRelationWithNotePath:@"note2"];
-    
-    NSMutableArray *ar = [dbManage getNoteRelationWithNotebookPath:@"notebook1"];
-    [ar release];
-    
-    ar = [dbManage getNoteRelations];
-    
-    //delete
-    BOOL isSu;
-    isSu = [dbManage deleteNoteRelationWithNotePath:@"note1"];
-    isSu = [dbManage deleteNoteRelationWithNotebookPath:@"notebook1"];
-    
-    return;
-    
     // get all notebooks in db
-    [self SetMyTableDataSource:nil];  //数据分组，同步问题
+    [self SetMyTableDataSource:nil];
     
+    //notebooks
+    notebookMM = [[SHNoteBookModelManager alloc] init];
     
+    myTableDataSource = [[notebookMM getAllNotebookFromDB] retain];
     
-    [notebookMM release];
-    //[notebookMM pullCloudDataAndUpdateDBWith:self action:@selector(didLoadBookList:)];
-    //[notebookMM release];
-    
-    //myTableDataSource = [[dbManage getAllNoteBooks] retain];
-    
-    //排序
+    //分组排序
     [self sortArrayWithOftenUsedAndMostRecent];
     
-    return;
-    //
-    
-    
-    //myTableDataSource =
-    
-//    SHNotebook *bk = [dbManage getNoteBookInfoWithNoteBookName:@"aa"];
-//    SHNotebook *notebook = [[SHNotebook alloc] init];
-//    notebook.strNotebookName = @"ios devlpoment";
-//    notebook.strNotes_num    = @"8";
-//    notebook.strPath = @"11";
-//    notebook.dateCreate_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
-//    notebook.dateModify_time = [NSString dateFormatString:@"2012-12-12 09:26:02"];
-//    notebook.isUpdate = YES;
-    
-    //BOOL b =[dbManage addNoteBook:notebook];
-    //[dbManage updateNoteBook:notebook oldNoteBookName:@"aa"];
-    //id pid = [dbManage getAllNoteBooks];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationItem setTitle:@"笔记本"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -168,6 +103,7 @@
 {
 
     // Return the number of rows in the section.
+    int  a= myOftenUsed.count;
     return section==0?myOftenUsed.count:myMostRecentlyUsed.count;
 }
 
@@ -185,50 +121,57 @@
     
     [cell.textLabel setText:notebook.strNotebookName];
     //cell.backgroundColor = [UIColor grayColor];
-    //[cell.detailTextLabel setText:notebook.strNotes_num];
-    [cell.detailTextLabel setText:[NSString stringFormatDate:notebook.dateModify_time]];
+    [cell.detailTextLabel setText:notebook.strNotes_num];
+    //[cell.detailTextLabel setText:[NSString stringFormatDate:notebook.dateModify_time]];
     
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //table datasource delete
+        indexPath.section==0?[myOftenUsed removeObjectAtIndex:indexPath.row]:[myMostRecentlyUsed removeObjectAtIndex:indexPath.row];
+        
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
+        [tableView endUpdates];
+        
+        
+        //db delete
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
-/*
+
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
-/*
+
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    return NO;
 }
-*/
+
 
 #pragma mark - Table view delegate
 
@@ -260,6 +203,8 @@
 #pragma mark - private_Method
 -(void) sortArrayWithOftenUsedAndMostRecent
 {
+    assert((myTableDataSource &&myTableDataSource.count>0));
+    
     if (myTableDataSource ==NULL || myTableDataSource.count<1) return;
     
     myOftenUsed = [[NSMutableArray alloc] init];

@@ -22,6 +22,9 @@
 /*
  (id)aDelegate engine:(OAuthEngine *)__engine action:(SEL)anAction
  */
+
+//get data from db's notebookTable
+-(NSMutableArray*) getAllNotebookFromDB;
 //down note data from youdao Cloud Server
 //异步请求
 -(void) pullCloudDataAndUpdateDBWith:(id)aDelegate action:(SEL)anAction;

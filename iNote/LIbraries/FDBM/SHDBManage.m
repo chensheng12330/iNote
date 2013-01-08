@@ -23,7 +23,7 @@
 //0 FALSE
 //1 nil
 #ifndef DEBUG_DB_ERROR_LOG
-#define DEBUG_DB_ERROR_LOG { if(DEBUG_OUT) { if([db hadError]){ NSLog(@"DB ERROR: %@",[db lastErrorMessage]);return FALSE;}}}
+#define DEBUG_DB_ERROR_LOG { if(DEBUG_OUT) { if([db hadError]){ NSLog(@"DB ERROR: %@ on line %d",[db lastErrorMessage],__LINE__);return FALSE;}}}
 #endif
 
 
@@ -287,7 +287,7 @@ static SHDBManage *_sharedDBManage = nil;
      create_time=?,\
      modify_time=?,\
      is_update=?, \
-     is_delete=?, \
+     is_delete=? \
      where name=?" ,
      _newNoteBook.strPath,
      _newNoteBook.strNotebookName,
@@ -587,7 +587,7 @@ static SHDBManage *_sharedDBManage = nil;
 -(NSMutableArray*) getNoteWithNOTE_FIELD:(NOTE_FIELD)_note_field
                                    Value:(NSString*)_string
 {
-    DBMQuickCheck((_note_field<NF_NOTE_ID || _note_field> NF_NONE));
+    DBMQuickCheck((_note_field>NF_NOTE_ID && _note_field< NF_NONE));
     
     FMResultSet *rs = nil;
     
