@@ -30,8 +30,16 @@
 static SHDBManage *_sharedDBManage = nil;
 
 @interface SHDBManage (private)
--(SHNote*) analyzingNoteResultSet:(FMResultSet*)rs;
+-(SHNote*)         analyzingNoteResultSet:(FMResultSet*)rs;
+-(SHNotebook*)     analyzingNotebookResultSet:(FMResultSet*)rs;
 -(SHNoteRelation*) analyzingNoteRelationResultSet:(FMResultSet*)rs;
+
+//get
+-(NSMutableArray*) getNoteBookWithNOTEBOOK_FIELD:(NOTEBOOK_FIELD)_notebook_field
+                                           Value:(NSString*)_string;
+
+-(NSMutableArray*) getNoteWithNOTE_FIELD:(NOTE_FIELD)_note_field
+                                   Value:(NSString*)_string;
 @end
 
 
@@ -161,7 +169,6 @@ static SHDBManage *_sharedDBManage = nil;
     SHNoteUser *fNoteUser = [[[SHNoteUser alloc] init] autorelease];
     if([rs next])
     {
-        
         fNoteUser.strUser       = [rs objectForColumnIndex:1];
         fNoteUser.strTotal_size = [rs objectForColumnIndex:2];
         fNoteUser.strUsed_size  = [rs objectForColumnIndex:3];
@@ -263,6 +270,7 @@ static SHDBManage *_sharedDBManage = nil;
 /*
  update NoteBookTable set name='asdf'  path='asdf' where name ='1'
  */
+
 -(BOOL) updateNoteBook:(SHNotebook*)_newNoteBook oldNoteBookName:(NSString*) _stringName
 {
     //check parameter
@@ -295,10 +303,27 @@ static SHDBManage *_sharedDBManage = nil;
     return YES;
 }
 
--(NSMutableArray*) getAllNoteBooks
+//////
+-(NSMutableArray*) getNoteBookWithNOTEBOOK_FIELD:(NOTEBOOK_FIELD)_notebook_field
+                                           Value:(NSString*)_string
 {
     DBMQuickCheck(db);
-    FMResultSet *rs = [db executeQuery:@"select * from NoteBookTable"];
+    FMResultSet *rs =nil;
+    
+    if (_notebook_field ==NTF_NONE) {
+        rs = [db executeQuery:@"select * from NoteBookTable"];
+    }
+    else if (_notebook_field == NTF_DELETE)
+    {
+        DBMQuickCheck(_string);
+        rs = [db executeQuery:@"select * from NoteBookTable where is_delete=?",_string];
+    }
+    else if (_notebook_field == NTF_UPDATE)
+    {
+        DBMQuickCheck(_string);
+        rs = [db executeQuery:@"select * from NoteBookTable where is_update=?",_string];
+    }
+    
     
     //get query db log
     DEBUG_DB_ERROR_LOG;
@@ -307,23 +332,35 @@ static SHDBManage *_sharedDBManage = nil;
     //get note'user info
     while ([rs next])
     {
-        SHNotebook *fNotebook = [[SHNotebook alloc] init];
-        fNotebook.nTable_id       = [rs intForColumnIndex:0];
-        fNotebook.strPath         = [rs objectForColumnIndex:1];
-        fNotebook.strNotebookName = [rs objectForColumnIndex:2];
-        fNotebook.strNotes_num    = [rs objectForColumnIndex:3];
-        fNotebook.dateCreate_time = [NSString dateFormatString:[rs objectForColumnIndex:4]];
-        fNotebook.dateModify_time = [NSString dateFormatString:[rs objectForColumnIndex:5]];
-        fNotebook.isUpdate        = [[rs objectForColumnIndex:6] boolValue];
-        
+        SHNotebook *fNotebook = [self analyzingNotebookResultSet:rs];
         [returnArrVal addObject:fNotebook];
-        [fNotebook release];
     }
     
     //close the result set.
     [rs close];
     
     return returnArrVal;
+}
+
+-(SHNotebook*) analyzingNotebookResultSet:(FMResultSet*)rs
+{
+    DBMQuickCheck(rs);
+    
+    SHNotebook *fNotebook = [[SHNotebook alloc] init];
+    fNotebook.nTable_id       = [rs intForColumnIndex:0];
+    fNotebook.strPath         = [rs objectForColumnIndex:1];
+    fNotebook.strNotebookName = [rs objectForColumnIndex:2];
+    fNotebook.strNotes_num    = [rs objectForColumnIndex:3];
+    fNotebook.dateCreate_time = [NSString dateFormatString:[rs objectForColumnIndex:4]];
+    fNotebook.dateModify_time = [NSString dateFormatString:[rs objectForColumnIndex:5]];
+    fNotebook.isUpdate        = [[rs objectForColumnIndex:6] boolValue];
+    
+    return fNotebook;
+}
+
+-(NSMutableArray*) getAllNoteBooks
+{
+    return [self getNoteBookWithNOTEBOOK_FIELD:NTF_DELETE Value:@"0"];
 }
 
 /*
@@ -337,20 +374,51 @@ static SHDBManage *_sharedDBManage = nil;
     DBMQuickCheck(db);
     
     //使用事物管理
-    [db beginTransaction];
+    BOOL isSuc = NO;
+    if(![db beginTransaction]) return NO;
     //1、逻辑删除该笔记本下所有笔记
-    //self deleteLogicNoteWithNoteID:<#(int)#>
+    isSuc = [db executeUpdate:@"update  NoteTable set is_delete=? where path in \
+     (select note_path from NoteRelationTable where notebook_path=?)",@"1",_path];
+    
+    if(!isSuc) {[db commit]; return NO;}
+    
+    //2、逻辑删除该笔记本
+    isSuc = [db executeUpdate:@"update NoteBookTable set is_delete=?  where path = ? ",@"1",_path];
+    
+    //3、如果失败，则回滚
+    if (!isSuc) [db rollback];
     
     [db commit];//结束事物
-    //delete notebook
-    //delete all notes
-    return TRUE;
+    return isSuc;
 }
 
 //物理删除
 -(BOOL) deletePhysicsNotebookWithNotebookPath:(NSString*)_path
 {
-    return TRUE;
+    if(_path==NULL || [_path isEqualToString:@""]) return NO;
+    
+    DBMQuickCheck(db);
+    
+    //使用事物管理
+    BOOL isSuc = NO;
+    if(![db beginTransaction]) return NO;
+    //1、物理删除该笔记本下所有笔记
+    isSuc = [db executeUpdate:@"delete from  NoteTable where path in \
+             (select note_path from NoteRelationTable where notebook_path=?)",_path];
+    
+    if(!isSuc) {[db commit]; return NO;}
+    
+    //2、物理删除该笔记关系表记录
+    isSuc = [db executeUpdate:@"delete from NoteRelationTable where notebook_path = ? ",_path];
+    if(!isSuc) {[db rollback]; return NO;}
+    
+    //3、物理删除该笔记本
+    isSuc = [db executeUpdate:@"delete from NoteBookTable where path = ? ",_path];
+    if(!isSuc) {[db rollback]; return NO;}
+    
+    //4、事物提交
+    [db commit];//结束事物
+    return isSuc;
 }
 
 -(int) getNoteBookCountWithName:(NSString *)_stringName
@@ -516,6 +584,41 @@ static SHDBManage *_sharedDBManage = nil;
 
 
 #pragma mark - NoteTable 
+-(NSMutableArray*) getNoteWithNOTE_FIELD:(NOTE_FIELD)_note_field
+                                   Value:(NSString*)_string
+{
+    DBMQuickCheck((_note_field<NF_NOTE_ID || _note_field> NF_NONE));
+    
+    FMResultSet *rs = nil;
+    
+    if (_note_field == NF_NONE) {
+       rs = [db executeQuery:@"select * from NoteTable"];
+    }
+    else if (_note_field == NF_NOTE_DELETE)
+    {
+        rs = [db executeQuery:@"select * from NoteTable where is_delete =?",_string];
+    }
+    else if (_note_field == NF_NOTE_UPDATE)
+    {
+        rs = [db executeQuery:@"select * from NoteTable where is_update =?",_string];
+    }
+    
+    DEBUG_DB_ERROR_LOG;
+    
+    NSMutableArray *returnArrVal = [[[NSMutableArray alloc]init] autorelease];
+    //get note'user info
+    while ([rs next])
+    {
+        SHNote *fNote = [self analyzingNoteResultSet:rs];
+        [returnArrVal addObject:fNote];
+    }
+    
+    //close the result set.
+    [rs close];
+    
+    return returnArrVal;
+}
+
 -(SHNote*) analyzingNoteResultSet:(FMResultSet*)rs
 {
     if(rs ==NULL) return nil;
@@ -539,25 +642,9 @@ static SHDBManage *_sharedDBManage = nil;
 
 -(NSMutableArray*)getAllNotes
 {
-    DBMQuickCheck(db);
-    FMResultSet *rs = [db executeQuery:@"select * from NoteTable"];
-    
-    //get query db log
-    DEBUG_DB_ERROR_LOG;
-    
-    NSMutableArray *returnArrVal = [[[NSMutableArray alloc]init] autorelease];
-    //get note'user info
-    while ([rs next])
-    {
-        SHNote *fNote = [self analyzingNoteResultSet:rs];
-        [returnArrVal addObject:fNote];
-    }
-    
-    //close the result set.
-    [rs close];
-    
-    return returnArrVal;
+    return [self getNoteWithNOTE_FIELD:NF_NOTE_DELETE Value:@"0"]; //获取未逻辑删除的数据
 }
+
 -(SHNote*)getNoteWithNoteID:(int)_note_id
 {
     if(_note_id<1) return nil;

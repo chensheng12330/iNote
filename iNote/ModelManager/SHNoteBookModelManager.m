@@ -75,8 +75,9 @@
 -(NSMutableArray*) pullCloudDataAndUpdateDB
 {
     
-    
-    //return nil;
+    [_dbManage deleteLogicNotebookWithNotebookPath:@"1"];
+    [_dbManage deletePhysicsNotebookWithNotebookPath:@"1"];
+    return nil;
     //synchronization db for noteBook
     
     //get data from web cloud

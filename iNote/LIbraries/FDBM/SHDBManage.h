@@ -14,11 +14,19 @@
 /*
  class property: Singleton model
 */
+typedef enum {
+    NTF_NONE,  //无
+    NTF_UPDATE,//is_delete
+    NTF_DELETE//
+}NOTEBOOK_FIELD;
 
 typedef enum {
     NF_NOTE_ID=0,
     NF_NOTEBOOK_NAME,
-    NF_NOTE_PATH
+    NF_NOTE_PATH,
+    NF_NOTE_DELETE,
+    NF_NOTE_UPDATE,
+    NF_NONE
 }NOTE_FIELD;
 
 @interface SHDBManage : NSObject
@@ -53,6 +61,9 @@ typedef enum {
 //get notebook of all
 //array for SHNoteBook class
 -(NSMutableArray*) getAllNoteBooks;
+//get notebook count with notebook name;
+-(int) getNoteBookCountWithName:(NSString *)_stringName;
+-(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName;
 
 //synchronization notebook table
 -(void) synchronizationNoteBooK:(NSArray*) _arryData;
@@ -65,15 +76,12 @@ typedef enum {
  逻辑删除: 不删除记录，只将记录中的delete字段设置为true,标识为已删除，用户界面不可见。 与服务器更新时，时行物理删除
  物理删除: 彻低的从数据库中将此记录删除。
  */
-
 //逻辑删除
 -(BOOL) deleteLogicNotebookWithNotebookPath:(NSString*)_path;
 //物理删除
 -(BOOL) deletePhysicsNotebookWithNotebookPath:(NSString*)_path;
 
-//get notebook count with notebook name;
--(int) getNoteBookCountWithName:(NSString *)_stringName;
--(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName;
+
 //*************End/////
 
 
