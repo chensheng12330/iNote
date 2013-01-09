@@ -35,9 +35,13 @@ static SHDBManage *_sharedDBManage = nil;
 -(SHNoteRelation*) analyzingNoteRelationResultSet:(FMResultSet*)rs;
 
 //get
+
+//notebook
+-(SHNotebook*)     getNotebookWithNOTEBOOK_FIELD:(NOTEBOOK_FIELD)_notebook_field
+                                        Value:(NSString*) _value;
 -(NSMutableArray*) getNoteBookWithNOTEBOOK_FIELD:(NOTEBOOK_FIELD)_notebook_field
                                            Value:(NSString*)_string;
-
+//note
 -(NSMutableArray*) getNoteWithNOTE_FIELD:(NOTE_FIELD)_note_field
                                    Value:(NSString*)_string;
 @end
@@ -237,9 +241,8 @@ static SHDBManage *_sharedDBManage = nil;
  */
 -(BOOL) addNoteBook:(SHNotebook*) _noteBook
 {
-    
     //check parameter
-    if (NULL == _noteBook) return FALSE;
+    if (NULL == _noteBook || [_noteBook.strNotebookName isEqualToString:@""]) return FALSE;
     
     if([self getNoteBookCountWithName:_noteBook.strNotebookName]) { _dbErrorInfo = @"Record already exists."; return FALSE;}
     
@@ -426,35 +429,56 @@ static SHDBManage *_sharedDBManage = nil;
     if (_stringName==NULL || [_stringName isEqualToString:@""]) return 0;
     
     DBMQuickCheck(db);
-    FMResultSet *rs = [db executeQuery:@"select name from NoteBookTable where name=?",_stringName];
-    NSInteger row_num = [rs rowDataCount];
-    [rs close];
+    NSInteger row_num = 0;
+    FMResultSet *rs = [db executeQuery:@"select count(name) from NoteBookTable where name=?",_stringName];
     
+    if ([rs next]) row_num=[rs intForColumnIndex:0];
+    
+    [rs close];
     return row_num;
 }
 
--(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName
+-(SHNotebook*) getNotebookWithNOTEBOOK_FIELD:(NOTEBOOK_FIELD)_notebook_field Value:(NSString*) _value
 {
-    if (_stringName==NULL || [_stringName isEqualToString:@""]) return nil;
-    
     DBMQuickCheck(db);
-    FMResultSet *rs = [db executeQuery:@"select * from NoteBookTable where name=?",_stringName];
+    FMResultSet *rs =nil;
+    
+    if (_notebook_field == NTF_BOOKNAME)
+    {
+        DBMQuickCheck(_value);
+        rs = [db executeQuery:@"select * from NoteBookTable where name=?",_value];
+    }
+    else if (_notebook_field == NTF_BOOKPATH)
+    {
+        DBMQuickCheck(_value);
+        rs = [db executeQuery:@"select * from NoteBookTable where path=?",_value];
+    }
+    else
+    {
+        return nil;
+    }
+    
     
     DEBUG_DB_ERROR_LOG;
     
     SHNotebook *notebook =nil;
     if([rs next])
     {
-        notebook = [[[SHNotebook alloc] init] autorelease];
-        notebook.nTable_id      = [rs intForColumnIndex:0];
-        notebook.strPath        = [rs stringForColumnIndex:1];
-        notebook.strNotebookName= [rs stringForColumnIndex:2];
-        notebook.strNotes_num   = [rs stringForColumnIndex:3];
-        notebook.dateCreate_time= [NSString dateFormatString:[rs objectForColumnIndex:4]];
-        notebook.dateModify_time= [NSString dateFormatString:[rs objectForColumnIndex:5]];
-        notebook.isUpdate       = [[rs stringForColumnIndex:6] boolValue];
+        notebook = [self analyzingNotebookResultSet:rs];
     }
+    [rs close];
     return notebook;
+}
+
+-(SHNotebook*) getNoteBookInfoWithNoteBookPath:(NSString*) _stringName
+{
+    if (_stringName==NULL || [_stringName isEqualToString:@""]) return nil;
+    return [self getNotebookWithNOTEBOOK_FIELD:NTF_BOOKPATH Value:_stringName];
+}
+-(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName
+{
+    if (_stringName==NULL || [_stringName isEqualToString:@""]) return nil;
+    return [self getNotebookWithNOTEBOOK_FIELD:NTF_BOOKNAME Value:_stringName];
 }
 
 -(void) synchronizationNoteBooK:(NSArray*) _arryData
@@ -534,6 +558,8 @@ static SHDBManage *_sharedDBManage = nil;
     {
         returnArrVal = [self analyzingNoteRelationResultSet:rs];
     }
+    [rs close];
+    
     return returnArrVal;
 }
 

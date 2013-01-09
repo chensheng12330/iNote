@@ -17,9 +17,6 @@ int main(int argc, char *argv[])
     int retVal;
     
     //Utility fuction Testing
-    SHNotebook *note = [[SHNotebook alloc] init];
-    [note setStrNotes_num:@"123345"];
-    [note setStrNotes_num:@"asdf234"];
     
     @autoreleasepool {
         @try {

@@ -24,9 +24,11 @@
  */
 
 //get data from db's notebookTable
--(NSMutableArray*) getAllNotebookFromDB;
+-(BOOL) isAtForNotebookName:(NSString*) _notebookName;
 
+-(NSMutableArray*) getAllNotebookFromDB;
 -(BOOL) addNotebook:(SHNotebook*)_notebook;
+-(BOOL) deleteNotebookWithName:(NSString*)_notebookName;
 //down note data from youdao Cloud Server
 //异步请求
 -(void) pullCloudDataAndUpdateDBWith:(id)aDelegate action:(SEL)anAction;

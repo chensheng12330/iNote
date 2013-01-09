@@ -63,13 +63,17 @@
 {
     if (_strNotes_num ==self.strNotes_num) return;
     
-    [self.strNotes_num release];
+    [self.strNotes_num release]; self->strNotes_num = nil; if(_strNotes_num==NULL) return;
     
     //setting
-    if(![_strNotes_num stringIsNumeral]) self.strNotes_num = [[NSString alloc] initWithString:@"0"];
+    if(![_strNotes_num stringIsNumeral]) {
+        self->strNotes_num = [[NSString alloc] initWithString:@"0"];
+        return;
+    }
     
     //ok copy
-    self.strNotes_num = [_strNotes_num copy];
+    self->strNotes_num = [_strNotes_num copy];
+    return;
 }
 #pragma mark - method
 

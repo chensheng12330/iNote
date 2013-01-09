@@ -62,11 +62,11 @@
 -(BOOL) stringIsNumeral
 {
     if ([self isEqualToString:@""]) return NO;
-    unichar ch0 ='0' , ch9 = '9';
+    unichar ch0 ='0' , ch9 = '9', cho = '.';
     
     for (int i=0; i<[self length]; i++) {
         unichar ch = [self characterAtIndex:i];
-        if (ch<ch0 || ch>ch9) {
+        if ( (ch<ch0 || ch>ch9) && (ch != cho)) {
             return NO;
         }
     }

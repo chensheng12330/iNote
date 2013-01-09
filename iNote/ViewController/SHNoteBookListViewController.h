@@ -11,7 +11,8 @@
 #import "SHNoteBookModelManager.h"
 #import "SHAddNotebookViewController.h"
 
-@interface SHNoteBookListViewController : UITableViewController<SHAddNotebookDelegate>
+@interface SHNoteBookListViewController : UITableViewController
+<SHAddNotebookDelegate,UIAlertViewDelegate>
 {
     NSMutableArray *myTableDataSource;
     NSMutableArray *myMostRecentlyUsed;   //最近使用
@@ -19,8 +20,8 @@
     
     //fuction obj
     SHNoteBookModelManager *notebookMM;
-    
-    UIBarButtonItem *leftBarItem;
+    UIAlertView *delAlertView;
+    NSIndexPath *delIndexPath;
 }
 
 -(void) didLoadBookList:(NSMutableArray*) _array;

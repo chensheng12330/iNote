@@ -16,10 +16,11 @@
 #define TABLE_SECTION_1 @"最近使用"
 
 @interface SHNoteBookListViewController ()
--(void) SetMyTableDataSource:(NSMutableArray*) _arry;
+//-(void) SetMyTableDataSource:(NSMutableArray*) _arry;
 
 -(void)sortArrayWithOftenUsedAndMostRecent;
 
+-(void) backToMainView:(UIBarButtonItem*) sender;
 -(void) addNotebookEvent:(UIBarButtonItem*) sender;
 @end
 
@@ -27,14 +28,6 @@
 //@synthesize tableView;
 
 #pragma mark - class variable seter
--(void) SetMyTableDataSource:(NSMutableArray*) _arry
-{
-    if (_arry == myTableDataSource) return;
-    
-    [myTableDataSource release];
-    myTableDataSource = [_arry retain];
-    return;
-}
 
 #pragma mark - init
 - (id)initWithStyle:(UITableViewStyle)style
@@ -64,7 +57,6 @@
     [super viewDidLoad];
     
     // get all notebooks in db
-    [self SetMyTableDataSource:nil];
     
     //notebooks
     notebookMM = [[SHNoteBookModelManager alloc] init];
@@ -77,12 +69,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //int a = self.tableView.style;
     //self.tableView sets
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.editButtonItem setTitle:@"编辑"];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"主页" style:UIBarButtonItemStyleDone target:self action:@selector(backToMainView:)]autorelease];
     
     [self.navigationItem setTitle:@"笔记本"];
 }
@@ -99,14 +95,14 @@
     
     if (editing) {
         //设置导航左键 add
-        leftBarItem = self.navigationItem.leftBarButtonItem;
+        [self.editButtonItem setTitle:@"保存"];
         
         self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNotebookEvent:)] autorelease];
     }
     else
     {
         //设置导航左键为 原来
-        self.navigationItem.leftBarButtonItem = leftBarItem;
+        self.navigationItem.leftBarButtonItem = nil;
     }
 }
 
@@ -167,21 +163,40 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        //table datasource delete
-        indexPath.section==0?[myOftenUsed removeObjectAtIndex:indexPath.row]:[myMostRecentlyUsed removeObjectAtIndex:indexPath.row];
-        
-        [tableView beginUpdates];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
-        [tableView endUpdates];
-        
-        
-        //db delete
+        delIndexPath = [indexPath retain];
+        delAlertView  = [[UIAlertView alloc] initWithTitle:@"温馨提示"
+                                                   message:@"该笔记本内所有笔记将会被删除!\n确认删除?"
+                                                  delegate:self
+                                         cancelButtonTitle:@"取消"
+                                         otherButtonTitles:@"删除",nil];
+        [delAlertView show];
+        [delAlertView release];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) { //cancal
+        
+    }
+    else if (buttonIndex==1) //ok
+    {
+        //db delete
+        [notebookMM deleteNotebookWithName:[self.tableView cellForRowAtIndexPath:delIndexPath].textLabel.text];
+        
+        //table datasource delete
+        delIndexPath.section==0?[myOftenUsed removeObjectAtIndex:delIndexPath.row]:[myMostRecentlyUsed removeObjectAtIndex:delIndexPath.row];
+        
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:delIndexPath]
+                              withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+    }
+    [delIndexPath release];
+}
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
@@ -262,6 +277,11 @@
 }
 
 #pragma mark -Table_Edit_Add
+-(void) backToMainView:(UIBarButtonItem*) sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void) addNotebookEvent:(UIBarButtonItem*) sender
 {
     // add notebook process
@@ -286,11 +306,14 @@
     fNotebook.dateModify_time = nowDate;
     
     //add to table source
-    [myMostRecentlyUsed addObject:fNotebook];  //分组数据
+    [myMostRecentlyUsed insertObject:fNotebook atIndex:0];
+    //[myMostRecentlyUsed addObject:fNotebook];  //分组数据
     [myTableDataSource addObject:fNotebook]; //总数据
 
     
     //add data to db
     [notebookMM addNotebook:fNotebook];
+    [fNotebook release];
+    [self.tableView reloadData];
 }
 @end

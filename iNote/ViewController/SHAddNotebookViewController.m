@@ -7,6 +7,7 @@
 //
 
 #import "SHAddNotebookViewController.h"
+#import "SHNoteBookModelManager.h"
 
 @interface SHAddNotebookViewController ()
 
@@ -43,17 +44,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self.editButtonItem setTitle:@"保存"];
-    //[self.navigationController setNavigationBarHidden:NO];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    //save notebook name
-    //process
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +61,20 @@
 
 -(IBAction)Save:(id)sender
 {
+    // check user input notebook name Is repeated？
+    SHNoteBookModelManager *notebookMM = [[[SHNoteBookModelManager alloc] init] autorelease];
+    BOOL bflag = [_tfNotebookName.text isEqualToString:@""];
+    
+    if ( bflag || [notebookMM isAtForNotebookName:_tfNotebookName.text] ) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示"
+                                                            message:(bflag?@"笔记本名称不能为空.":@"此笔记本已存在.")
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+        return;
+    }
+    
     //sent notebook name to delegate
     SEL setNotebookName = @selector(viewControl:getNotebookName:);
     

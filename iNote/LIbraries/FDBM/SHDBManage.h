@@ -17,7 +17,9 @@
 typedef enum {
     NTF_NONE,  //无
     NTF_UPDATE,//is_delete
-    NTF_DELETE//
+    NTF_DELETE,
+    NTF_BOOKNAME,
+    NTF_BOOKPATH
 }NOTEBOOK_FIELD;
 
 typedef enum {
@@ -63,6 +65,8 @@ typedef enum {
 -(NSMutableArray*) getAllNoteBooks;
 //get notebook count with notebook name;
 -(int) getNoteBookCountWithName:(NSString *)_stringName;
+
+-(SHNotebook*) getNoteBookInfoWithNoteBookPath:(NSString*) _stringName;
 -(SHNotebook*) getNoteBookInfoWithNoteBookName:(NSString*) _stringName;
 
 //synchronization notebook table

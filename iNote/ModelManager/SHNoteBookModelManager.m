@@ -134,6 +134,12 @@
 }
 
 #pragma mark - selfMethod
+-(BOOL) isAtForNotebookName:(NSString*) _notebookName
+{
+    SHArgumCheck(_notebookName);
+    return [_dbManage getNoteBookCountWithName:_notebookName];
+}
+
 -(NSMutableArray*) getAllNotebookFromDB
 {
     return [_dbManage getAllNoteBooks];
@@ -144,4 +150,13 @@
     SHArgumCheck(_notebook);
     return [_dbManage addNoteBook:_notebook];
 }
+
+-(BOOL) deleteNotebookWithName:(NSString*)_notebookName
+{
+    SHArgumCheck(_notebookName);
+    SHNotebook *fNotebook = [_dbManage getNoteBookInfoWithNoteBookName:_notebookName];
+    if(fNotebook) return [_dbManage deleteLogicNotebookWithNotebookPath:fNotebook.strPath];
+    return NO;
+}
+
 @end

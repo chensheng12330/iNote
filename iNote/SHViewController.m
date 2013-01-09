@@ -95,6 +95,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationItem setTitle:@"主页"];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     return;
 }

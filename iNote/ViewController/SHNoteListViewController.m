@@ -17,6 +17,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
+    style = UITableViewStyleGrouped;
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -27,30 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    dbManage = [SHDBManage sharedDBManage];  //db manage
-    
-    //NSArray *ar = [dbManage getAllNotes];
-    //SHNote* note = [dbManage getNoteWithNoteID:3];
-
-    //[dbManage deleteLogicNoteWithNoteID:3];
-    
-    //[dbManage deletePhysicsNoteWithNoteID:3];
-    
-    //myTableDataSource = [[dbManage getAllNotes] retain];
-    
-    return;
-//    [dbManage addNote:note];
-//    
-//    note.isDelete = YES;
-//    note.isUpdate = YES;
-//    [dbManage updateNote:note];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)dealloc

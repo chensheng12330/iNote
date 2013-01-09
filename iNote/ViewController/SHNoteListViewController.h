@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SHDBManage.h"
+#import "SHNoteBookModelManager.h"
 
 @interface SHNoteListViewController : UITableViewController
 {
     NSMutableArray *myTableDataSource;
-    SHDBManage *dbManage;
+    SHNoteBookModelManager *notebookMM;
 }
 @end
  
