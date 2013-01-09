@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SHModelManagerBase.h"
-
+#import "Header.h"
 
 @interface SHNoteBookModelManager : SHModelManagerBase
 {
@@ -25,6 +25,8 @@
 
 //get data from db's notebookTable
 -(NSMutableArray*) getAllNotebookFromDB;
+
+-(BOOL) addNotebook:(SHNotebook*)_notebook;
 //down note data from youdao Cloud Server
 //异步请求
 -(void) pullCloudDataAndUpdateDBWith:(id)aDelegate action:(SEL)anAction;

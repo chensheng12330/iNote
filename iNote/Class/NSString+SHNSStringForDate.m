@@ -59,4 +59,17 @@
     return data;
 }
 
+-(BOOL) stringIsNumeral
+{
+    if ([self isEqualToString:@""]) return NO;
+    unichar ch0 ='0' , ch9 = '9';
+    
+    for (int i=0; i<[self length]; i++) {
+        unichar ch = [self characterAtIndex:i];
+        if (ch<ch0 || ch>ch9) {
+            return NO;
+        }
+    }
+    return YES;
+}
 @end

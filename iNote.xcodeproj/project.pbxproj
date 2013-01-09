@@ -20,6 +20,9 @@
 		84EDABA8165E603C0039F314 /* MarkInfo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84EDABA7165E603C0039F314 /* MarkInfo.rtf */; };
 		84F2D14416777B3A00D2EFC7 /* SHNoteBookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F2D14216777B3A00D2EFC7 /* SHNoteBookListViewController.m */; };
 		84F2D14516777B3A00D2EFC7 /* SHNoteBookListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F2D14316777B3A00D2EFC7 /* SHNoteBookListViewController.xib */; };
+		D4038175169D1B23002BE836 /* SHAddNotebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4038173169D1B23002BE836 /* SHAddNotebookViewController.m */; };
+		D4038176169D1B23002BE836 /* SHAddNotebookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4038174169D1B23002BE836 /* SHAddNotebookViewController.xib */; };
+		D4038179169D49A4002BE836 /* TaskList.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D4038178169D49A4002BE836 /* TaskList.rtf */; };
 		D42D87FA165F4706004D3E72 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D42D87F9165F4706004D3E72 /* Default.png */; };
 		D42D8818165F77CB004D3E72 /* half rount.png in Resources */ = {isa = PBXBuildFile; fileRef = D42D8817165F77CB004D3E72 /* half rount.png */; };
 		D43BD2FA160C55850091A219 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD2F9160C55850091A219 /* UIKit.framework */; };
@@ -163,6 +166,10 @@
 		84F2D14116777B3A00D2EFC7 /* SHNoteBookListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteBookListViewController.h; sourceTree = "<group>"; };
 		84F2D14216777B3A00D2EFC7 /* SHNoteBookListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteBookListViewController.m; sourceTree = "<group>"; };
 		84F2D14316777B3A00D2EFC7 /* SHNoteBookListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHNoteBookListViewController.xib; sourceTree = "<group>"; };
+		D4038172169D1B23002BE836 /* SHAddNotebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHAddNotebookViewController.h; sourceTree = "<group>"; };
+		D4038173169D1B23002BE836 /* SHAddNotebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHAddNotebookViewController.m; sourceTree = "<group>"; };
+		D4038174169D1B23002BE836 /* SHAddNotebookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHAddNotebookViewController.xib; sourceTree = "<group>"; };
+		D4038178169D49A4002BE836 /* TaskList.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = TaskList.rtf; sourceTree = "<group>"; };
 		D42D87F9165F4706004D3E72 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D42D8817165F77CB004D3E72 /* half rount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "half rount.png"; sourceTree = "<group>"; };
 		D43BD2F5160C55850091A219 /* iNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -438,6 +445,9 @@
 				84F2D14116777B3A00D2EFC7 /* SHNoteBookListViewController.h */,
 				84F2D14216777B3A00D2EFC7 /* SHNoteBookListViewController.m */,
 				84F2D14316777B3A00D2EFC7 /* SHNoteBookListViewController.xib */,
+				D4038172169D1B23002BE836 /* SHAddNotebookViewController.h */,
+				D4038173169D1B23002BE836 /* SHAddNotebookViewController.m */,
+				D4038174169D1B23002BE836 /* SHAddNotebookViewController.xib */,
 			);
 			name = NoteBooks;
 			sourceTree = "<group>";
@@ -484,6 +494,7 @@
 		D43BD2FF160C55850091A219 /* iNote */ = {
 			isa = PBXGroup;
 			children = (
+				D4038178169D49A4002BE836 /* TaskList.rtf */,
 				843EFD7F167F42FC0095B11E /* Header.h */,
 				D43BD308160C55850091A219 /* SHAppDelegate.h */,
 				D43BD309160C55850091A219 /* SHAppDelegate.m */,
@@ -949,6 +960,8 @@
 				843684701676177B00122999 /* SHSynSettingViewController.xib in Resources */,
 				84F2D14516777B3A00D2EFC7 /* SHNoteBookListViewController.xib in Resources */,
 				D4E8F6A1168A93BE00956DB9 /* SHNoteListViewController.xib in Resources */,
+				D4038176169D1B23002BE836 /* SHAddNotebookViewController.xib in Resources */,
+				D4038179169D49A4002BE836 /* TaskList.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1073,7 @@
 				D4E8F6A0168A93BE00956DB9 /* SHNoteListViewController.m in Sources */,
 				582D7D10168B325200497528 /* SHNoteModelManager.m in Sources */,
 				582D7D13168B383800497528 /* SHModelManagerBase.m in Sources */,
+				D4038175169D1B23002BE836 /* SHAddNotebookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

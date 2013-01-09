@@ -46,7 +46,7 @@ static SHNoteClient *staticNoteClient=nil;
         {
             //Engine load from config data
             NSData *getData = [[NSUserDefaults standardUserDefaults] objectForKey: OAUTH_SAVE_KEY];
-            OAuthEngine *_engine = [[OAuthEngine unarchivedOAuthEngineWithData:getData] retain];
+            OAuthEngine *_engine = [OAuthEngine unarchivedOAuthEngineWithData:getData];
             //
             if (_engine ==NULL) {
                 //action processing +++ addtion

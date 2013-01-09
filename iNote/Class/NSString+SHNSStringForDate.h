@@ -18,4 +18,6 @@
 +(NSString*)ToStringWithNSDecimalNumber:(NSDecimalNumber*)_num;
 +(NSDate*)  ToNSDateWithNSDecimalNumber:(NSDecimalNumber*)_num
                               precision:(float) _precision;
+
+-(BOOL) stringIsNumeral;
 @end

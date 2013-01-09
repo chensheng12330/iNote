@@ -59,6 +59,18 @@
     return (descripton);
 }
 
+-(void) setStrNotes_num:(NSString *)_strNotes_num
+{
+    if (_strNotes_num ==self.strNotes_num) return;
+    
+    [self.strNotes_num release];
+    
+    //setting
+    if(![_strNotes_num stringIsNumeral]) self.strNotes_num = [[NSString alloc] initWithString:@"0"];
+    
+    //ok copy
+    self.strNotes_num = [_strNotes_num copy];
+}
 #pragma mark - method
 
 -(id) initWithJSON:(NSDictionary*) _dict

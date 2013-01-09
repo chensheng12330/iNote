@@ -138,4 +138,10 @@
 {
     return [_dbManage getAllNoteBooks];
 }
+
+-(BOOL) addNotebook:(SHNotebook*)_notebook
+{
+    SHArgumCheck(_notebook);
+    return [_dbManage addNoteBook:_notebook];
+}
 @end

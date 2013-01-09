@@ -43,4 +43,9 @@
 #define JK_NOTE_MODIFY_TIME (@"modify_time")
 #define JK_NOTE_CONTENT     (@"content")
 
+//Debug Fuction
+#ifndef SHArgumCheck//(SomeBool)
+#define SHArgumCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
+#endif
+
 #endif

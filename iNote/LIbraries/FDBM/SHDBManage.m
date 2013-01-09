@@ -355,7 +355,7 @@ static SHDBManage *_sharedDBManage = nil;
     fNotebook.dateModify_time = [NSString dateFormatString:[rs objectForColumnIndex:5]];
     fNotebook.isUpdate        = [[rs objectForColumnIndex:6] boolValue];
     
-    return fNotebook;
+    return [fNotebook autorelease];
 }
 
 -(NSMutableArray*) getAllNoteBooks

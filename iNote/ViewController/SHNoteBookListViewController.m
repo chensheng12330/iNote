@@ -7,6 +7,7 @@
 //
 
 #import "SHNoteBookListViewController.h"
+
 #import "NSString+SHNSStringForDate.h"
 #import "SHNotebook.h"
 
@@ -18,9 +19,12 @@
 -(void) SetMyTableDataSource:(NSMutableArray*) _arry;
 
 -(void)sortArrayWithOftenUsedAndMostRecent;
+
+-(void) addNotebookEvent:(UIBarButtonItem*) sender;
 @end
 
 @implementation SHNoteBookListViewController
+//@synthesize tableView;
 
 #pragma mark - class variable seter
 -(void) SetMyTableDataSource:(NSMutableArray*) _arry
@@ -35,9 +39,11 @@
 #pragma mark - init
 - (id)initWithStyle:(UITableViewStyle)style
 {
+    style = UITableViewStyleGrouped;
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -69,6 +75,8 @@
     [self sortArrayWithOftenUsedAndMostRecent];
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    //int a = self.tableView.style;
+    //self.tableView sets
      self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
@@ -84,15 +92,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - Table Method
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    
+    if (editing) {
+        //设置导航左键 add
+        leftBarItem = self.navigationItem.leftBarButtonItem;
+        
+        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNotebookEvent:)] autorelease];
+    }
+    else
+    {
+        //设置导航左键为 原来
+        self.navigationItem.leftBarButtonItem = leftBarItem;
+    }
+}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    int c1 = myMostRecentlyUsed.count>0;
-    int c2 = myOftenUsed.count>0;
-    return (c1+c2);
+    //int c1 = myMostRecentlyUsed.count>0;
+    //int c2 = myOftenUsed.count>0;
+    return 2;//(c1+c2);
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -103,7 +128,6 @@
 {
 
     // Return the number of rows in the section.
-    int  a= myOftenUsed.count;
     return section==0?myOftenUsed.count:myMostRecentlyUsed.count;
 }
 
@@ -113,6 +137,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     
     SHNotebook *notebook = nil;
@@ -234,5 +259,38 @@
         //return [date1 compare:date2] == NSOrderedDescending; // 升序
         return [date1 compare:date2] == NSOrderedAscending;  // 降序
     }];
+}
+
+#pragma mark -Table_Edit_Add
+-(void) addNotebookEvent:(UIBarButtonItem*) sender
+{
+    // add notebook process
+    SHAddNotebookViewController *addNotebooControl = [[SHAddNotebookViewController alloc] init];
+    addNotebooControl.delegate = self;
+    [self presentModalViewController:addNotebooControl animated:YES];
+    [addNotebooControl release];
+    
+    //[self.navigationController mo]
+}
+
+-(void) viewControl:(SHAddNotebookViewController*)_viewControl
+    getNotebookName:(NSString*)_notebookName
+{
+    //build notebook info
+    SHNotebook *fNotebook = [[SHNotebook alloc]init];
+    fNotebook.strPath         = @"";
+    fNotebook.strNotes_num    = @"0";
+    fNotebook.strNotebookName = _notebookName;
+    NSDate *nowDate= [NSDate date];
+    fNotebook.dateCreate_time = nowDate;
+    fNotebook.dateModify_time = nowDate;
+    
+    //add to table source
+    [myMostRecentlyUsed addObject:fNotebook];  //分组数据
+    [myTableDataSource addObject:fNotebook]; //总数据
+
+    
+    //add data to db
+    [notebookMM addNotebook:fNotebook];
 }
 @end

@@ -23,7 +23,9 @@
     
     [super tearDown];
 }
-
+- (void)testFirst  {
+    STAssertTrue(get(0), @"Must Fail");
+}
 - (void)testExample
 {
     STFail(@"Unit tests are not implemented yet in iNoteTests");
