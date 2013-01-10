@@ -68,7 +68,7 @@
         [self.contentView addSubview:_labTime];
         
         //设置sourth url
-        _labSourceUrl = [[UILabel alloc] initWithFrame:CGRectMake(20,48,201,15)];
+        _labSourceUrl = [[UILabel alloc] initWithFrame:CGRectMake(99,48,201,15)];
         _labSourceUrl.numberOfLines=1;
         _labSourceUrl.font=[UIFont boldSystemFontOfSize:12.0f];
         _labSourceUrl.textColor=[UIColor blackColor];

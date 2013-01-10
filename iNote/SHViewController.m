@@ -13,6 +13,8 @@
 #import "SHNoteListViewController.h"
 #import "SHNoteBookListViewController.h"
 
+#import "HHViewController.h"
+
 @interface SHViewController ()
 
 @end
@@ -144,7 +146,7 @@
             subViewController = [[SHNoteBookListViewController alloc] init];
             break;
         case 3:
-            subViewController = [[SHNoteListViewController alloc] init];
+            subViewController = [[HHViewController alloc] init];
             break;
         case 4:
             break;
