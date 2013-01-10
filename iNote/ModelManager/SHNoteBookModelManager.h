@@ -36,5 +36,5 @@
 //同步请求
 -(NSMutableArray*) pullCloudDataAndUpdateDB;
 
--(void) pushDBDataToCloud;
+//-(void) pushDBDataToCloud;
 @end

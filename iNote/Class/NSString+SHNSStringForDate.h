@@ -13,7 +13,9 @@
 @interface NSString (SHNSStringForDate)
 
 +(NSDate*)   dateFormatString:(NSString*)_string;
+
 +(NSString*) stringFormatDate:(NSDate*)_date;
++(NSString*) stringFormatDateV1:(NSDate*)_date;
 
 +(NSString*)ToStringWithNSDecimalNumber:(NSDecimalNumber*)_num;
 +(NSDate*)  ToNSDateWithNSDecimalNumber:(NSDecimalNumber*)_num

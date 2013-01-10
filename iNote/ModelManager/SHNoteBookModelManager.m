@@ -155,8 +155,18 @@
 {
     SHArgumCheck(_notebookName);
     SHNotebook *fNotebook = [_dbManage getNoteBookInfoWithNoteBookName:_notebookName];
-    if(fNotebook) return [_dbManage deleteLogicNotebookWithNotebookPath:fNotebook.strPath];
-    return NO;
+
+    if( fNotebook.strPath==NULL || [fNotebook.strPath isEqualToString:@""])
+    {
+        //1、如果是本地新建数据，则实行物理删除[判断依据,notebook path 为空]
+        return [_dbManage deletePhysicsNotebookWithNotebookName:_notebookName];
+    }
+    else
+    {
+        //2、如果是服务器同步数据，则实行逻辑删除
+        return [_dbManage deleteLogicNotebookWithNotebookName:_notebookName];
+    }
+    return YES;
 }
 
 @end

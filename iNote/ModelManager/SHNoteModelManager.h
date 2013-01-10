@@ -16,6 +16,10 @@
     SEL _anAction;
 }
 
+-(NSMutableArray*) getAllNoteFromDB;
+-(BOOL) addNote:(SHNote*)_note;
+-(BOOL) deleteNoteWithName:(NSString*)_noteName;
+
 //异步请求
 -(void) pullCloudDataAndUpdateDBWith:(id)aDelegate action:(SEL)anAction;
 

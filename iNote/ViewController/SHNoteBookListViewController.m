@@ -69,14 +69,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //int a = self.tableView.style;
     //self.tableView sets
+    [self.editButtonItem setTitle:@"编辑"];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self.editButtonItem setTitle:@"编辑"];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     //self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"主页" style:UIBarButtonItemStyleDone target:self action:@selector(backToMainView:)]autorelease];
     

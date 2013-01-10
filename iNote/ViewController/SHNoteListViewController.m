@@ -7,7 +7,8 @@
 //
 
 #import "SHNoteListViewController.h"
-//#import "`"
+#import "SHNoteTableCell.h"
+#import "NSString+SHNSStringForDate.h"
 
 @interface SHNoteListViewController ()
 
@@ -28,10 +29,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    noteMM = [[SHNoteModelManager alloc] init];
+    myTableDataSource = [[noteMM getAllNoteFromDB] retain];
 }
 
 -(void)dealloc
 {
+    [noteMM release];
     [myTableDataSource release];
     [super dealloc];
 }
@@ -60,19 +64,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SHNoteTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[SHNoteTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier height:66];
     }
     
     SHNote *note = [myTableDataSource objectAtIndex:indexPath.row];
-    [cell.textLabel setText:note.strTitle];
-    [cell.detailTextLabel setText:note.strContent];
+    //cell set1
+
+    [cell.labTitle  setText:note.strTitle];
+    [cell.labDetail setText:note.strContent];
+    [cell.labTime   setText:[NSString stringFormatDateV1:note.dateModify_time]];
+    [cell.labSourceUrl setText:note.strSource];
+    
     // Configure the cell...
     
     return cell;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 64;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

@@ -38,6 +38,7 @@
 		D43BD31A160C55850091A219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD2FB160C55850091A219 /* Foundation.framework */; };
 		D43BD322160C55850091A219 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43BD320160C55850091A219 /* InfoPlist.strings */; };
 		D43BD325160C55850091A219 /* iNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D43BD324160C55850091A219 /* iNoteTests.m */; };
+		D43F2C13169EA64700799119 /* SHNoteTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43F2C12169EA64700799119 /* SHNoteTableCell.m */; };
 		D4872C301671B7360046D938 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D4872C271671B7360046D938 /* FMDatabase.m */; };
 		D4872C311671B7360046D938 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4872C291671B7360046D938 /* FMDatabaseAdditions.m */; };
 		D4872C321671B7360046D938 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D4872C2B1671B7360046D938 /* FMDatabasePool.m */; };
@@ -191,6 +192,8 @@
 		D43BD321160C55850091A219 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D43BD323160C55850091A219 /* iNoteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iNoteTests.h; sourceTree = "<group>"; };
 		D43BD324160C55850091A219 /* iNoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iNoteTests.m; sourceTree = "<group>"; };
+		D43F2C11169EA64700799119 /* SHNoteTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteTableCell.h; sourceTree = "<group>"; };
+		D43F2C12169EA64700799119 /* SHNoteTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteTableCell.m; sourceTree = "<group>"; };
 		D4872C261671B7360046D938 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		D4872C271671B7360046D938 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		D4872C281671B7360046D938 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -856,6 +859,8 @@
 		D4E8F69B168A937500956DB9 /* NoteList */ = {
 			isa = PBXGroup;
 			children = (
+				D43F2C11169EA64700799119 /* SHNoteTableCell.h */,
+				D43F2C12169EA64700799119 /* SHNoteTableCell.m */,
 				D4E8F69D168A93BE00956DB9 /* SHNoteListViewController.h */,
 				D4E8F69E168A93BE00956DB9 /* SHNoteListViewController.m */,
 				D4E8F69F168A93BE00956DB9 /* SHNoteListViewController.xib */,
@@ -1074,6 +1079,7 @@
 				582D7D10168B325200497528 /* SHNoteModelManager.m in Sources */,
 				582D7D13168B383800497528 /* SHModelManagerBase.m in Sources */,
 				D4038175169D1B23002BE836 /* SHAddNotebookViewController.m in Sources */,
+				D43F2C13169EA64700799119 /* SHNoteTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,7 +63,7 @@
 {
     if (_strNotes_num ==self.strNotes_num) return;
     
-    [self.strNotes_num release]; self->strNotes_num = nil; if(_strNotes_num==NULL) return;
+    [self.strNotes_num release]; self->strNotes_num = nil; if(_strNotes_num==NULL || [_strNotes_num isKindOfClass:[NSNull class]]) return;
     
     //setting
     if(![_strNotes_num stringIsNumeral]) {

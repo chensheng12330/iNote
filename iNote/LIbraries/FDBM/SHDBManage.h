@@ -81,9 +81,9 @@ typedef enum {
  物理删除: 彻低的从数据库中将此记录删除。
  */
 //逻辑删除
--(BOOL) deleteLogicNotebookWithNotebookPath:(NSString*)_path;
+-(BOOL) deleteLogicNotebookWithNotebookName:(NSString*)_bookName;
 //物理删除
--(BOOL) deletePhysicsNotebookWithNotebookPath:(NSString*)_path;
+-(BOOL) deletePhysicsNotebookWithNotebookName:(NSString*)_bookName;
 
 
 //*************End/////
@@ -117,10 +117,9 @@ typedef enum {
 -(BOOL) addNote:(SHNote*) _note;
 -(BOOL) updateNote:(SHNote*) _note;
 
-//逻辑删除
--(BOOL) deleteLogicNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value;
+//逻辑删除［只提供id删除，因为本地增加，id才是唯一记录］
+-(BOOL) deleteLogicNoteWithNoteID:(NSString *)_note_id;
 //物理删除
--(BOOL) deletePhysicsNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value;
-
+-(BOOL) deletePhysicsNoteWithNoteID:(NSString *)_note_id;
 //get note count with note_table_id
 @end

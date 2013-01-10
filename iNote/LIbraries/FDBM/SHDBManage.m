@@ -15,6 +15,10 @@
 #define DBMQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
 #endif
 
+#ifndef DBMRollback//(SomeBool)
+#define DBMRollback(SomeBool) { if (!(SomeBool)) { [db rollback]; return NO;} }
+#endif
+
 //log out flag
 #ifndef DEBUG_OUT
 #define DEBUG_OUT 1
@@ -44,6 +48,11 @@ static SHDBManage *_sharedDBManage = nil;
 //note
 -(NSMutableArray*) getNoteWithNOTE_FIELD:(NOTE_FIELD)_note_field
                                    Value:(NSString*)_string;
+//delete
+//逻辑删除
+-(BOOL) deleteLogicNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value;
+//物理删除
+-(BOOL) deletePhysicsNoteWithNOTE_FIELD:(NOTE_FIELD)_note_fd Value:(NSString*) _value;
 @end
 
 
@@ -371,34 +380,33 @@ static SHDBManage *_sharedDBManage = nil;
   select path from NoteTable where
  */
 //逻辑删除
--(BOOL) deleteLogicNotebookWithNotebookPath:(NSString*)_path
+-(BOOL) deleteLogicNotebookWithNotebookName:(NSString*)_bookName
 {
-    if(_path==NULL || [_path isEqualToString:@""]) return NO;
+    if(_bookName==NULL || [_bookName isEqualToString:@""]) return NO;
     DBMQuickCheck(db);
     
     //使用事物管理
     BOOL isSuc = NO;
     if(![db beginTransaction]) return NO;
     //1、逻辑删除该笔记本下所有笔记
-    isSuc = [db executeUpdate:@"update  NoteTable set is_delete=? where path in \
-     (select note_path from NoteRelationTable where notebook_path=?)",@"1",_path];
+    isSuc = [db executeUpdate:@"update NoteTable set is_delete=? where notebook_name=?",@"1",_bookName];
     
-    if(!isSuc) {[db commit]; return NO;}
+    DBMRollback(isSuc);
     
     //2、逻辑删除该笔记本
-    isSuc = [db executeUpdate:@"update NoteBookTable set is_delete=?  where path = ? ",@"1",_path];
+    isSuc = [db executeUpdate:@"update NoteBookTable set is_delete=?  where name = ? ",@"1",_bookName];
     
     //3、如果失败，则回滚
-    if (!isSuc) [db rollback];
+    DBMRollback(isSuc);
     
     [db commit];//结束事物
     return isSuc;
 }
 
 //物理删除
--(BOOL) deletePhysicsNotebookWithNotebookPath:(NSString*)_path
+-(BOOL) deletePhysicsNotebookWithNotebookName:(NSString*)_bookName
 {
-    if(_path==NULL || [_path isEqualToString:@""]) return NO;
+    if(_bookName==NULL || [_bookName isEqualToString:@""]) return NO;
     
     DBMQuickCheck(db);
     
@@ -406,18 +414,25 @@ static SHDBManage *_sharedDBManage = nil;
     BOOL isSuc = NO;
     if(![db beginTransaction]) return NO;
     //1、物理删除该笔记本下所有笔记
-    isSuc = [db executeUpdate:@"delete from  NoteTable where path in \
-             (select note_path from NoteRelationTable where notebook_path=?)",_path];
+    isSuc = [db executeUpdate:@"delete from  NoteTable where notebook_name=?",_bookName];
     
-    if(!isSuc) {[db commit]; return NO;}
+    DBMRollback(isSuc);
     
-    //2、物理删除该笔记关系表记录
-    isSuc = [db executeUpdate:@"delete from NoteRelationTable where notebook_path = ? ",_path];
-    if(!isSuc) {[db rollback]; return NO;}
+    //2.1、获取笔记本path
+    SHNotebook *fNotebook = [self getNotebookWithNOTEBOOK_FIELD:NTF_BOOKNAME Value:_bookName];
+    DBMRollback(fNotebook);
+    
+    //2.2、物理删除该笔记关系表记录
+    //2.2.1 如果是本地新增的笔记本，则无需删除NoteRelationTable中的相关记录(依据是 notebook name 是null或 空字符串)
+    //2.2.2 如果是服务器同步的笔记本数据，则对NoteRelationTable中的相关记录进行删除
+    if (fNotebook.strPath != NULL && ![fNotebook.strPath isEqualToString:@""]) {
+        isSuc = [db executeUpdate:@"delete from NoteRelationTable where notebook_path = ? ",fNotebook.strPath];
+        DBMRollback(isSuc);
+    }
     
     //3、物理删除该笔记本
-    isSuc = [db executeUpdate:@"delete from NoteBookTable where path = ? ",_path];
-    if(!isSuc) {[db rollback]; return NO;}
+    isSuc = [db executeUpdate:@"delete from NoteBookTable where name = ? ",_bookName];
+    DBMRollback(isSuc);
     
     //4、事物提交
     [db commit];//结束事物
@@ -841,6 +856,19 @@ static SHDBManage *_sharedDBManage = nil;
     
     DEBUG_DB_ERROR_LOG;
     return bExe;
+}
+
+//逻辑删除
+-(BOOL) deleteLogicNoteWithNoteID:(NSString *)_note_id
+{
+    DBMQuickCheck(_note_id);
+    return  [self deleteLogicNoteWithNOTE_FIELD:NF_NOTE_ID Value:_note_id];
+}
+//物理删除
+-(BOOL) deletePhysicsNoteWithNoteID:(NSString *)_note_id
+{
+    DBMQuickCheck(_note_id);
+    return [self deletePhysicsNoteWithNOTE_FIELD:NF_NOTE_ID Value:_note_id];
 }
 
 @end
