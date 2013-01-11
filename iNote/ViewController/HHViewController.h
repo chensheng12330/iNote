@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 //#import "HHFullScreenViewController.h"
-#import "HHYoukuMenuView.h"
+#import "SHBottomMenuView.h"
 @interface HHViewController : UIViewController
 {
     UITableView *tableView;

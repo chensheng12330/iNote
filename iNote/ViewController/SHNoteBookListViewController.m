@@ -43,6 +43,7 @@
 
 -(void) dealloc
 {
+    [notebookMM         release];
     [myOftenUsed        release];
     [myMostRecentlyUsed release];
     [myTableDataSource  release];

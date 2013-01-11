@@ -8,7 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #define  kButtonNum  11
-@interface HHYoukuMenuView : UIView
+
+typedef enum
+{
+    MK_MORE1=0,
+    MK_MORE2,
+    MK_MORE3,
+    MK_MORE4,
+    MK_MORE5,
+    MK_MORE6,
+    MK_MORE7,
+    MK_INFO,
+    MK_MENU,
+    MK_FIND,
+    MK_HOME
+}MENU_KIND;
+
+@class SHBottomMenuView;
+
+@protocol SHBottomMenuDelegate <NSObject>
+-(void) bottomMenuView:(SHBottomMenuView*) botMenuView SelectButton:(MENU_KIND)_menu_kind;
+@end
+
+@interface SHBottomMenuView : UIView
 {
     UIImageView *rotationView;
     UIImageView *bgView;
@@ -17,6 +39,8 @@
     BOOL rotationViewIsNomal;//NO 为不显示状态 
     BOOL isMenuHide;
 }
+
+@property (assign) id<SHBottomMenuDelegate> delegate;
 @property (nonatomic, retain)  UIImageView *rotationView;
 @property (nonatomic, retain)  UIImageView *bgView;
 @property (nonatomic, retain)   NSMutableArray *arrayButtonIcon;

@@ -64,10 +64,10 @@ static SHNoteClient *staticNoteClient=nil;
 - (void)dealloc
 {
     self.noteClienDelegate = nil;
-    
     [errorMessage release];
     [errorDetail release];
     [super dealloc];
+    staticNoteClient = nil;
 }
 
 - (NSString*) nameValString: (NSDictionary*) dict {

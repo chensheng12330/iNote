@@ -17,16 +17,6 @@
 @implementation SHNoteListViewController
 @synthesize tableView,youkuMenuView;
 
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-//    //style = UITableViewStyleGrouped;
-//    self = [super initWithStyle:style];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,11 +26,23 @@
     [self bottomMenuViewDidLoad];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 -(void)dealloc
 {
     [noteMM release];
+    
     [myTableDataSource  release];
     [youkuMenuView      release];
+    [tableView          release];
     [super dealloc];
 }
 
@@ -66,75 +68,38 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 64;
 }
 
-
-
-
-- (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static int i = 0;
-    static NSString *CellIdentif = @"friends-cell";
-    UITableViewCell *cell =(UITableViewCell *)[TableView dequeueReusableCellWithIdentifier:CellIdentif];
+    static NSString *CellIdentifier = @"Cell";
+    SHNoteTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentif] autorelease];
+        cell = [[[SHNoteTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier height:65] autorelease];
     }
-    NSArray *subviews = [[NSArray alloc] initWithArray:cell.contentView.subviews];
-	
-    for (UIView *subview in subviews) {
-        [subview removeFromSuperview];
-    }
-    [subviews release];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.png",i]];
-    button.frame = CGRectMake(250.0, 5.0, image.size.width, image.size.height);
-    [button setBackgroundImage:image forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(buttonDown:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.contentView  addSubview:button];
-    // cell.imageView.image = [UIImage imageNamed:@"sms_share.png"];
-    cell.textLabel.text = @"点击后面的图片看动画";
-    i++;
-    if (i == 8)
-    {
-        i = 0;
-    }
+    SHNote *note = [myTableDataSource objectAtIndex:indexPath.row];
+    //cell set1
+
+    [cell.labTitle  setText:note.strTitle];
+    [cell.labDetail setText:note.strContent];
+    [cell.labTime   setText:[NSString stringFormatDateV1:note.dateModify_time]];
+    [cell.labSourceUrl setText:note.strSource];
+    
+    // Configure the cell...
+    
     return cell;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"Cell";
-//    SHNoteTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//        cell = [[SHNoteTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier height:66];
-//    }
-//    
-//    SHNote *note = [myTableDataSource objectAtIndex:indexPath.row];
-//    //cell set1
-//
-//    [cell.labTitle  setText:note.strTitle];
-//    [cell.labDetail setText:note.strContent];
-//    [cell.labTime   setText:[NSString stringFormatDateV1:note.dateModify_time]];
-//    [cell.labSourceUrl setText:note.strSource];
-//    
-//    // Configure the cell...
-//    
-//    return cell;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 80;
-//}
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
+
 
 /*
 // Override to support editing the table view.
@@ -184,20 +149,9 @@
 - (void)bottomMenuViewDidLoad
 {
     self.view.backgroundColor  = [UIColor blueColor];
-    UIView *tempView = [[UIView alloc]initWithFrame:CGRectMake(0.0,-800,320,800)];
-    tempView.backgroundColor = [UIColor grayColor];
-    
-    UIImageView *imageview = [[UIImageView alloc]initWithFrame:CGRectMake(20.0, 720.0, 60, 69)];
-    imageview.image = [UIImage imageNamed:@"6.png"];
-    [tempView addSubview:imageview];
-    
-    //[tableView addSubview:tempView];
-    [tableView release];
-    tableView.backgroundColor = [UIColor whiteColor];
-    tableView.contentInset = UIEdgeInsetsMake(100.0f, 0.0f, 0.0f, 0.0f);
-    
-    
-    
+    //[tableView release];
+    //tableView.backgroundColor = [UIColor whiteColor];
+    //tableView.contentInset = UIEdgeInsetsMake(100.0f, 0.0f, 0.0f, 0.0f);
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *image = [UIImage imageNamed:@"hidemenu.png"];
@@ -207,12 +161,10 @@
     button.tag = 111;
     [self.view addSubview:button];
     
-    youkuMenuView = [[HHYoukuMenuView alloc]initWithFrame:[HHYoukuMenuView getFrame]];
+    youkuMenuView = [[SHBottomMenuView alloc]initWithFrame:[SHBottomMenuView getFrame]];
+    youkuMenuView.delegate = self;
     [self.view addSubview:youkuMenuView];
-    [youkuMenuView release];
-
 }
-
 
 - (void)showMeun:(id)sender
 {
@@ -224,7 +176,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
     if (![youkuMenuView  getisMenuHide]&&!scrollView.decelerating)
     {
         [youkuMenuView  showOrHideMenu];
@@ -236,5 +187,10 @@
     UIView *button = [self.view viewWithTag:111];
     button.hidden = NO;
 }
-
+-(void) bottomMenuView:(SHBottomMenuView*) botMenuView SelectButton:(MENU_KIND)_menu_kind
+{
+    if (_menu_kind == MK_HOME) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
+}
 @end

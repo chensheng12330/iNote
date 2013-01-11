@@ -25,7 +25,6 @@
 
 - (void)dealloc
 {
-    _dbManage = nil;
     [_noteClient release]; _noteClient = nil;
     [super dealloc];
 }

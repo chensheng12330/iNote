@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		582D7D10168B325200497528 /* SHNoteModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 582D7D0F168B325200497528 /* SHNoteModelManager.m */; };
 		582D7D13168B383800497528 /* SHModelManagerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 582D7D12168B383800497528 /* SHModelManagerBase.m */; };
-		584BA9C0169F0E3E007FF9E8 /* HHYoukuMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584BA97D169F0E3D007FF9E8 /* HHYoukuMenuView.m */; };
+		584BA9C0169F0E3E007FF9E8 /* SHBottomMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584BA97D169F0E3D007FF9E8 /* SHBottomMenuView.m */; };
 		584BA9C1169F0E3E007FF9E8 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 584BA97F169F0E3D007FF9E8 /* 0.png */; };
 		584BA9C2169F0E3E007FF9E8 /* 0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 584BA980169F0E3D007FF9E8 /* 0@2x.png */; };
 		584BA9C3169F0E3E007FF9E8 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 584BA981169F0E3D007FF9E8 /* 1.png */; };
@@ -77,8 +77,6 @@
 		584BAA01169F0E3E007FF9E8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584BA9BF169F0E3E007FF9E8 /* View.xib */; };
 		584BAA04169F0EF9007FF9E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BAA03169F0EF9007FF9E8 /* QuartzCore.framework */; };
 		584BAA06169F174C007FF9E8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BAA05169F174C007FF9E8 /* ImageIO.framework */; };
-		584BAA0F169F1931007FF9E8 /* HHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 584BAA0D169F1930007FF9E8 /* HHViewController.m */; };
-		584BAA10169F1931007FF9E8 /* HHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584BAA0E169F1930007FF9E8 /* HHViewController.xib */; };
 		840808851663A51E00028F77 /* SHSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840808831663A51E00028F77 /* SHSettingViewController.m */; };
 		840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840808841663A51E00028F77 /* SHSettingViewController.xib */; };
 		84166CBA1610A51900183621 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84166CB91610A51900183621 /* icon.png */; };
@@ -200,6 +198,7 @@
 		D4D9201A161017B300A634CF /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D91FCF161017B300A634CF /* ASIS3Request.m */; };
 		D4D9201B161017B300A634CF /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D91FD1161017B300A634CF /* ASIS3ServiceRequest.m */; };
 		D4DE7E2F166C777C00870FC0 /* SHNoteUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DE7E2E166C777C00870FC0 /* SHNoteUser.m */; };
+		D4E6B337169FE98C008AA1A3 /* bottomMenu.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4E6B336169FE98C008AA1A3 /* bottomMenu.plist */; };
 		D4E8F6A0168A93BE00956DB9 /* SHNoteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E8F69E168A93BE00956DB9 /* SHNoteListViewController.m */; };
 		D4E8F6A1168A93BE00956DB9 /* SHNoteListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4E8F69F168A93BE00956DB9 /* SHNoteListViewController.xib */; };
 /* End PBXBuildFile section */
@@ -219,8 +218,8 @@
 		582D7D0F168B325200497528 /* SHNoteModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteModelManager.m; sourceTree = "<group>"; };
 		582D7D11168B383800497528 /* SHModelManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHModelManagerBase.h; sourceTree = "<group>"; };
 		582D7D12168B383800497528 /* SHModelManagerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHModelManagerBase.m; sourceTree = "<group>"; };
-		584BA97C169F0E3D007FF9E8 /* HHYoukuMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHYoukuMenuView.h; sourceTree = "<group>"; };
-		584BA97D169F0E3D007FF9E8 /* HHYoukuMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHYoukuMenuView.m; sourceTree = "<group>"; };
+		584BA97C169F0E3D007FF9E8 /* SHBottomMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHBottomMenuView.h; sourceTree = "<group>"; };
+		584BA97D169F0E3D007FF9E8 /* SHBottomMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHBottomMenuView.m; sourceTree = "<group>"; };
 		584BA97F169F0E3D007FF9E8 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
 		584BA980169F0E3D007FF9E8 /* 0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0@2x.png"; sourceTree = "<group>"; };
 		584BA981169F0E3D007FF9E8 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -288,9 +287,6 @@
 		584BA9BF169F0E3E007FF9E8 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		584BAA03169F0EF9007FF9E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		584BAA05169F174C007FF9E8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		584BAA0C169F1930007FF9E8 /* HHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHViewController.h; sourceTree = "<group>"; };
-		584BAA0D169F1930007FF9E8 /* HHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHViewController.m; sourceTree = "<group>"; };
-		584BAA0E169F1930007FF9E8 /* HHViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HHViewController.xib; sourceTree = "<group>"; };
 		840808821663A51E00028F77 /* SHSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSettingViewController.h; sourceTree = "<group>"; };
 		840808831663A51E00028F77 /* SHSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSettingViewController.m; sourceTree = "<group>"; };
 		840808841663A51E00028F77 /* SHSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSettingViewController.xib; sourceTree = "<group>"; };
@@ -501,6 +497,7 @@
 		D4D91FD1161017B300A634CF /* ASIS3ServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIS3ServiceRequest.m; sourceTree = "<group>"; };
 		D4DE7E2D166C777C00870FC0 /* SHNoteUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteUser.h; sourceTree = "<group>"; };
 		D4DE7E2E166C777C00870FC0 /* SHNoteUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteUser.m; sourceTree = "<group>"; };
+		D4E6B336169FE98C008AA1A3 /* bottomMenu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = bottomMenu.plist; path = ../bottomMenu.plist; sourceTree = "<group>"; };
 		D4E8F69D168A93BE00956DB9 /* SHNoteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNoteListViewController.h; sourceTree = "<group>"; };
 		D4E8F69E168A93BE00956DB9 /* SHNoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNoteListViewController.m; sourceTree = "<group>"; };
 		D4E8F69F168A93BE00956DB9 /* SHNoteListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHNoteListViewController.xib; sourceTree = "<group>"; };
@@ -544,8 +541,8 @@
 		584BA97B169F0E3D007FF9E8 /* bottomMenu */ = {
 			isa = PBXGroup;
 			children = (
-				584BA97C169F0E3D007FF9E8 /* HHYoukuMenuView.h */,
-				584BA97D169F0E3D007FF9E8 /* HHYoukuMenuView.m */,
+				584BA97C169F0E3D007FF9E8 /* SHBottomMenuView.h */,
+				584BA97D169F0E3D007FF9E8 /* SHBottomMenuView.m */,
 				584BA97E169F0E3D007FF9E8 /* image */,
 				584BA9BF169F0E3E007FF9E8 /* View.xib */,
 			);
@@ -555,6 +552,7 @@
 		584BA97E169F0E3D007FF9E8 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				D4E6B336169FE98C008AA1A3 /* bottomMenu.plist */,
 				584BA97F169F0E3D007FF9E8 /* 0.png */,
 				584BA980169F0E3D007FF9E8 /* 0@2x.png */,
 				584BA981169F0E3D007FF9E8 /* 1.png */,
@@ -1088,9 +1086,6 @@
 		D4E8F69B168A937500956DB9 /* NoteList */ = {
 			isa = PBXGroup;
 			children = (
-				584BAA0C169F1930007FF9E8 /* HHViewController.h */,
-				584BAA0D169F1930007FF9E8 /* HHViewController.m */,
-				584BAA0E169F1930007FF9E8 /* HHViewController.xib */,
 				D43F2C11169EA64700799119 /* SHNoteTableCell.h */,
 				D43F2C12169EA64700799119 /* SHNoteTableCell.m */,
 				D4E8F69D168A93BE00956DB9 /* SHNoteListViewController.h */,
@@ -1264,7 +1259,7 @@
 				584BA9FF169F0E3E007FF9E8 /* mvideoh.png in Resources */,
 				584BAA00169F0E3E007FF9E8 /* mvideoh@2x.png in Resources */,
 				584BAA01169F0E3E007FF9E8 /* View.xib in Resources */,
-				584BAA10169F1931007FF9E8 /* HHViewController.xib in Resources */,
+				D4E6B337169FE98C008AA1A3 /* bottomMenu.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1378,8 +1373,7 @@
 				582D7D13168B383800497528 /* SHModelManagerBase.m in Sources */,
 				D4038175169D1B23002BE836 /* SHAddNotebookViewController.m in Sources */,
 				D43F2C13169EA64700799119 /* SHNoteTableCell.m in Sources */,
-				584BA9C0169F0E3E007FF9E8 /* HHYoukuMenuView.m in Sources */,
-				584BAA0F169F1931007FF9E8 /* HHViewController.m in Sources */,
+				584BA9C0169F0E3E007FF9E8 /* SHBottomMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
