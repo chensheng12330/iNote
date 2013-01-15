@@ -77,6 +77,22 @@
 		584BAA01169F0E3E007FF9E8 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584BA9BF169F0E3E007FF9E8 /* View.xib */; };
 		584BAA04169F0EF9007FF9E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BAA03169F0EF9007FF9E8 /* QuartzCore.framework */; };
 		584BAA06169F174C007FF9E8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BAA05169F174C007FF9E8 /* ImageIO.framework */; };
+		588AAA3716A59C6700C50D09 /* AnimationChaining.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA1A16A59C6700C50D09 /* AnimationChaining.m */; };
+		588AAA3816A59C6700C50D09 /* BackInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA1C16A59C6700C50D09 /* BackInOut.m */; };
+		588AAA3916A59C6700C50D09 /* FadeBackgroundColorInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA1E16A59C6700C50D09 /* FadeBackgroundColorInOut.m */; };
+		588AAA3A16A59C6700C50D09 /* FadeInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2016A59C6700C50D09 /* FadeInOut.m */; };
+		588AAA3B16A59C6700C50D09 /* FallInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2216A59C6700C50D09 /* FallInOut.m */; };
+		588AAA3C16A59C6700C50D09 /* FlyOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2416A59C6700C50D09 /* FlyOut.m */; };
+		588AAA3D16A59C6700C50D09 /* GestureRecognizerBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2616A59C6700C50D09 /* GestureRecognizerBlocks.m */; };
+		588AAA3E16A59C6700C50D09 /* PopInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2816A59C6700C50D09 /* PopInOut.m */; };
+		588AAA3F16A59C6700C50D09 /* SimpleAnimationExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2A16A59C6700C50D09 /* SimpleAnimationExample.m */; };
+		588AAA4016A59C6700C50D09 /* SlideInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2C16A59C6700C50D09 /* SlideInOut.m */; };
+		588AAA4116A59C6700C50D09 /* FTAnimation+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA2E16A59C6700C50D09 /* FTAnimation+UIView.m */; };
+		588AAA4216A59C6700C50D09 /* FTAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA3116A59C6700C50D09 /* FTAnimationManager.m */; };
+		588AAA4316A59C6700C50D09 /* FTUtils+NSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA3316A59C6700C50D09 /* FTUtils+NSObject.m */; };
+		588AAA4416A59C6700C50D09 /* FTUtils+UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA3516A59C6700C50D09 /* FTUtils+UIGestureRecognizer.m */; };
+		588AAA4716A59FA400C50D09 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 588AAA4616A59FA400C50D09 /* OCMock.framework */; };
+		588AAA4A16A5A10D00C50D09 /* ExampleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 588AAA4916A5A10C00C50D09 /* ExampleManager.m */; };
 		840808851663A51E00028F77 /* SHSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840808831663A51E00028F77 /* SHSettingViewController.m */; };
 		840808861663A51E00028F77 /* SHSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840808841663A51E00028F77 /* SHSettingViewController.xib */; };
 		84166CBA1610A51900183621 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84166CB91610A51900183621 /* icon.png */; };
@@ -287,6 +303,40 @@
 		584BA9BF169F0E3E007FF9E8 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		584BAA03169F0EF9007FF9E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		584BAA05169F174C007FF9E8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		588AAA1916A59C6700C50D09 /* AnimationChaining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationChaining.h; sourceTree = "<group>"; };
+		588AAA1A16A59C6700C50D09 /* AnimationChaining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationChaining.m; sourceTree = "<group>"; };
+		588AAA1B16A59C6700C50D09 /* BackInOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackInOut.h; sourceTree = "<group>"; };
+		588AAA1C16A59C6700C50D09 /* BackInOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackInOut.m; sourceTree = "<group>"; };
+		588AAA1D16A59C6700C50D09 /* FadeBackgroundColorInOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FadeBackgroundColorInOut.h; sourceTree = "<group>"; };
+		588AAA1E16A59C6700C50D09 /* FadeBackgroundColorInOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FadeBackgroundColorInOut.m; sourceTree = "<group>"; };
+		588AAA1F16A59C6700C50D09 /* FadeInOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FadeInOut.h; sourceTree = "<group>"; };
+		588AAA2016A59C6700C50D09 /* FadeInOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FadeInOut.m; sourceTree = "<group>"; };
+		588AAA2116A59C6700C50D09 /* FallInOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallInOut.h; sourceTree = "<group>"; };
+		588AAA2216A59C6700C50D09 /* FallInOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FallInOut.m; sourceTree = "<group>"; };
+		588AAA2316A59C6700C50D09 /* FlyOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyOut.h; sourceTree = "<group>"; };
+		588AAA2416A59C6700C50D09 /* FlyOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyOut.m; sourceTree = "<group>"; };
+		588AAA2516A59C6700C50D09 /* GestureRecognizerBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureRecognizerBlocks.h; sourceTree = "<group>"; };
+		588AAA2616A59C6700C50D09 /* GestureRecognizerBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureRecognizerBlocks.m; sourceTree = "<group>"; };
+		588AAA2716A59C6700C50D09 /* PopInOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopInOut.h; sourceTree = "<group>"; };
+		588AAA2816A59C6700C50D09 /* PopInOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopInOut.m; sourceTree = "<group>"; };
+		588AAA2916A59C6700C50D09 /* SimpleAnimationExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAnimationExample.h; sourceTree = "<group>"; };
+		588AAA2A16A59C6700C50D09 /* SimpleAnimationExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAnimationExample.m; sourceTree = "<group>"; };
+		588AAA2B16A59C6700C50D09 /* SlideInOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideInOut.h; sourceTree = "<group>"; };
+		588AAA2C16A59C6700C50D09 /* SlideInOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideInOut.m; sourceTree = "<group>"; };
+		588AAA2D16A59C6700C50D09 /* FTAnimation+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTAnimation+UIView.h"; sourceTree = "<group>"; };
+		588AAA2E16A59C6700C50D09 /* FTAnimation+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FTAnimation+UIView.m"; sourceTree = "<group>"; };
+		588AAA2F16A59C6700C50D09 /* FTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAnimation.h; sourceTree = "<group>"; };
+		588AAA3016A59C6700C50D09 /* FTAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAnimationManager.h; sourceTree = "<group>"; };
+		588AAA3116A59C6700C50D09 /* FTAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAnimationManager.m; sourceTree = "<group>"; };
+		588AAA3216A59C6700C50D09 /* FTUtils+NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTUtils+NSObject.h"; sourceTree = "<group>"; };
+		588AAA3316A59C6700C50D09 /* FTUtils+NSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FTUtils+NSObject.m"; sourceTree = "<group>"; };
+		588AAA3416A59C6700C50D09 /* FTUtils+UIGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTUtils+UIGestureRecognizer.h"; sourceTree = "<group>"; };
+		588AAA3516A59C6700C50D09 /* FTUtils+UIGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FTUtils+UIGestureRecognizer.m"; sourceTree = "<group>"; };
+		588AAA3616A59C6700C50D09 /* FTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUtils.h; sourceTree = "<group>"; };
+		588AAA4616A59FA400C50D09 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = iNote/LIbraries/FTUtiles/OCMock.framework; sourceTree = "<group>"; };
+		588AAA4816A5A10C00C50D09 /* ExampleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleManager.h; sourceTree = "<group>"; };
+		588AAA4916A5A10C00C50D09 /* ExampleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleManager.m; sourceTree = "<group>"; };
+		588AAA4B16A5A16500C50D09 /* FTUtilsExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUtilsExample.h; sourceTree = "<group>"; };
 		840808821663A51E00028F77 /* SHSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSettingViewController.h; sourceTree = "<group>"; };
 		840808831663A51E00028F77 /* SHSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSettingViewController.m; sourceTree = "<group>"; };
 		840808841663A51E00028F77 /* SHSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSettingViewController.xib; sourceTree = "<group>"; };
@@ -522,6 +572,7 @@
 				D43BD2FA160C55850091A219 /* UIKit.framework in Frameworks */,
 				D43BD2FC160C55850091A219 /* Foundation.framework in Frameworks */,
 				D43BD2FE160C55850091A219 /* CoreGraphics.framework in Frameworks */,
+				588AAA4716A59FA400C50D09 /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +672,54 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		588AAA1716A59C6700C50D09 /* FTUtiles */ = {
+			isa = PBXGroup;
+			children = (
+				588AAA1816A59C6700C50D09 /* ExampleManager */,
+				588AAA2D16A59C6700C50D09 /* FTAnimation+UIView.h */,
+				588AAA2E16A59C6700C50D09 /* FTAnimation+UIView.m */,
+				588AAA2F16A59C6700C50D09 /* FTAnimation.h */,
+				588AAA3016A59C6700C50D09 /* FTAnimationManager.h */,
+				588AAA3116A59C6700C50D09 /* FTAnimationManager.m */,
+				588AAA3216A59C6700C50D09 /* FTUtils+NSObject.h */,
+				588AAA3316A59C6700C50D09 /* FTUtils+NSObject.m */,
+				588AAA3416A59C6700C50D09 /* FTUtils+UIGestureRecognizer.h */,
+				588AAA3516A59C6700C50D09 /* FTUtils+UIGestureRecognizer.m */,
+				588AAA3616A59C6700C50D09 /* FTUtils.h */,
+			);
+			path = FTUtiles;
+			sourceTree = "<group>";
+		};
+		588AAA1816A59C6700C50D09 /* ExampleManager */ = {
+			isa = PBXGroup;
+			children = (
+				588AAA4B16A5A16500C50D09 /* FTUtilsExample.h */,
+				588AAA4816A5A10C00C50D09 /* ExampleManager.h */,
+				588AAA4916A5A10C00C50D09 /* ExampleManager.m */,
+				588AAA2916A59C6700C50D09 /* SimpleAnimationExample.h */,
+				588AAA2A16A59C6700C50D09 /* SimpleAnimationExample.m */,
+				588AAA1916A59C6700C50D09 /* AnimationChaining.h */,
+				588AAA1A16A59C6700C50D09 /* AnimationChaining.m */,
+				588AAA1B16A59C6700C50D09 /* BackInOut.h */,
+				588AAA1C16A59C6700C50D09 /* BackInOut.m */,
+				588AAA1D16A59C6700C50D09 /* FadeBackgroundColorInOut.h */,
+				588AAA1E16A59C6700C50D09 /* FadeBackgroundColorInOut.m */,
+				588AAA1F16A59C6700C50D09 /* FadeInOut.h */,
+				588AAA2016A59C6700C50D09 /* FadeInOut.m */,
+				588AAA2116A59C6700C50D09 /* FallInOut.h */,
+				588AAA2216A59C6700C50D09 /* FallInOut.m */,
+				588AAA2316A59C6700C50D09 /* FlyOut.h */,
+				588AAA2416A59C6700C50D09 /* FlyOut.m */,
+				588AAA2516A59C6700C50D09 /* GestureRecognizerBlocks.h */,
+				588AAA2616A59C6700C50D09 /* GestureRecognizerBlocks.m */,
+				588AAA2716A59C6700C50D09 /* PopInOut.h */,
+				588AAA2816A59C6700C50D09 /* PopInOut.m */,
+				588AAA2B16A59C6700C50D09 /* SlideInOut.h */,
+				588AAA2C16A59C6700C50D09 /* SlideInOut.m */,
+			);
+			path = ExampleManager;
+			sourceTree = "<group>";
+		};
 		840808801663A43A00028F77 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +801,7 @@
 		D43BD2F8160C55850091A219 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				588AAA4616A59FA400C50D09 /* OCMock.framework */,
 				584BAA03169F0EF9007FF9E8 /* QuartzCore.framework */,
 				D4A1B7461640C1F20021CFDF /* Security.framework */,
 				D4A1B7441640C1E70021CFDF /* MessageUI.framework */,
@@ -948,6 +1048,7 @@
 		D4D91F99161017B300A634CF /* LIbraries */ = {
 			isa = PBXGroup;
 			children = (
+				588AAA1716A59C6700C50D09 /* FTUtiles */,
 				D4872C251671B7360046D938 /* FDBM */,
 				D48E0316166C958700068EF0 /* JSON */,
 				D4D91F9A161017B300A634CF /* ASIHTTPRequest */,
@@ -1374,6 +1475,21 @@
 				D4038175169D1B23002BE836 /* SHAddNotebookViewController.m in Sources */,
 				D43F2C13169EA64700799119 /* SHNoteTableCell.m in Sources */,
 				584BA9C0169F0E3E007FF9E8 /* SHBottomMenuView.m in Sources */,
+				588AAA3716A59C6700C50D09 /* AnimationChaining.m in Sources */,
+				588AAA3816A59C6700C50D09 /* BackInOut.m in Sources */,
+				588AAA3916A59C6700C50D09 /* FadeBackgroundColorInOut.m in Sources */,
+				588AAA3A16A59C6700C50D09 /* FadeInOut.m in Sources */,
+				588AAA3B16A59C6700C50D09 /* FallInOut.m in Sources */,
+				588AAA3C16A59C6700C50D09 /* FlyOut.m in Sources */,
+				588AAA3D16A59C6700C50D09 /* GestureRecognizerBlocks.m in Sources */,
+				588AAA3E16A59C6700C50D09 /* PopInOut.m in Sources */,
+				588AAA3F16A59C6700C50D09 /* SimpleAnimationExample.m in Sources */,
+				588AAA4016A59C6700C50D09 /* SlideInOut.m in Sources */,
+				588AAA4116A59C6700C50D09 /* FTAnimation+UIView.m in Sources */,
+				588AAA4216A59C6700C50D09 /* FTAnimationManager.m in Sources */,
+				588AAA4316A59C6700C50D09 /* FTUtils+NSObject.m in Sources */,
+				588AAA4416A59C6700C50D09 /* FTUtils+UIGestureRecognizer.m in Sources */,
+				588AAA4A16A5A10D00C50D09 /* ExampleManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1478,6 +1594,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Chen (NB3Z8Z4U8A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Chen (NB3Z8Z4U8A)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iNote/LIbraries/FTUtiles\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iNote/iNote-Prefix.pch";
 				INFOPLIST_FILE = "iNote/iNote-Info.plist";
@@ -1498,6 +1618,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Chen (NB3Z8Z4U8A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Chen (NB3Z8Z4U8A)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iNote/LIbraries/FTUtiles\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iNote/iNote-Prefix.pch";
 				INFOPLIST_FILE = "iNote/iNote-Info.plist";
