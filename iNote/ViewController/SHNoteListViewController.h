@@ -18,7 +18,9 @@ SHBottomMenuDelegate,UISearchBarDelegate>
     NSMutableArray *myTableDataSource;
     SHNoteModelManager *noteMM;
 }
+-(void)showOrHideSearchBar;
 
+@property (nonatomic, retain) IBOutlet UISearchBar *mySearchBar;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic,readonly, retain) SHBottomMenuView *youkuMenuView;
 @end

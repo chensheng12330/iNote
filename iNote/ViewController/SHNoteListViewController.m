@@ -16,6 +16,7 @@
 
 @implementation SHNoteListViewController
 @synthesize tableView,youkuMenuView;
+@synthesize mySearchBar = _mySearchBar;
 
 - (void)viewDidLoad
 {
@@ -24,6 +25,10 @@
     myTableDataSource = [[noteMM getAllNoteFromDB] retain];
     
     [self bottomMenuViewDidLoad];
+    
+    //add search bar
+    [_mySearchBar setHidden:YES];
+    [self.view addSubview:_mySearchBar];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -33,13 +38,14 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 -(void)dealloc
 {
     [noteMM release];
     
+    [_mySearchBar       release];
     [myTableDataSource  release];
     [youkuMenuView      release];
     [tableView          release];
@@ -179,9 +185,11 @@
     if (![youkuMenuView  getisMenuHide]&&!scrollView.decelerating)
     {
         [youkuMenuView  showOrHideMenu];
+        [self showOrHideSearchBar];
         [self performSelector:@selector(showMeunButton) withObject:nil afterDelay:1];
     }
 }
+
 - (void)showMeunButton
 {
     UIView *button = [self.view viewWithTag:111];
@@ -190,7 +198,73 @@
 -(void) bottomMenuView:(SHBottomMenuView*) botMenuView SelectButton:(MENU_KIND)_menu_kind
 {
     if (_menu_kind == MK_HOME) {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        //[self.navigationController setNavigationBarHidden:NO animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
+    if (_menu_kind == MK_FIND) {
+        //[self.view addSubview:_mySearchBar];
+        [self showOrHideSearchBar];
+    }
+}
+
+#pragma mark - SearchBar_Delegate
+
+- (void)showOrHideSearchBar
+{
+    [UIView beginAnimations:@"present-countdown" context:nil];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationDelegate:_mySearchBar];
+    //[UIView setAnimationDidStopSelector:@selector(hideMenuAnimationStop)];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [_mySearchBar setHidden:!_mySearchBar.hidden];
+    [UIView commitAnimations];
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar                      // return NO to not become first responder
+{
+    return YES;
+}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar                     // called when text starts editing
+{
+    
+}
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar                        // return NO to not resign first responder
+{
+    return YES;
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar                       // called when text ends editing
+{
+    
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText   // called when text changes (including clear)
+{
+    
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text  // called before text changes
+{
+    return YES;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar                     // called when keyboard search button pressed
+{
+    
+}
+- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar                   // called when bookmark button pressed
+{
+    return;
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar                    // called when cancel button pressed
+{
+    
+}
+- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar // called when search results button pressed
+{
+    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    
 }
 @end
