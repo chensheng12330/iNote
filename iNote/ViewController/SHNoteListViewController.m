@@ -9,6 +9,7 @@
 #import "SHNoteListViewController.h"
 #import "SHNoteTableCell.h"
 #import "NSString+SHNSStringForDate.h"
+#import "SHFTAnimationExample.h"
 
 @interface SHNoteListViewController ()
 -(void)bottomMenuViewDidLoad;
@@ -211,17 +212,13 @@
 
 - (void)showOrHideSearchBar
 {
-    [UIView beginAnimations:@"present-countdown" context:nil];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationDelegate:_mySearchBar];
-    //[UIView setAnimationDidStopSelector:@selector(hideMenuAnimationStop)];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [_mySearchBar setHidden:!_mySearchBar.hidden];
-    [UIView commitAnimations];
+    [SHFTAnimationExample BackInOut:kFTAnimationTop mainView:_mySearchBar inView:_mySearchBar.superview withFade:YES duration:BACKINOUT_DURA delegate:nil startSelector:nil stopSelector:nil];
+    return;
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar                      // return NO to not become first responder
 {
+    
     return YES;
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar                     // called when text starts editing
@@ -256,7 +253,7 @@
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar                    // called when cancel button pressed
 {
-    
+    [SHFTAnimationExample FadeBackgroundColorInOut:FADE_COLOR_INOUT_DURA mainView:searchBar delegate:nil startSelector:nil stopSelector:nil];
 }
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar // called when search results button pressed
 {

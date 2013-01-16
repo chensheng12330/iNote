@@ -49,6 +49,7 @@
 {
     [super viewDidLoad];
     
+    
 	// Do any additional setup after loading the view, typically from a nib.
     backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Firstbg0.png"]];
     backImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);    
