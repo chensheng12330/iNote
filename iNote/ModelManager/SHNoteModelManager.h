@@ -17,6 +17,7 @@
 }
 
 -(NSMutableArray*) getAllNoteFromDB;
+-(NSMutableArray*) getNotesWithNotebookName:(NSString*) _notebookName;
 -(BOOL) addNote:(SHNote*)_note;
 -(BOOL) deleteNoteWithName:(NSString*)_noteName;
 

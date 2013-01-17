@@ -12,29 +12,66 @@
 #import "SHFTAnimationExample.h"
 
 @interface SHNoteListViewController ()
--(void)bottomMenuViewDidLoad;
+-(void) bottomMenuViewDidLoad;
+-(void) showOrHideSearchBar;
+-(void) pinHeaderView;
+-(void) unpinHeaderView;
 @end
 
 @implementation SHNoteListViewController
 @synthesize tableView,youkuMenuView;
 @synthesize mySearchBar = _mySearchBar;
+@synthesize myTableDataSource;
+@synthesize strTableHeadString = _strTableHeadString;
+@synthesize emDataSourceType   = _emDataSourceType;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _emDataSourceType = NL_ALL_NOTEBOOK;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     noteMM = [[SHNoteModelManager alloc] init];
-    myTableDataSource = [[noteMM getAllNoteFromDB] retain];
+
+    // set tableview datasourece
+    if (_emDataSourceType == NL_ALL_NOTEBOOK) {
+        //all notebook's notes
+        myTableDataSource = [[noteMM getAllNoteFromDB] retain];
+        self.strTableHeadString = @"所有笔记";
+    }
+    else if (_emDataSourceType == NL_SINGLE_NOTEBOOK)
+    {
+        //singl notebook's notes
+        myTableDataSource = [[noteMM getNotesWithNotebookName:_strTableHeadString] retain];
+    }
+    else if (_emDataSourceType == NL_SEARCH_NOTES)
+    {
+        // search result
+    }
     
+    //add bottom Menu view
     [self bottomMenuViewDidLoad];
     
     //add search bar
     [_mySearchBar setHidden:YES];
-    [self.view addSubview:_mySearchBar];
+    //tableView.tableFooterView = _mySearchBar;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];   
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self  showOrHideSearchBar];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -50,6 +87,7 @@
     [myTableDataSource  release];
     [youkuMenuView      release];
     [tableView          release];
+    [_strTableHeadString release];
     [super dealloc];
 }
 
@@ -65,6 +103,11 @@
 {
     // Return the number of sections.
     return 1;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return nil;
+    return _strTableHeadString;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -185,9 +228,14 @@
 {
     if (![youkuMenuView  getisMenuHide]&&!scrollView.decelerating)
     {
+        //Hide SearchBar
+        //[self unpinHeaderView];
+        //[_mySearchBar setHidden:YES];
+        
         [youkuMenuView  showOrHideMenu];
-        [self showOrHideSearchBar];
         [self performSelector:@selector(showMeunButton) withObject:nil afterDelay:1];
+        
+        
     }
 }
 
@@ -196,6 +244,24 @@
     UIView *button = [self.view viewWithTag:111];
     button.hidden = NO;
 }
+
+- (void) pinHeaderView
+{
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        self.tableView.tableHeaderView = _mySearchBar;
+        self.tableView.contentInset = UIEdgeInsetsMake(_mySearchBar.frame.origin.x+4, 0, 0.0f, 0.0f);
+    }];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) unpinHeaderView
+{
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        self.tableView.tableHeaderView = nil;
+    }];
+}
+
 -(void) bottomMenuView:(SHBottomMenuView*) botMenuView SelectButton:(MENU_KIND)_menu_kind
 {
     if (_menu_kind == MK_HOME) {
@@ -203,16 +269,31 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     if (_menu_kind == MK_FIND) {
-        //[self.view addSubview:_mySearchBar];
         [self showOrHideSearchBar];
+    }
+    if (_menu_kind == MK_INFO) {
+        //[SHFTAnimationExample ControlViewMove:_mySearchBar];
     }
 }
 
 #pragma mark - SearchBar_Delegate
 
 - (void)showOrHideSearchBar
-{
-    [SHFTAnimationExample BackInOut:kFTAnimationTop mainView:_mySearchBar inView:_mySearchBar.superview withFade:YES duration:BACKINOUT_DURA delegate:nil startSelector:nil stopSelector:nil];
+{    
+    //tableView.autoresizingMask =  UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    if (!_mySearchBar.hidden) { //搜索条隐藏
+        [SHFTAnimationExample BackInOut:kFTAnimationTop mainView:_mySearchBar inView:tableView withFade:YES duration:0.6 delegate:nil startSelector:nil stopSelector:nil];
+        
+        [self performSelector:@selector(unpinHeaderView) withObject:nil afterDelay:0.5];
+    }
+    else
+    {
+        [SHFTAnimationExample BackInOut:kFTAnimationTop mainView:_mySearchBar inView:tableView withFade:YES duration:0.8 delegate:nil startSelector:@selector(pinHeaderView) stopSelector:nil];
+        
+        [self pinHeaderView];
+    }
+    
     return;
 }
 
@@ -253,7 +334,8 @@
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar                    // called when cancel button pressed
 {
-    [SHFTAnimationExample FadeBackgroundColorInOut:FADE_COLOR_INOUT_DURA mainView:searchBar delegate:nil startSelector:nil stopSelector:nil];
+    [searchBar resignFirstResponder];
+    //[SHFTAnimationExample FadeBackgroundColorInOut:FADE_BACOLOR_INOUT_DURA mainView:searchBar delegate:nil startSelector:nil stopSelector:nil];
 }
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar // called when search results button pressed
 {

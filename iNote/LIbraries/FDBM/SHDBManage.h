@@ -111,6 +111,7 @@ typedef enum {
 //定时整理 note_id值[]
 //Note info
 -(NSMutableArray*)getAllNotes;
+-(NSMutableArray*)getNotesWithNoteBookName:(NSString*)_book_name;
 -(SHNote*)getNoteWithNoteID:(int)_note_id;
 -(SHNote*)getNoteWithNotePath:(NSString*)_notepath;
 

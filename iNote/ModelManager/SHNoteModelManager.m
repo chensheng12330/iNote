@@ -26,6 +26,10 @@
 {
     return [_dbManage getAllNotes];
 }
+-(NSMutableArray*) getNotesWithNotebookName:(NSString*) _notebookName
+{
+    return [_dbManage getNotesWithNoteBookName:_notebookName];
+}
 
 -(BOOL) addNote:(SHNote*)_note
 {

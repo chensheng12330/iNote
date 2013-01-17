@@ -7,10 +7,9 @@
 //
 
 #import "SHNoteBookListViewController.h"
-
 #import "NSString+SHNSStringForDate.h"
 #import "SHNotebook.h"
-
+#import "SHNoteListViewController.h"
 
 #define TABLE_SECTION_0 @"经常使用"
 #define TABLE_SECTION_1 @"最近使用"
@@ -78,8 +77,7 @@
 {
     [super viewWillAppear:animated];
     
-    //self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"主页" style:UIBarButtonItemStyleDone target:self action:@selector(backToMainView:)]autorelease];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationItem setTitle:@"笔记本"];
 }
 
@@ -218,13 +216,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    //get notebook info
+    NSString *strNotebookName = [self.tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+    //push notelist viewcontroller
+    
+    SHNoteListViewController *notelistViewControl = [[SHNoteListViewController alloc] init];
+    [notelistViewControl setEmDataSourceType:NL_SINGLE_NOTEBOOK];
+    [notelistViewControl setStrTableHeadString:strNotebookName];
+    [self.navigationController pushViewController:notelistViewControl animated:YES];
+    
+    //release
+    [notelistViewControl release];
+    return;
 }
 
 #pragma mark - Datasource

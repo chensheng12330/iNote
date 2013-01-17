@@ -11,6 +11,13 @@
 
 @interface SHFTAnimationExample : NSObject
 
+
+/*
+ 说明：
+ 该工具库，所进行 if(_mainView.hidden) 代码处理后，会自动设置其Hidden属性。
+ 所以在进行动画操作后，不必进行其视图属性的Hidden设置
+ */
+
 #define BACKINOUT_DURA (0.4)
 //跳动移动视图 [方向可选]
 +(void) BackInOut:(FTAnimationDirection)direction  //动画方向
@@ -24,7 +31,7 @@
 
 //平向移动视图，不加任何附属动作 [方向可选]
 #define SLIDE_INOUT_DIRA (0.4)
--(void) SlideInOut:(FTAnimationDirection)direction
++(void) SlideInOut:(FTAnimationDirection)direction
           mainView:(UIView*)_mainView
             inView:(UIView*)_inView
           withFade:(BOOL)fade
@@ -33,13 +40,15 @@
      startSelector:(SEL)startSelector
       stopSelector:(SEL)stopSelector;
 
-#define FADE_COLOR_INOUT_DURA (0.4)
+#define FADE_BACOLOR_INOUT_DURA (0.4)
 //视图背景颜色渐变
 +(void) FadeBackgroundColorInOut:(NSTimeInterval)duration
                         mainView:(UIView*)_mainView
                         delegate:(id)delegate
                    startSelector:(SEL)startSelector
                     stopSelector:(SEL)stopSelector;
+
+#define FADE_INOUT_DURA (0.4)
 //渐入视图
 +(void) FadeInOut:(NSTimeInterval)duration
          mainView:(UIView*)_mainView
@@ -47,6 +56,7 @@
     startSelector:(SEL)startSelector
      stopSelector:(SEL)stopSelector;
 
+#define FLYOUT_DURA (0.4)
 //放大消失(飞出)
 +(void) FlyOut:(NSTimeInterval)duration
       mainView:(UIView*)_mainView
@@ -54,6 +64,7 @@
  startSelector:(SEL)startSelector
   stopSelector:(SEL)stopSelector;
 
+#define FALL_INOUT_DURA (0.4)
 //从天而降-缩小消失
 +(void) FallInOut:(NSTimeInterval)duration
          mainView:(UIView*)_mainView
@@ -61,6 +72,7 @@
     startSelector:(SEL)startSelector
      stopSelector:(SEL)stopSelector;
 
+#define POP_INOUT_DURA (0.4)
 //弹入，弹出
 +(void) PopInOut:(NSTimeInterval)duration
         mainView:(UIView*)_mainView
@@ -68,4 +80,7 @@
    startSelector:(SEL)startSelector
     stopSelector:(SEL)stopSelector;
 
+//触摸视图移动
++(void) ControlViewMove:(UIView*)viewToAnimate;
++(void) ReleaseControlView:(UIView*)viewToAnimate;
 @end

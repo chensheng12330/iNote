@@ -635,6 +635,12 @@ static SHDBManage *_sharedDBManage = nil;
     if (_note_field == NF_NONE) {
        rs = [db executeQuery:@"select * from NoteTable"];
     }
+    else if (_note_field == NF_NOTEBOOK_NAME)
+    {
+        rs = [db executeQuery:
+              @"select * from NoteTable  where \
+              is_delete =? and notebook_name=? ",@"0",_string];
+    }
     else if (_note_field == NF_NOTE_DELETE)
     {
         rs = [db executeQuery:@"select * from NoteTable where is_delete =?",_string];
@@ -684,6 +690,11 @@ static SHDBManage *_sharedDBManage = nil;
 -(NSMutableArray*)getAllNotes
 {
     return [self getNoteWithNOTE_FIELD:NF_NOTE_DELETE Value:@"0"]; //获取未逻辑删除的数据
+}
+-(NSMutableArray*)getNotesWithNoteBookName:(NSString*)_book_name
+{
+    DBMQuickCheck(_book_name);
+    return [self getNoteWithNOTE_FIELD:NF_NOTEBOOK_NAME Value:_book_name];
 }
 
 -(SHNote*)getNoteWithNoteID:(int)_note_id

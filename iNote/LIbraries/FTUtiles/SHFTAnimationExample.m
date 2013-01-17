@@ -7,6 +7,7 @@
 //
 
 #import "SHFTAnimationExample.h"
+#import "FTUtils+UIGestureRecognizer.h"
 
 @implementation SHFTAnimationExample
 
@@ -33,7 +34,7 @@
     return;
 }
 
--(void) SlideInOut:(FTAnimationDirection)direction
++(void) SlideInOut:(FTAnimationDirection)direction
           mainView:(UIView*)_mainView
             inView:(UIView*)_inView
           withFade:(BOOL)fade
@@ -46,6 +47,7 @@
                _mainView == NULL || _mainView.retainCount<1 ||
                _inView   == NULL || _inView.retainCount<1),
              @"SHFTAnimationExample->SlideInOut: paramerter is null");
+    
     if(_mainView.hidden) {
         [_mainView slideInFrom:direction inView:_inView duration:duration delegate:delegate startSelector:startSelector stopSelector:stopSelector];
     } else {
@@ -118,9 +120,9 @@
              @"SHFTAnimationExample->FallInOut: paramerter is null");
     
     if(_mainView.hidden) {
-        [_mainView fallIn:duration delegate:nil startSelector:nil stopSelector:nil];
+        [_mainView fallIn:duration delegate:delegate startSelector:startSelector stopSelector:stopSelector];
     } else {
-        [_mainView fallOut:duration delegate:nil startSelector:nil stopSelector:nil];
+        [_mainView fallOut:duration delegate:delegate startSelector:startSelector stopSelector:stopSelector];
     }
     return;
 }
@@ -136,11 +138,66 @@
     NSAssert(!(_mainView == NULL || _mainView.retainCount<1),
              @"SHFTAnimationExample->PopInOut: paramerter is null");
     
-    if(_mainView.hidden) {
-        [_mainView popIn:duration delegate:nil startSelector:nil stopSelector:nil];
+    if(!_mainView.hidden) {
+        [_mainView popIn:duration delegate:delegate startSelector:startSelector stopSelector:stopSelector];
     } else {
-        [_mainView popOut:duration delegate:nil startSelector:nil stopSelector:nil];
+        [_mainView popOut:duration delegate:delegate startSelector:startSelector stopSelector:stopSelector];
     }
     return;
+}
+
++(void) ControlViewMove:(UIView*)viewToAnimate
+{
+    // parameter check
+    NSAssert(!(viewToAnimate == NULL || viewToAnimate.retainCount<1),
+             @"SHFTAnimationExample->ControlViewMove: paramerter is null");
+    
+    viewToAnimate.userInteractionEnabled = YES;
+    viewToAnimate.multipleTouchEnabled   = YES;
+#if NS_BLOCKS_AVAILABLE
+    
+    [viewToAnimate addGestureRecognizer:
+     [UIPanGestureRecognizer recognizerWithActionBlock:^(UIPanGestureRecognizer *pan) {
+        if(pan.state == UIGestureRecognizerStateBegan ||
+           pan.state == UIGestureRecognizerStateChanged) {
+            CGPoint translation = [pan translationInView:viewToAnimate.superview];
+            
+            viewToAnimate.center =  CGPointMake(viewToAnimate.center.x + translation.x,
+                                                     viewToAnimate.center.y + translation.y);
+            [pan setTranslation:CGPointZero inView:viewToAnimate.superview];
+        }
+    }]];
+    
+    UIPinchGestureRecognizer *thePinch = [UIPinchGestureRecognizer recognizer];
+    thePinch.actionBlock = ^(UIPinchGestureRecognizer *pinch) {
+        if ([pinch state] == UIGestureRecognizerStateBegan ||
+            [pinch state] == UIGestureRecognizerStateChanged) {
+            viewToAnimate.transform = CGAffineTransformScale(viewToAnimate.transform, pinch.scale, pinch.scale);
+            [pinch setScale:1];
+        }
+    };
+    [viewToAnimate addGestureRecognizer:thePinch];
+    
+    UITapGestureRecognizer *doubleTap = [UITapGestureRecognizer recognizerWithActionBlock:^(id dTap) {
+        thePinch.disabled = !thePinch.disabled;
+        [UIView animateWithDuration:.25f animations:^{
+            viewToAnimate.transform = CGAffineTransformIdentity;
+        }];
+    }];
+    doubleTap.numberOfTapsRequired = 2;
+    [viewToAnimate addGestureRecognizer:doubleTap];
+    
+#endif
+    
+}
++(void) ReleaseControlView:(UIView*)viewToAnimate
+{
+    // parameter check
+    NSAssert(!(viewToAnimate == NULL || viewToAnimate.retainCount<1),
+             @"SHFTAnimationExample->ReleaseControlView: paramerter is null");
+    
+    for(UIGestureRecognizer *recognizer in viewToAnimate.gestureRecognizers) {
+        [viewToAnimate removeGestureRecognizer:recognizer];
+    }
 }
 @end

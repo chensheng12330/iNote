@@ -147,6 +147,7 @@
             break;
         case 3:
             subViewController = [[SHNoteListViewController alloc] init];
+            [((SHNoteListViewController*)subViewController) setEmDataSourceType:NL_ALL_NOTEBOOK];
             break;
         case 4:
             break;
@@ -174,6 +175,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIDeviceOrientationPortraitUpsideDown);
 }
 @end
