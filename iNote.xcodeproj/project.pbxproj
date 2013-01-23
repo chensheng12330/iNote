@@ -892,7 +892,6 @@
 		D43BD2EA160C55850091A219 = {
 			isa = PBXGroup;
 			children = (
-				584BAA05169F174C007FF9E8 /* ImageIO.framework */,
 				D43BD2FF160C55850091A219 /* iNote */,
 				D43BD31D160C55850091A219 /* iNoteTests */,
 				D43BD2F8160C55850091A219 /* Frameworks */,
@@ -912,6 +911,7 @@
 		D43BD2F8160C55850091A219 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				584BAA05169F174C007FF9E8 /* ImageIO.framework */,
 				584BAA03169F0EF9007FF9E8 /* QuartzCore.framework */,
 				D4A1B7461640C1F20021CFDF /* Security.framework */,
 				D4A1B7441640C1E70021CFDF /* MessageUI.framework */,

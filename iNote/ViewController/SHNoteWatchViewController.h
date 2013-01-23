@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SHNote.h"
+#import "QuadCurveMenu.h"
 
-@interface SHNoteWatchViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate>
-
+@interface SHNoteWatchViewController : UIViewController
+<UIWebViewDelegate, UIActionSheetDelegate,QuadCurveMenuDelegate>
+{
+    QuadCurveMenu *quadCurveMenu;
+}
 @property (nonatomic,readonly, retain) SHNote   *noteInfo;
 @property (nonatomic, retain) NSString *strWebContent;
 @property (nonatomic, readwrite, assign, getter = isToolbarHidden) BOOL toolbarHidden;

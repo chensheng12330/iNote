@@ -34,6 +34,9 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
 @property (nonatomic, readwrite, retain) NSURL* loadingURL;
 
 @property (nonatomic, readwrite, retain) NSURLRequest* loadRequest;
+
+//load quadCureveMenu
+-(void)loadQuadCurveMenu;
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +69,7 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     
     [_noteInfo      release];
     [_strWebContent release];
+    [quadCurveMenu  release];
     [super dealloc];
 }
 
@@ -119,7 +123,61 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     }
 }
 
+-(void) loadQuadCurveMenu
+{
+    UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
+    UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
+    
+    // Camera MenuItem.
+    QuadCurveMenuItem *cameraMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                highlightedImage:storyMenuItemImagePressed
+                                                                    ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                         highlightedContentImage:nil];
+    // People MenuItem.
+    QuadCurveMenuItem *peopleMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                highlightedImage:storyMenuItemImagePressed
+                                                                    ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                         highlightedContentImage:nil];
+    // Place MenuItem.
+    QuadCurveMenuItem *placeMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                               highlightedImage:storyMenuItemImagePressed
+                                                                   ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                        highlightedContentImage:nil];
+    // Music MenuItem.
+    QuadCurveMenuItem *musicMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                               highlightedImage:storyMenuItemImagePressed
+                                                                   ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                        highlightedContentImage:nil];
+    // Thought MenuItem.
+    QuadCurveMenuItem *thoughtMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                 highlightedImage:storyMenuItemImagePressed
+                                                                     ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                          highlightedContentImage:nil];
+    // Sleep MenuItem.
+    QuadCurveMenuItem *sleepMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                               highlightedImage:storyMenuItemImagePressed
+                                                                   ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                        highlightedContentImage:nil];
+    
+    NSArray *menus = [NSArray arrayWithObjects:cameraMenuItem, peopleMenuItem, placeMenuItem, musicMenuItem, thoughtMenuItem, sleepMenuItem, nil];
+    [cameraMenuItem release];
+    [peopleMenuItem release];
+    [placeMenuItem release];
+    [musicMenuItem release];
+    [thoughtMenuItem release];
+    [sleepMenuItem release];
 
+    
+    CGRect rect =  self.view.bounds;
+    
+    quadCurveMenu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(0, 0, 320, 640) menus:menus];
+    quadCurveMenu.delegate = self;
+}
+
+- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
+{
+    NSLog(@"Select the index : %d",idx);
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)loadView {
     [super loadView];
@@ -215,6 +273,8 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     
     [self.view addSubview:self.webView];
     
+    [self loadQuadCurveMenu];
+    [self.view addSubview:quadCurveMenu];
     return;
 }
 
@@ -240,7 +300,7 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self updateToolbarWithOrientation:self.interfaceOrientation];
 }
 

@@ -153,7 +153,7 @@
         case 3:
             break;
         case 4:
-            //subViewController = [[SHNoteWatchViewController alloc] initWithNote:[[SHNote alloc] init]];
+            subViewController = [[SHNoteWatchViewController alloc] initWithNote:[[SHNote alloc] init]];
             break;
         default:
             subViewController =nil;
