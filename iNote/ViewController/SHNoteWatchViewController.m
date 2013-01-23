@@ -8,6 +8,7 @@
 
 
 #import "NSLoggerSent.h"
+#import "SHFTAnimationExample.h"
 #import "SHNoteWatchViewController.h"
 
 CGRect NIRectContract(CGRect rect, CGFloat dx, CGFloat dy) {
@@ -69,7 +70,7 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     
     [_noteInfo      release];
     [_strWebContent release];
-    [quadCurveMenu  release];
+    [viQuadCurveMenu  release];
     [super dealloc];
 }
 
@@ -112,6 +113,41 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     return;
 }
 
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    
+    [SHFTAnimationExample ReleaseMoveControl4View:viQuadCurveMenu];
+    self.actionSheet.delegate = nil;
+    self.webView.delegate = nil;
+    
+    self.actionSheet = nil;
+    self.webView = nil;
+    self.toolbar = nil;
+    self.backButton = nil;
+    self.forwardButton = nil;
+    self.refreshButton = nil;
+    self.stopButton = nil;
+    self.actionButton = nil;
+    self.activityItem = nil;
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self updateToolbarWithOrientation:self.interfaceOrientation];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // If the browser launched the media player, it steals the key window and never gives it
+    // back, so this is a way to try and fix that.
+    [self.view.window makeKeyWindow];
+    
+    [super viewWillDisappear:animated];
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)updateWebViewFrame {
@@ -168,10 +204,14 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     [sleepMenuItem release];
 
     
-    CGRect rect =  self.view.bounds;
+    //CGRect rect =  self.view.bounds;
     
-    quadCurveMenu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(0, 0, 320, 640) menus:menus];
-    quadCurveMenu.delegate = self;
+    viQuadCurveMenu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(0, 0, 320, 640) menus:menus];
+    viQuadCurveMenu.delegate = self;
+    
+    [SHFTAnimationExample MoveView:viQuadCurveMenu];
+    
+    [self.view addSubview:viQuadCurveMenu];
 }
 
 - (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
@@ -274,44 +314,11 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     [self.view addSubview:self.webView];
     
     [self loadQuadCurveMenu];
-    [self.view addSubview:quadCurveMenu];
+    
     return;
 }
 
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    
-    self.actionSheet.delegate = nil;
-    self.webView.delegate = nil;
-    
-    self.actionSheet = nil;
-    self.webView = nil;
-    self.toolbar = nil;
-    self.backButton = nil;
-    self.forwardButton = nil;
-    self.refreshButton = nil;
-    self.stopButton = nil;
-    self.actionButton = nil;
-    self.activityItem = nil;
-}
-
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self updateToolbarWithOrientation:self.interfaceOrientation];
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-    // If the browser launched the media player, it steals the key window and never gives it
-    // back, so this is a way to try and fix that.
-    [self.view.window makeKeyWindow];
-    
-    [super viewWillDisappear:animated];
-}
 
 
 

@@ -146,7 +146,7 @@
     return;
 }
 
-+(void) ControlViewMove:(UIView*)viewToAnimate
++(void) MoveView:(UIView*)viewToAnimate
 {
     // parameter check
     NSAssert(!(viewToAnimate == NULL || viewToAnimate.retainCount<1),
@@ -190,7 +190,7 @@
 #endif
     
 }
-+(void) ReleaseControlView:(UIView*)viewToAnimate
++(void) ReleaseMoveControl4View:(UIView*)viewToAnimate
 {
     // parameter check
     NSAssert(!(viewToAnimate == NULL || viewToAnimate.retainCount<1),

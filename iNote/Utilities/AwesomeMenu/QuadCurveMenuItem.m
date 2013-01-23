@@ -53,7 +53,9 @@ highlightedContentImage:(UIImage *)hcimg;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
     self.highlighted = YES;
+    
     if ([_delegate respondsToSelector:@selector(quadCurveMenuItemTouchesBegan:)])
     {
        [_delegate quadCurveMenuItemTouchesBegan:self];
@@ -62,13 +64,19 @@ highlightedContentImage:(UIImage *)hcimg;
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    /*
     // if move out of 2x rect, cancel highlighted.
     CGPoint location = [[touches anyObject] locationInView:self];
     if (!CGRectContainsPoint(ScaleRect(self.bounds, 2.0f), location))
     {
         self.highlighted = NO;
+    }*/
+    if ([_delegate respondsToSelector:@selector(quadCurveMenuItemTouchesMoved:)])
+    {
+        [_delegate quadCurveMenuItemTouchesMoved:self];
     }
     
+    return;
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -82,7 +90,7 @@ highlightedContentImage:(UIImage *)hcimg;
             [_delegate quadCurveMenuItemTouchesEnd:self];
         }
     }
-    
+    return;
 }
 
 #pragma mark - instant methods

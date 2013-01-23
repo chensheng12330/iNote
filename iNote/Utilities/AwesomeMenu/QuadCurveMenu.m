@@ -12,7 +12,7 @@
 #define NEARRADIUS 130.0f
 #define ENDRADIUS 140.0f
 #define FARRADIUS 160.0f
-#define STARTPOINT CGPointMake(50, 430)
+#define STARTPOINT CGPointMake(50, 230)
 #define TIMEOFFSET 0.026f
 
 
@@ -95,16 +95,26 @@
 #pragma mark - QuadCurveMenuItem delegates
 - (void)quadCurveMenuItemTouchesBegan:(QuadCurveMenuItem *)item
 {
+    //点击按钮开始事件
     if (item == _addButton) 
     {
-        self.expanding = !self.isExpanding;
+        //self.expanding = !self.isExpanding;
     }
 }
+
+- (void)quadCurveMenuItemTouchesMoved:(QuadCurveMenuItem *)item
+{
+    //移动事件
+    //处理子项目展视空间
+}
+
 - (void)quadCurveMenuItemTouchesEnd:(QuadCurveMenuItem *)item
 {
     // exclude the "add" button
     if (item == _addButton) 
     {
+        //
+        self.expanding = !self.isExpanding;
         return;
     }
     // blowup the selected menu button

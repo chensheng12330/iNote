@@ -13,7 +13,7 @@
 @interface SHNoteWatchViewController : UIViewController
 <UIWebViewDelegate, UIActionSheetDelegate,QuadCurveMenuDelegate>
 {
-    QuadCurveMenu *quadCurveMenu;
+    QuadCurveMenu *viQuadCurveMenu;
 }
 @property (nonatomic,readonly, retain) SHNote   *noteInfo;
 @property (nonatomic, retain) NSString *strWebContent;

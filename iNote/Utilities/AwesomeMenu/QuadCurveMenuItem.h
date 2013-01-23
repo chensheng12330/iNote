@@ -38,5 +38,6 @@ highlightedContentImage:(UIImage *)hcimg;
 
 @protocol QuadCurveMenuItemDelegate <NSObject>
 - (void)quadCurveMenuItemTouchesBegan:(QuadCurveMenuItem *)item;
+- (void)quadCurveMenuItemTouchesMoved:(QuadCurveMenuItem *)item;
 - (void)quadCurveMenuItemTouchesEnd:(QuadCurveMenuItem *)item;
 @end

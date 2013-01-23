@@ -81,6 +81,6 @@
     stopSelector:(SEL)stopSelector;
 
 //触摸视图移动
-+(void) ControlViewMove:(UIView*)viewToAnimate;
-+(void) ReleaseControlView:(UIView*)viewToAnimate;
++(void) MoveView:(UIView*)viewToAnimate;
++(void) ReleaseMoveControl4View:(UIView*)viewToAnimate;
 @end
