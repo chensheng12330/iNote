@@ -10,6 +10,7 @@
 #import "SHNoteTableCell.h"
 #import "NSString+SHNSStringForDate.h"
 #import "SHFTAnimationExample.h"
+#import "SHNoteWatchViewController.h"
 
 @interface SHNoteListViewController ()
 -(void) bottomMenuViewDidLoad;
@@ -186,13 +187,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+
+    SHNote *note = [myTableDataSource objectAtIndex:indexPath.row];
+     SHNoteWatchViewController *detailViewController = [[SHNoteWatchViewController alloc] initWithNote:note];
+    //[detailViewController openURL:[NSURL URLWithString:@"www.baidu.com"]];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
-     */
 }
 
 #pragma mark - youkuButtonMenu

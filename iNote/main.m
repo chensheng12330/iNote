@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SHNotebook.h"
-
 #import "SHAppDelegate.h"
+#import "NSLoggerSent.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +19,11 @@ int main(int argc, char *argv[])
     
     @autoreleasepool {
         @try {
-           retVal= UIApplicationMain(argc, argv, nil, NSStringFromClass([SHAppDelegate class]));
+            StartLoggerMessages(@"192.168.0.78:56248", YES, YES);
+            LogMessage(@"Main", 0, @"App Begain Run");
+            //StartLoggerMessages(nil, YES, YES);
+            retVal= UIApplicationMain(argc, argv, nil, NSStringFromClass([SHAppDelegate class]));
+            
         }
         @catch (NSException *exception) {
             NSLog(@"CRASH: %@", exception);
@@ -28,5 +31,6 @@ int main(int argc, char *argv[])
             NSLog(@"App Over");
         }
     }
+    LogMessage(@"Main", 0, @"App Run Completed");
     return retVal;
 }

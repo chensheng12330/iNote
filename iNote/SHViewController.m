@@ -13,6 +13,7 @@
 #import "SHNoteListViewController.h"
 #import "SHNoteBookListViewController.h"
 
+#import "SHNoteWatchViewController.h"
 
 @interface SHViewController ()
 
@@ -139,19 +140,20 @@
 
     //id subClass = 
     switch (btn.tag) {
-        case 1:
+        case 0:
             subViewController = [[SHSettingViewController alloc] init];
             break;
-        case 2:
+        case 1:
             subViewController = [[SHNoteBookListViewController alloc] init];
             break;
-        case 3:
+        case 2:
             subViewController = [[SHNoteListViewController alloc] init];
             [((SHNoteListViewController*)subViewController) setEmDataSourceType:NL_ALL_NOTEBOOK];
             break;
-        case 4:
+        case 3:
             break;
-        case 5:
+        case 4:
+            //subViewController = [[SHNoteWatchViewController alloc] initWithNote:[[SHNote alloc] init]];
             break;
         default:
             subViewController =nil;
