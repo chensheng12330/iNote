@@ -207,7 +207,7 @@ NSString* NIPathForBundleResource(NSBundle* bundle, NSString* relativePath) {
     self.webView.delegate = self;
     self.webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth
                                      | UIViewAutoresizingFlexibleHeight);
-    self.webView.scalesPageToFit = YES;
+    //self.webView.scalesPageToFit = YES;
     
     if ([UIColor respondsToSelector:@selector(underPageBackgroundColor)]) {
         self.webView.backgroundColor = [UIColor underPageBackgroundColor];
